@@ -1,24 +1,21 @@
 <?php
 
-class Dashboard extends Controller
+class Laporan extends Controller
 {
     public function index()
     {
-        // data
-        $data['judul'] = 'Dashboard';
-        $data['statusDashboard'] = 'active';
+        $data['judul'] = 'Laporan Pembayaran';
+        $data['statusDashboard'] = '';
         $data['statusKelas'] = '';
         $data['statusSiswa'] = '';
         $data['statusPegawai'] = '';
         $data['statusSpp'] = '';
         $data['statusPembayaran'] = '';
         $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
-        // model
-        // 
-        // view
+        $data['statusLaporan'] = 'active';
+
         $this->view('templates/header', $data);
-        $this->view('dashboard/index');
+        $this->view('laporan/index');
         $this->view('templates/footer');
     }
 }

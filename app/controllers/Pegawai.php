@@ -1,24 +1,21 @@
 <?php
 
-class Dashboard extends Controller
+class Pegawai extends Controller
 {
     public function index()
     {
-        // data
-        $data['judul'] = 'Dashboard';
-        $data['statusDashboard'] = 'active';
+        $data['judul'] = 'Data Pegawai';
+        $data['statusDashboard'] = '';
         $data['statusKelas'] = '';
         $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
+        $data['statusPegawai'] = 'active';
         $data['statusSpp'] = '';
         $data['statusPembayaran'] = '';
         $data['statusHistory'] = '';
         $data['statusLaporan'] = '';
-        // model
-        // 
-        // view
+
         $this->view('templates/header', $data);
-        $this->view('dashboard/index');
+        $this->view('pegawai/index');
         $this->view('templates/footer');
     }
 }

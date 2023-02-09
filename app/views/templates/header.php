@@ -59,56 +59,56 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="<?= BASEURL; ?>" class="<?= $data['statusDashboard'] ?>">
                             <i class='icon'><?= HOME; ?></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="<?= BASEURL; ?>kelas" class="<?= $data['statusKelas'] ?>">
                             <i class='icon'><?= COLUMNS; ?></i>
                             <span class="text nav-text">Data Kelas</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="<?= BASEURL; ?>siswa" class="<?= $data['statusSiswa'] ?>">
                             <i class='icon'><?= SPREADSHEET ?></i>
                             <span class="text nav-text">Data Siswa</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="<?= BASEURL; ?>pegawai" class="<?= $data['statusPegawai'] ?>">
                             <i class='icon'><?= SPREADSHEET; ?></i>
                             <span class="text nav-text">Data Petugas</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="<?= BASEURL; ?>spp" class="<?= $data['statusSpp'] ?>">
                             <i class='icon'><?= RECEIPT; ?></i>
                             <span class="text nav-text">Data SPP</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="<?= BASEURL; ?>pembayaran" class="<?= $data['statusPembayaran'] ?>">
                             <i class='icon'><?= CREDITCARD; ?></i>
                             <span class="text nav-text">Pembayaran</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="<?= BASEURL; ?>history" class="<?= $data['statusHistory'] ?>">
                             <i class='icon'><?= HISTORY; ?></i>
                             <span class="text nav-text">History</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="<?= BASEURL; ?>laporan" class="<?= $data['statusLaporan'] ?>">
                             <i class='icon'><?= REPORT; ?></i>
                             <span class="text nav-text">Laporan</span>
                         </a>

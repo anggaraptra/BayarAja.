@@ -161,6 +161,24 @@ body.dark {
   transition: var(--tran-03);
 }
 
+/* Sidebar active */
+.sidebar li a.active {
+  background-color: var(--primary-color);
+}
+
+.sidebar li a.active .icon svg,
+.sidebar li a.active .text {
+  color: var(--sidebar-color);
+  fill: var(--sidebar-color);
+}
+
+body.dark .sidebar li a.active .icon svg,
+body.dark .sidebar li a.active .text {
+  color: var(--text-color);
+  fill: var(--text-color);
+}
+
+/* Sidebar hover */
 .sidebar li a:hover {
   background-color: var(--primary-color);
 }
@@ -181,6 +199,7 @@ body.dark .sidebar li a.logout:hover {
   background-color: var(--logout-color);
 }
 
+/* Sidebar menubar */
 .sidebar .menu-bar {
   height: calc(100% - 0rem);
   display: flex;

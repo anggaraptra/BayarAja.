@@ -1,24 +1,21 @@
 <?php
 
-class Dashboard extends Controller
+class History extends Controller
 {
     public function index()
     {
-        // data
-        $data['judul'] = 'Dashboard';
-        $data['statusDashboard'] = 'active';
+        $data['judul'] = 'History Pembayaran';
+        $data['statusDashboard'] = '';
         $data['statusKelas'] = '';
         $data['statusSiswa'] = '';
         $data['statusPegawai'] = '';
         $data['statusSpp'] = '';
         $data['statusPembayaran'] = '';
-        $data['statusHistory'] = '';
+        $data['statusHistory'] = 'active';
         $data['statusLaporan'] = '';
-        // model
-        // 
-        // view
+
         $this->view('templates/header', $data);
-        $this->view('dashboard/index');
+        $this->view('history/index');
         $this->view('templates/footer');
     }
 }

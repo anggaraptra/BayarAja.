@@ -1,4 +1,5 @@
 :root {
+  /* Color */
   --body-color: #e4e9f7;
   --sidebar-color: #fff;
   --navbar-color: #fff;
@@ -6,7 +7,9 @@
   --primary-color-light: #f6f5ff;
   --toggle-color: #ddd;
   --text-color: #656565;
+  --content-color: #363636;
   --logout-color: #dd5353;
+  --active-color: #a9acb1;
   --shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
   /* Transition */
@@ -39,7 +42,9 @@ body.dark {
   --primary-color-light: #3a3b3c;
   --toggle-color: #fff;
   --text-color: #ccc;
+  --content-color: #cecece;
   --logout-color: #5d3d3d;
+  --active-color: #808080;
   --shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -61,7 +66,6 @@ body.dark {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* grid-template-columns: 1fr 1fr 1fr; */
   padding: 0 1rem;
   box-shadow: var(--shadow);
   transition: var(--tran-05);
@@ -125,6 +129,7 @@ body.dark {
   opacity: 0;
 }
 
+/* Sidebar menubar */
 .sidebar .menu {
   margin-top: 3rem;
 }
@@ -161,7 +166,6 @@ body.dark {
   transition: var(--tran-03);
 }
 
-/* Sidebar active */
 .sidebar li a.active {
   background-color: var(--primary-color);
 }
@@ -178,7 +182,6 @@ body.dark .sidebar li a.active .text {
   fill: var(--text-color);
 }
 
-/* Sidebar hover */
 .sidebar li a:hover {
   background-color: var(--primary-color);
 }
@@ -199,7 +202,6 @@ body.dark .sidebar li a.logout:hover {
   background-color: var(--logout-color);
 }
 
-/* Sidebar menubar */
 .sidebar .menu-bar {
   height: calc(100% - 0rem);
   display: flex;
@@ -272,7 +274,7 @@ body.dark .switch::before {
   left: 1.2rem;
 }
 
-/* Home Dashboard */
+/* Home */
 .home {
   position: absolute;
   top: 4rem;
@@ -283,18 +285,32 @@ body.dark .switch::before {
   transition: var(--tran-05);
 }
 
-.home .head-text {
-  font-size: 1.8rem;
-  font-weight: 500;
-  color: var(--text-color);
+.home .page-title {
   padding: 0.7rem 3.7rem;
 }
 
-.home .text {
+.home .page-title .head-text {
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.home .page-title .sub-text {
   font-size: 1rem;
   font-weight: 400;
   color: var(--text-color);
+}
+
+.home .page-title .sub-text span {
+  color: var(--active-color);
+  cursor: pointer;
+}
+
+.home .content {
   padding: 0.7rem 3.7rem;
+  font-size: 1.2rem;
+  color: var(--content-color);
 }
 
 .sidebar.close ~ .home {

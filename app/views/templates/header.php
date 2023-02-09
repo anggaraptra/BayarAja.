@@ -82,7 +82,7 @@
                     <li class="nav-link">
                         <a href="<?= BASEURL; ?>pegawai" class="<?= $data['statusPegawai'] ?>">
                             <i class='icon'><?= SPREADSHEET; ?></i>
-                            <span class="text nav-text">Data Petugas</span>
+                            <span class="text nav-text">Data Pegawai</span>
                         </a>
                     </li>
 

@@ -305,6 +305,7 @@ body.dark .switch::before {
 .home .page-title .sub-text span {
   color: var(--active-color);
   cursor: pointer;
+  transition: var(--tran-05);
 }
 
 .home .content {

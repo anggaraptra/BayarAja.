@@ -14,8 +14,10 @@ class Dashboard extends Controller
         $data['statusPembayaran'] = '';
         $data['statusHistory'] = '';
         $data['statusLaporan'] = '';
+
         // model
-        // 
+
+
         // view
         $this->view('templates/header', $data);
         $this->view('dashboard/index');

@@ -4,6 +4,7 @@ class Spp extends Controller
 {
     public function index()
     {
+        // data
         $data['judul'] = 'Data SPP';
         $data['statusDashboard'] = '';
         $data['statusKelas'] = '';
@@ -14,6 +15,10 @@ class Spp extends Controller
         $data['statusHistory'] = '';
         $data['statusLaporan'] = '';
 
+        // model
+
+
+        // view
         $this->view('templates/header', $data);
         $this->view('spp/index');
         $this->view('templates/footer');

@@ -4,6 +4,7 @@ class Pegawai extends Controller
 {
     public function index()
     {
+        // data
         $data['judul'] = 'Data Pegawai';
         $data['statusDashboard'] = '';
         $data['statusKelas'] = '';
@@ -14,6 +15,10 @@ class Pegawai extends Controller
         $data['statusHistory'] = '';
         $data['statusLaporan'] = '';
 
+        // model
+
+
+        // view
         $this->view('templates/header', $data);
         $this->view('pegawai/index');
         $this->view('templates/footer');

@@ -14,4 +14,47 @@ class Kelas_model
         $this->db->query('SELECT * FROM ' . $this->table);
         return $this->db->resultSet();
     }
+
+    public function getKelasById($id)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id_kelas=:id');
+        $this->db->bind('id', $id);
+        return $this->db->single();
+    }
+
+    public function insertKelas($data)
+    {
+        $query = "INSERT INTO " . $this->table . " VALUES ('', :kelas, :keterangan)";
+
+        $this->db->query($query);
+        $this->db->bind('kelas', htmlspecialchars($data['kelas']));
+        $this->db->bind('keterangan', htmlspecialchars($data['keterangan']));
+
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
+    public function updateKelas($data)
+    {
+        $query = "UPDATE " . $this->table . " SET kelas=:kelas, keterangan=:keterangan WHERE id_kelas=:id";
+
+        $this->db->query($query);
+        $this->db->bind('kelas', htmlspecialchars($data['kelas']));
+        $this->db->bind('keterangan', htmlspecialchars($data['keterangan']));
+
+        $this->db->bind('id', $data['id_kelas']);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
+    public function deleteKelas($id)
+    {
+        $query = "DELETE FROM " . $this->table . " WHERE id_kelas=:id";
+
+        $this->db->query($query);
+        $this->db->bind('id', $id);
+
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
 }

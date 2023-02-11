@@ -4,6 +4,7 @@ class Pembayaran extends Controller
 {
     public function index()
     {
+        // data
         $data['judul'] = 'Pembayaran';
         $data['statusDashboard'] = '';
         $data['statusKelas'] = '';
@@ -14,6 +15,10 @@ class Pembayaran extends Controller
         $data['statusHistory'] = '';
         $data['statusLaporan'] = '';
 
+        // model
+
+
+        // view
         $this->view('templates/header', $data);
         $this->view('pembayaran/index');
         $this->view('templates/footer');

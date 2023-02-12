@@ -20,8 +20,11 @@
                     <td><?= $swa['nis']; ?></td>
                     <td><?= $swa['nama_siswa']; ?></td>
                     <td><?= $swa['id_kelas']; ?></td>
-                    <td><?= $swa['angkatan']; ?></td>
-                    <td><?= $swa['telp']; ?></td>
+                    <?php foreach ($data['spp'] as $spp) : ?>
+                        <?php if ($swa['id_angkatan'] == $spp['id_angkatan']) : ?>
+                            <td><?= $spp['angkatan']; ?></td>
+                        <?php endif; ?>
+                    <?php endforeach; ?> <td><?= $swa['telp']; ?></td>
                     <td><?= $swa['alamat']; ?></td>
                     <td><?= $swa['telp_ortu']; ?></td>
                 </tbody>

@@ -16,15 +16,15 @@ class Spp extends Controller
         $data['statusLaporan'] = '';
 
         // model
-
+        $data['spp'] = $this->model('Spp_model')->getAllSpp();
 
         // view
         $this->view('templates/header', $data);
-        $this->view('spp/index');
+        $this->view('spp/index', $data);
         $this->view('templates/footer');
     }
 
-    public function formTambah()
+    public function formAdd()
     {
         // data
         $data['judul'] = 'Tambah SPP';
@@ -46,7 +46,18 @@ class Spp extends Controller
         $this->view('templates/footer');
     }
 
-    public function getUpdate($angkatan)
+    public function add()
+    {
+        if ($this->model('Spp_model')->addDataSpp($_POST) > 0) {
+            header('Location: ' . BASEURL . 'spp');
+            exit;
+        } else {
+            header('Location: ' . BASEURL . 'spp');
+            exit;
+        }
+    }
+
+    public function getUpdate($id)
     {
         // data
         $data['judul'] = 'Update SPP';
@@ -60,11 +71,33 @@ class Spp extends Controller
         $data['statusLaporan'] = '';
 
         // model
-        $data['spp'] = $this->model('Spp_model')->getSppByAngkatan($angkatan);
+        $data['spp'] = $this->model('Spp_model')->getSppById($id);
 
         // view
         $this->view('templates/header', $data);
         $this->view('spp/page-update', $data);
         $this->view('templates/footer');
+    }
+
+    public function update()
+    {
+        if ($this->model('Spp_model')->updateDataSpp($_POST) > 0) {
+            header('Location: ' . BASEURL . 'spp');
+            exit;
+        } else {
+            header('Location: ' . BASEURL . 'spp');
+            exit;
+        }
+    }
+
+    public function delete($id)
+    {
+        if ($this->model('Spp_model')->deleteDataSpp($id) > 0) {
+            header('Location: ' . BASEURL . 'spp');
+            exit;
+        } else {
+            header('Location: ' . BASEURL . 'spp');
+            exit;
+        }
     }
 }

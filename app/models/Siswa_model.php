@@ -25,13 +25,13 @@ class Siswa_model
 
     public function addDataSiswa($data)
     {
-        $query = 'INSERT INTO ' . $this->table . ' VALUES (:nis, :nama_siswa, :id_kelas, :angkatan, :telp, :alamat, :telp_ortu, :password)';
+        $query = 'INSERT INTO ' . $this->table . ' VALUES (:nis, :nama_siswa, :id_kelas, :id_angkatan, :telp, :alamat, :telp_ortu, :password)';
 
         $this->db->query($query);
         $this->db->bind('nis', htmlspecialchars($data['nis']));
         $this->db->bind('nama_siswa', htmlspecialchars($data['nama_siswa']));
         $this->db->bind('id_kelas', htmlspecialchars($data['id_kelas']));
-        $this->db->bind('angkatan', htmlspecialchars($data['angkatan']));
+        $this->db->bind('id_angkatan', htmlspecialchars($data['id_angkatan']));
         $this->db->bind('telp', htmlspecialchars($data['telp']));
         $this->db->bind('alamat', htmlspecialchars($data['alamat']));
         $this->db->bind('telp_ortu', htmlspecialchars($data['telp_ortu']));
@@ -43,12 +43,12 @@ class Siswa_model
 
     public function updateDataSiswa($data)
     {
-        $query = 'UPDATE ' . $this->table . ' SET nama_siswa=:nama_siswa, id_kelas=:id_kelas, angkatan=:angkatan, telp=:telp, alamat=:alamat, telp_ortu=:telp_ortu, password=:password WHERE nis=:nis';
+        $query = 'UPDATE ' . $this->table . ' SET nama_siswa=:nama_siswa, id_kelas=:id_kelas, id_angkatan=:id_angkatan, telp=:telp, alamat=:alamat, telp_ortu=:telp_ortu, password=:password WHERE nis=:nis';
 
         $this->db->query($query);
         $this->db->bind('nama_siswa', htmlspecialchars($data['nama_siswa']));
         $this->db->bind('id_kelas', htmlspecialchars($data['id_kelas']));
-        $this->db->bind('angkatan', htmlspecialchars($data['angkatan']));
+        $this->db->bind('id_angkatan', htmlspecialchars($data['id_angkatan']));
         $this->db->bind('telp', htmlspecialchars($data['telp']));
         $this->db->bind('alamat', htmlspecialchars($data['alamat']));
         $this->db->bind('telp_ortu', htmlspecialchars($data['telp_ortu']));

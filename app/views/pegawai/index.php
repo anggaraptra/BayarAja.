@@ -16,6 +16,7 @@
                         <th>Telepon</th>
                         <th>Username</th>
                         <th>Level</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,7 +36,7 @@
             </table>
         </div>
     <?php else : ?>
-        <div class="content">
+        <div class="content pegawai">
             <h1 class="">Data Pegawai Kosong</h1>
             <a href="<?= BASEURL; ?>pegawai/formAdd" class="btn btn-primary">Tambah Data</a>
         </div>

@@ -37,6 +37,7 @@ class Pembayaran extends Controller
         $data['statusLaporan'] = '';
 
         $data['siswa'] = $this->model('Siswa_model')->searchDataSiswa();
+        $data['spp'] = $this->model('Spp_model')->getAllSpp();
 
         $this->view('templates/header', $data);
         $this->view('pembayaran/page-biodata', $data);

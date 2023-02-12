@@ -4,5 +4,16 @@
         <h5 class="sub-text">Home / Data Spp / <span>Update</span></h5>
     </div>
 
-    <div class="content update-spp"></div>
+    <div class="content update-spp">
+        <form action="<?= BASEURL ?>spp/update" method="POST">
+            <input type="hidden" name="id_angkatan" value="<?= $data['spp']['id_angkatan']; ?>">
+            <label for="angkatan">Angkatan</label>
+            <input type="text" name="angkatan" id="angkatan" value="<?= $data['spp']['angkatan']; ?>" placeholder="Masukkan Angkatan" required>
+            <br>
+            <label for="nominal">Nominal</label>
+            <input type="number" name="nominal" id="nominal" value="<?= $data['spp']['nominal']; ?>" placeholder="Masukkan Nominal" required>
+            <br>
+            <button type="submit" name="update">Update</button>
+        </form>
+    </div>
 </section>

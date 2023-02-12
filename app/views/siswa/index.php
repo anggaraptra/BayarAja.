@@ -28,7 +28,11 @@
                             <td><?= $siswa['nis']; ?></td>
                             <td><?= $siswa['nama_siswa']; ?></td>
                             <td><?= $siswa['id_kelas']; ?></td>
-                            <td><?= $siswa['angkatan']; ?></td>
+                            <?php foreach ($data['spp'] as $spp) : ?>
+                                <?php if ($siswa['id_angkatan'] == $spp['id_angkatan']) : ?>
+                                    <td><?= $spp['angkatan']; ?></td>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                             <td><?= $siswa['telp']; ?></td>
                             <td><?= $siswa['alamat']; ?></td>
                             <td><?= $siswa['telp_ortu']; ?></td>
@@ -42,7 +46,7 @@
             </table>
         </div>
     <?php else : ?>
-        <div class="content">
+        <div class="content siswa">
             <h1 class="">Data Siswa Kosong</h1>
             <a href="<?= BASEURL; ?>siswa/formAdd" class="btn btn-primary">Tambah Data</a>
         </div>

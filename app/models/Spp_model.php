@@ -15,16 +15,16 @@ class Spp_model
         return $this->db->resultSet();
     }
 
-    public function getSppByAngkatan($angkatan)
+    public function getSppById($id)
     {
-        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE angkatan=:angkatan');
-        $this->db->bind('angkatan', $angkatan);
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id_angkatan=:id');
+        $this->db->bind('id', $id);
         return $this->db->single();
     }
 
     public function addDataSpp($data)
     {
-        $query = 'INSERT INTO ' . $this->table . ' VALUES (:angkatan, :nominal)';
+        $query = 'INSERT INTO ' . $this->table . ' VALUES (0, :angkatan, :nominal)';
 
         $this->db->query($query);
         $this->db->bind('angkatan', htmlspecialchars($data['angkatan']));
@@ -36,22 +36,23 @@ class Spp_model
 
     public function updateDataSpp($data)
     {
-        $query = 'UPDATE ' . $this->table . ' SET nominal=:nominal WHERE angkatan=:angkatan';
+        $query = 'UPDATE ' . $this->table . ' SET angkatan=:angkatan, nominal=:nominal WHERE id_angkatan=:id_angkatan';
 
         $this->db->query($query);
+        $this->db->bind('angkatan', htmlspecialchars($data['angkatan']));
         $this->db->bind('nominal', htmlspecialchars($data['nominal']));
 
-        $this->db->bind('angkatan', $data['angkatan']);
+        $this->db->bind('id_angkatan', $data['id_angkatan']);
         $this->db->execute();
         return $this->db->rowCount();
     }
 
-    public function deleteDataSpp($angkatan)
+    public function deleteDataSpp($id)
     {
-        $query = 'DELETE FROM ' . $this->table . ' WHERE angkatan=:angkatan';
+        $query = 'DELETE FROM ' . $this->table . ' WHERE id_angkatan=:id ';
 
         $this->db->query($query);
-        $this->db->bind('angkatan', $angkatan);
+        $this->db->bind('id', $id);
 
         $this->db->execute();
         return $this->db->rowCount();

@@ -22,9 +22,9 @@ class Pembayaran_model
         return $this->db->single();
     }
 
-    public function insertPembayaran($data)
+    public function addDataPembayaran($data)
     {
-        $query = "INSERT INTO " . $this->table . " VALUES ('', :id_pegawai, :nis, :tanggal_bayar, :bulan_bayar, :tahun_bayar, :jumlah_bayar, :keterangan)";
+        $query = "INSERT INTO " . $this->table . " VALUES (0, :id_pegawai, :nis, :tanggal_bayar, :bulan_bayar, :tahun_bayar, :jumlah_bayar, :keterangan)";
 
         $this->db->query($query);
         $this->db->bind('id_pegawai', htmlspecialchars($data['id_pegawai']));
@@ -39,7 +39,7 @@ class Pembayaran_model
         return $this->db->rowCount();
     }
 
-    public function updatePembayaran($data)
+    public function updateDataPembayaran($data)
     {
         $query = "UPDATE " . $this->table . " SET id_pegawai=:id_pegawai, nis=:nis, tanggal_bayar=:tanggal_bayar, bulan_bayar=:bulan_bayar, tahun_bayar=:tahun_bayar, jumlah_bayar=:jumlah_bayar, keterangan=:keterangan WHERE id_bayar=:id";
 
@@ -57,7 +57,7 @@ class Pembayaran_model
         return $this->db->rowCount();
     }
 
-    public function deletePembayaran($id)
+    public function deleteDataPembayaran($id)
     {
         $query = "DELETE FROM " . $this->table . " WHERE id_bayar=:id";
 

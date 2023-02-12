@@ -36,10 +36,10 @@ class Pembayaran extends Controller
         $data['statusHistory'] = '';
         $data['statusLaporan'] = '';
 
-        $data['siswa'] = $this->model('Siswa_model')->cariSiswa();
+        $data['siswa'] = $this->model('Siswa_model')->searchDataSiswa();
 
         $this->view('templates/header', $data);
-        $this->view('pembayaran/biodata', $data);
+        $this->view('pembayaran/page-biodata', $data);
         $this->view('templates/footer');
     }
 }

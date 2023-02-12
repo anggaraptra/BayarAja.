@@ -22,9 +22,9 @@ class Kelas_model
         return $this->db->single();
     }
 
-    public function insertKelas($data)
+    public function addDataKelas($data)
     {
-        $query = "INSERT INTO " . $this->table . " VALUES ('', :kelas, :keterangan)";
+        $query = "INSERT INTO " . $this->table . " VALUES (0, :kelas, :keterangan)";
 
         $this->db->query($query);
         $this->db->bind('kelas', htmlspecialchars($data['kelas']));
@@ -34,7 +34,7 @@ class Kelas_model
         return $this->db->rowCount();
     }
 
-    public function updateKelas($data)
+    public function updateDataKelas($data)
     {
         $query = "UPDATE " . $this->table . " SET kelas=:kelas, keterangan=:keterangan WHERE id_kelas=:id";
 
@@ -47,7 +47,7 @@ class Kelas_model
         return $this->db->rowCount();
     }
 
-    public function deleteKelas($id)
+    public function deleteDataKelas($id)
     {
         $query = "DELETE FROM " . $this->table . " WHERE id_kelas=:id";
 

@@ -23,7 +23,7 @@ class Siswa_model
         return $this->db->single();
     }
 
-    public function insertSiswa($data)
+    public function addDataSiswa($data)
     {
         $query = 'INSERT INTO ' . $this->table . ' VALUES (:nis, :nama_siswa, :id_kelas, :angkatan, :telp, :alamat, :telp_ortu, :password)';
 
@@ -41,7 +41,7 @@ class Siswa_model
         return $this->db->rowCount();
     }
 
-    public function updateSiswa($data)
+    public function updateDataSiswa($data)
     {
         $query = 'UPDATE ' . $this->table . ' SET nama_siswa=:nama_siswa, id_kelas=:id_kelas, angkatan=:angkatan, telp=:telp, alamat=:alamat, telp_ortu=:telp_ortu, password=:password WHERE nis=:nis';
 
@@ -59,7 +59,7 @@ class Siswa_model
         return $this->db->rowCount();
     }
 
-    public function deleteSiswa($nis)
+    public function deleteDataSiswa($nis)
     {
         $query = 'DELETE FROM ' . $this->table . ' WHERE nis=:nis';
 
@@ -70,7 +70,7 @@ class Siswa_model
         return $this->db->rowCount();
     }
 
-    public function cariSiswa()
+    public function searchDataSiswa()
     {
         $keyword = $_POST['keyword'];
         $this->db->query('SELECT * FROM ' . $this->table . ' WHERE nis LIKE :keyword OR nama_siswa LIKE :keyword');

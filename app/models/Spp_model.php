@@ -22,7 +22,7 @@ class Spp_model
         return $this->db->single();
     }
 
-    public function insertSpp($data)
+    public function addDataSpp($data)
     {
         $query = 'INSERT INTO ' . $this->table . ' VALUES (:angkatan, :nominal)';
 
@@ -34,7 +34,7 @@ class Spp_model
         return $this->db->rowCount();
     }
 
-    public function updateSpp($data)
+    public function updateDataSpp($data)
     {
         $query = 'UPDATE ' . $this->table . ' SET nominal=:nominal WHERE angkatan=:angkatan';
 
@@ -46,7 +46,7 @@ class Spp_model
         return $this->db->rowCount();
     }
 
-    public function deleteSpp($angkatan)
+    public function deleteDataSpp($angkatan)
     {
         $query = 'DELETE FROM ' . $this->table . ' WHERE angkatan=:angkatan';
 

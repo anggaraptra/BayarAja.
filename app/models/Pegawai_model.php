@@ -22,9 +22,9 @@ class Pegawai_model
         return $this->db->single();
     }
 
-    public function insertPegawai($data)
+    public function addDataPegawai($data)
     {
-        $query = "INSERT INTO " . $this->table . " VALUES ('', :nama_pegawai, :telp, :username, :password, :level)";
+        $query = "INSERT INTO " . $this->table . " VALUES (0, :nama_pegawai, :telp, :username, :password, :level)";
 
         $this->db->query($query);
         $this->db->bind('nama_pegawai', htmlspecialchars($data['nama_pegawai']));
@@ -37,7 +37,7 @@ class Pegawai_model
         return $this->db->rowCount();
     }
 
-    public function updatePegawai($data)
+    public function updateDataPegawai($data)
     {
         $query = "UPDATE " . $this->table . " SET nama_pegawai=:nama_pegawai, telp=:telp, username=:username, password=:password, level=:level WHERE id_pegawai=:id";
 
@@ -53,7 +53,7 @@ class Pegawai_model
         return $this->db->rowCount();
     }
 
-    public function deletePegawai($id)
+    public function deleteDataPegawai($id)
     {
         $query = "DELETE FROM " . $this->table . " WHERE id_pegawai=:id";
 

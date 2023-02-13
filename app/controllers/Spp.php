@@ -57,7 +57,7 @@ class Spp extends Controller
         }
     }
 
-    public function getUpdate($id)
+    public function getUpdate($angkatan)
     {
         // data
         $data['judul'] = 'Update SPP';
@@ -71,7 +71,7 @@ class Spp extends Controller
         $data['statusLaporan'] = '';
 
         // model
-        $data['spp'] = $this->model('Spp_model')->getSppById($id);
+        $data['spp'] = $this->model('Spp_model')->getSppByAngkatan($angkatan);
 
         // view
         $this->view('templates/header', $data);
@@ -90,9 +90,9 @@ class Spp extends Controller
         }
     }
 
-    public function delete($id)
+    public function delete($angkatan)
     {
-        if ($this->model('Spp_model')->deleteDataSpp($id) > 0) {
+        if ($this->model('Spp_model')->deleteDataSpp($angkatan) > 0) {
             header('Location: ' . BASEURL . 'spp');
             exit;
         } else {

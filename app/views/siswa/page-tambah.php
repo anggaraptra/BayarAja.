@@ -20,11 +20,11 @@
                 <?php endforeach; ?>
             </select>
             <br>
-            <label for="id_angkatan">Angkatan</label>
-            <select name="id_angkatan" id="id_angkatan">
+            <label for="angkatan">Angkatan</label>
+            <select name="angkatan" id="angkatan">
                 <option value="">Pilih Angkatan</option>
                 <?php foreach ($data['spp'] as $spp) : ?>
-                    <option value="<?= $spp['id_angkatan'] ?>"><?= $spp['angkatan'] ?></option>
+                    <option value="<?= $spp['angkatan'] ?>"><?= $spp['angkatan'] ?></option>
                 <?php endforeach; ?>
             </select>
             <br>

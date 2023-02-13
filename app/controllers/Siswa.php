@@ -18,6 +18,7 @@ class Siswa extends Controller
         // model
         $data['siswa'] = $this->model('Siswa_model')->getAllSiswa();
         $data['spp'] = $this->model('Spp_model')->getAllSpp();
+        $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
 
         // view
         $this->view('templates/header', $data);

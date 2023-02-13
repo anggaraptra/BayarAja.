@@ -24,12 +24,12 @@
             </select>
             <br>
             <label for="angkatan">Angkatan</label>
-            <select name="id_angkatan" id="angkatan">
+            <select name="angkatan" id="angkatan">
                 <?php foreach ($data['spp'] as $spp) : ?>
-                    <?php if ($spp['id_angkatan'] == $data['siswa']['id_angkatan']) : ?>
-                        <option value="<?= $spp['id_angkatan'] ?>" selected><?= $spp['angkatan'] ?></option>
+                    <?php if ($spp['angkatan'] == $data['siswa']['angkatan']) : ?>
+                        <option value="<?= $spp['angkatan'] ?>" selected><?= $spp['angkatan'] ?></option>
                     <?php else : ?>
-                        <option value="<?= $spp['id_angkatan'] ?>"><?= $spp['angkatan'] ?></option>
+                        <option value="<?= $spp['angkatan'] ?>"><?= $spp['angkatan'] ?></option>
                     <?php endif; ?>
                 <?php endforeach; ?>
             </select>

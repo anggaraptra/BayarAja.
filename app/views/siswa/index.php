@@ -27,12 +27,14 @@
                         <tr>
                             <td><?= $siswa['nis']; ?></td>
                             <td><?= $siswa['nama_siswa']; ?></td>
-                            <td><?= $siswa['id_kelas']; ?></td>
-                            <?php foreach ($data['spp'] as $spp) : ?>
-                                <?php if ($siswa['id_angkatan'] == $spp['id_angkatan']) : ?>
-                                    <td><?= $spp['angkatan']; ?></td>
+
+                            <?php foreach ($data['kelas'] as $kelas) : ?>
+                                <?php if ($kelas['id_kelas'] == $siswa['id_kelas']) : ?>
+                                    <td><?= $kelas['kelas']; ?></td>
                                 <?php endif; ?>
                             <?php endforeach; ?>
+
+                            <td><?= $siswa['angkatan']; ?></td>
                             <td><?= $siswa['telp']; ?></td>
                             <td><?= $siswa['alamat']; ?></td>
                             <td><?= $siswa['telp_ortu']; ?></td>

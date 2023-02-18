@@ -49,10 +49,10 @@ class Spp extends Controller
     public function add()
     {
         if ($this->model('Spp_model')->addDataSpp($_POST) > 0) {
-            header('Location: ' . BASEURL . 'spp');
+            header('Location: ' . BASEURL . '/spp');
             exit;
         } else {
-            header('Location: ' . BASEURL . 'spp');
+            header('Location: ' . BASEURL . '/spp');
             exit;
         }
     }
@@ -82,10 +82,10 @@ class Spp extends Controller
     public function update()
     {
         if ($this->model('Spp_model')->updateDataSpp($_POST) > 0) {
-            header('Location: ' . BASEURL . 'spp');
+            header('Location: ' . BASEURL . '/spp');
             exit;
         } else {
-            header('Location: ' . BASEURL . 'spp');
+            header('Location: ' . BASEURL . '/spp');
             exit;
         }
     }
@@ -93,10 +93,10 @@ class Spp extends Controller
     public function delete($angkatan)
     {
         if ($this->model('Spp_model')->deleteDataSpp($angkatan) > 0) {
-            header('Location: ' . BASEURL . 'spp');
+            header('Location: ' . BASEURL . '/spp');
             exit;
         } else {
-            header('Location: ' . BASEURL . 'spp');
+            header('Location: ' . BASEURL . '/spp');
             exit;
         }
     }

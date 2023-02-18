@@ -5,7 +5,7 @@
     </div>
 
     <div class="content update-siswa">
-        <form action="<?= BASEURL ?>siswa/update" method="POST">
+        <form action="<?= BASEURL ?>/siswa/update" method="POST">
             <label for="nis">Nis</label>
             <input type="text" name="nis" id="nis" value="<?= $data['siswa']['nis'] ?>" readonly>
             <br>

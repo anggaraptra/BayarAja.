@@ -82,4 +82,10 @@ class Database
     {
         return $this->stmt->rowCount();
     }
+
+    // mengambil id terakhir
+    public function lastInsertId()
+    {
+        return $this->dbh->lastInsertId();
+    }
 }

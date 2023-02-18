@@ -5,7 +5,7 @@
     </div>
 
     <div class="content update-spp">
-        <form action="<?= BASEURL ?>spp/update" method="POST">
+        <form action="<?= BASEURL ?>/spp/update" method="POST">
             <label for="angkatan">Angkatan</label>
             <input type="text" name="angkatan" id="angkatan" value="<?= $data['spp']['angkatan']; ?>" placeholder="Masukkan Angkatan" readonly required>
             <br>

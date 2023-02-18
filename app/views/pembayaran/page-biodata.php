@@ -14,19 +14,26 @@
                 <td>Telp</td>
                 <td>Alamat</td>
                 <td>Telp Ortu</td>
+                <th></th>
             </thead>
             <?php foreach ($data['siswa'] as $swa) : ?>
                 <tbody>
                     <td><?= $swa['nis']; ?></td>
                     <td><?= $swa['nama_siswa']; ?></td>
-                    <td><?= $swa['id_kelas']; ?></td>
-                    <?php foreach ($data['spp'] as $spp) : ?>
-                        <?php if ($swa['id_angkatan'] == $spp['id_angkatan']) : ?>
-                            <td><?= $spp['angkatan']; ?></td>
+
+                    <?php foreach ($data['kelas'] as $kls) : ?>
+                        <?php if ($kls['id_kelas'] == $swa['id_kelas']) : ?>
+                            <td><?= $kls['kelas']; ?></td>
                         <?php endif; ?>
-                    <?php endforeach; ?> <td><?= $swa['telp']; ?></td>
+                    <?php endforeach; ?>
+
+                    <td><?= $swa['angkatan']; ?></td>
+                    <td><?= $swa['telp']; ?></td>
                     <td><?= $swa['alamat']; ?></td>
                     <td><?= $swa['telp_ortu']; ?></td>
+                    <td>
+                        <a href="<?= BASEURL; ?>/pembayaran/tagihan/<?= $swa['nis']; ?>" class="btn">Details</a>
+                    </td>
                 </tbody>
             <?php endforeach; ?>
         </table>

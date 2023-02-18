@@ -5,7 +5,7 @@
     </div>
 
     <div class="content tambah-siswa">
-        <form action="<?= BASEURL ?>siswa/add" method="POST">
+        <form action="<?= BASEURL ?>/siswa/add" method="POST">
             <label for="nis">Nis</label>
             <input type="text" name="nis" id="nis" placeholder="Masukkan Nis" required>
             <br>

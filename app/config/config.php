@@ -2,7 +2,7 @@
 
 // Variable Constant
 // Base URL
-const BASEURL = 'http://localhost/pembayaranspp/public/';
+const BASEURL = 'http://localhost/pembayaranspp/public';
 
 // Database
 const DB_HOST = 'localhost';

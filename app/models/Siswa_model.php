@@ -73,8 +73,9 @@ class Siswa_model
     public function searchDataSiswa()
     {
         $keyword = $_POST['keyword'];
-        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE nis LIKE :keyword OR nama_siswa LIKE :keyword');
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE nis LIKE :keyword OR nama_siswa LIKE :keywordName');
         $this->db->bind('keyword', "$keyword");
+        $this->db->bind('keywordName', "%$keyword%");
         return $this->db->resultSet();
     }
 }

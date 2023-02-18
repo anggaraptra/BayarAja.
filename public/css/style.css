@@ -144,6 +144,7 @@ body.dark {
 .sidebar li.search-box input {
   height: 100%;
   width: 100%;
+  padding-right: 0.8rem;
   outline: none;
   border: none;
   background-color: var(--primary-color-light);

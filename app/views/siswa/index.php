@@ -7,9 +7,9 @@
     <?php if ($data['siswa'] != null) : ?>
         <div class="content siswa">
             <div class="add">
-                <a href="<?= BASEURL; ?>siswa/formAdd" class="btn btn-primary">Tambah Data</a>
+                <a href="<?= BASEURL; ?>/siswa/formAdd" class="btn btn-primary">Tambah Data</a>
             </div>
-            <table>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Nis</th>
@@ -39,8 +39,8 @@
                             <td><?= $siswa['alamat']; ?></td>
                             <td><?= $siswa['telp_ortu']; ?></td>
                             <td>
-                                <a href="<?= BASEURL; ?>siswa/getUpdate/<?= $siswa['nis']; ?>" class="btn">Update</a>
-                                <a href="<?= BASEURL; ?>siswa/delete/<?= $siswa['nis']; ?>" class="btn" onclick="return confirm('Yakin?');">Hapus</a>
+                                <a href="<?= BASEURL; ?>/siswa/getUpdate/<?= $siswa['nis']; ?>" class="btn">Update</a>
+                                <a href="<?= BASEURL; ?>/siswa/delete/<?= $siswa['nis']; ?>" class="btn" onclick="return confirm('Yakin?');">Hapus</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -50,7 +50,7 @@
     <?php else : ?>
         <div class="content siswa">
             <h1 class="">Data Siswa Kosong</h1>
-            <a href="<?= BASEURL; ?>siswa/formAdd" class="btn btn-primary">Tambah Data</a>
+            <a href="<?= BASEURL; ?>/siswa/formAdd" class="btn btn-primary">Tambah Data</a>
         </div>
     <?php endif; ?>
 </section>

@@ -5,9 +5,8 @@
     </div>
 
     <div class="content pembayaran">
-        <form action="<?= BASEURL; ?>pembayaran/biodata" method="post" class="">
-            <input class="" type="search" placeholder="Cari nis" name="keyword" id="keyword" autocomplete="off" required>
-            <button class="btn" type="submit" id="tombolCari">Cari</button>
+        <form action="<?= BASEURL; ?>/pembayaran/biodata" method="post" class="">
+            <input class="" type="search" placeholder="Search nis" name="keyword" id="keyword" autocomplete="off" required>
         </form>
     </div>
 </section>

@@ -87,10 +87,10 @@ class Siswa extends Controller
     public function update()
     {
         if ($this->model('Siswa_model')->updateDataSiswa($_POST) > 0) {
-            header('Location: ' . BASEURL . 'siswa');
+            header('Location: ' . BASEURL . '/siswa');
             exit;
         } else {
-            header('Location: ' . BASEURL . 'siswa');
+            header('Location: ' . BASEURL . '/siswa');
             exit;
         }
     }
@@ -98,10 +98,10 @@ class Siswa extends Controller
     public function delete($nis)
     {
         if ($this->model('Siswa_model')->deleteDataSiswa($nis) > 0) {
-            header('Location: ' . BASEURL . 'siswa');
+            header('Location: ' . BASEURL . '/siswa');
             exit;
         } else {
-            header('Location: ' . BASEURL . 'siswa');
+            header('Location: ' . BASEURL . '/siswa');
             exit;
         }
     }

@@ -5,7 +5,7 @@
     </div>
 
     <div class="content update-pegawai">
-        <form action="<?= BASEURL ?>pegawai/update" method="POST">
+        <form action="<?= BASEURL ?>/pegawai/update" method="POST">
             <input type="hidden" name="id_pegawai" value="<?= $data['pegawai']['id_pegawai']; ?>">
             <label for="nama_pegawai">Nama</label>
             <input type="text" name="nama_pegawai" id="nama_pegawai" value="<?= $data['pegawai']['nama_pegawai']; ?>" placeholder="Masukkan Nama" required>

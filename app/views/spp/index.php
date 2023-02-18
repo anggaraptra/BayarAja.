@@ -7,9 +7,9 @@
     <?php if ($data['spp'] != null) : ?>
         <div class="content spp">
             <div class="add">
-                <a href="<?= BASEURL; ?>spp/formAdd" class="btn">Tambah Data</a>
+                <a href="<?= BASEURL; ?>/spp/formAdd" class="btn">Tambah Data</a>
             </div>
-            <table>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Tahun</th>
@@ -23,8 +23,8 @@
                             <td><?= $spp['angkatan']; ?></td>
                             <td><?= $spp['nominal']; ?></td>
                             <td>
-                                <a href="<?= BASEURL; ?>spp/getUpdate/<?= $spp['angkatan']; ?>" class="btn">Update</a>
-                                <a href="<?= BASEURL; ?>spp/delete/<?= $spp['angkatan']; ?>" class="btn" onclick="return confirm('Yakin?');">Hapus</a>
+                                <a href="<?= BASEURL; ?>/spp/getUpdate/<?= $spp['angkatan']; ?>" class="btn">Update</a>
+                                <a href="<?= BASEURL; ?>/spp/delete/<?= $spp['angkatan']; ?>" class="btn" onclick="return confirm('Yakin?');">Hapus</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -34,7 +34,7 @@
     <?php else : ?>
         <div class="content spp">
             <h1 class="">Data Spp Kosong</h1>
-            <a href="<?= BASEURL; ?>spp/formAdd" class="btn">Tambah Data</a>
+            <a href="<?= BASEURL; ?>/spp/formAdd" class="btn">Tambah Data</a>
         </div>
     <?php endif; ?>
 </section>

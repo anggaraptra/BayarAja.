@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- My Style -->
-    <link rel="stylesheet" href="<?= BASEURL; ?>css/style.css">
+    <link rel="stylesheet" href="<?= BASEURL; ?>/css/style.css">
 
     <!-- Fonts -->
     <!-- Montserrat -->
@@ -54,7 +54,9 @@
 
                 <li class="search-box">
                     <i class='icon'><?= SEARCH; ?></i>
-                    <input type="text" placeholder="Search...">
+                    <form action="<?= BASEURL; ?>/pembayaran/biodata" method="POST">
+                        <input type="search" name="keyword" id="keyword" placeholder="Search...">
+                    </form>
                 </li>
 
                 <ul class="menu-links">
@@ -66,49 +68,49 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="<?= BASEURL; ?>kelas" class="<?= $data['statusKelas'] ?>">
+                        <a href="<?= BASEURL; ?>/kelas" class="<?= $data['statusKelas'] ?>">
                             <i class='icon'><?= COLUMNS; ?></i>
                             <span class="text nav-text">Data Kelas</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="<?= BASEURL; ?>siswa" class="<?= $data['statusSiswa'] ?>">
+                        <a href="<?= BASEURL; ?>/siswa" class="<?= $data['statusSiswa'] ?>">
                             <i class='icon'><?= SPREADSHEET ?></i>
                             <span class="text nav-text">Data Siswa</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="<?= BASEURL; ?>pegawai" class="<?= $data['statusPegawai'] ?>">
+                        <a href="<?= BASEURL; ?>/pegawai" class="<?= $data['statusPegawai'] ?>">
                             <i class='icon'><?= SPREADSHEET; ?></i>
                             <span class="text nav-text">Data Pegawai</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="<?= BASEURL; ?>spp" class="<?= $data['statusSpp'] ?>">
+                        <a href="<?= BASEURL; ?>/spp" class="<?= $data['statusSpp'] ?>">
                             <i class='icon'><?= RECEIPT; ?></i>
                             <span class="text nav-text">Data SPP</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="<?= BASEURL; ?>pembayaran" class="<?= $data['statusPembayaran'] ?>">
+                        <a href="<?= BASEURL; ?>/pembayaran" class="<?= $data['statusPembayaran'] ?>">
                             <i class='icon'><?= CREDITCARD; ?></i>
                             <span class="text nav-text">Pembayaran</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="<?= BASEURL; ?>history" class="<?= $data['statusHistory'] ?>">
+                        <a href="<?= BASEURL; ?>/history" class="<?= $data['statusHistory'] ?>">
                             <i class='icon'><?= HISTORY; ?></i>
                             <span class="text nav-text">History</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="<?= BASEURL; ?>laporan" class="<?= $data['statusLaporan'] ?>">
+                        <a href="<?= BASEURL; ?>/laporan" class="<?= $data['statusLaporan'] ?>">
                             <i class='icon'><?= REPORT; ?></i>
                             <span class="text nav-text">Laporan</span>
                         </a>

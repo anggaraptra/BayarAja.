@@ -49,10 +49,10 @@ class Pegawai extends Controller
     public function add()
     {
         if ($this->model('Pegawai_model')->addDataPegawai($_POST) > 0) {
-            header('Location: ' . BASEURL . 'pegawai');
+            header('Location: ' . BASEURL . '/pegawai');
             exit;
         } else {
-            header('Location: ' . BASEURL . 'pegawai');
+            header('Location: ' . BASEURL . '/pegawai');
             exit;
         }
     }
@@ -82,10 +82,10 @@ class Pegawai extends Controller
     public function update()
     {
         if ($this->model('Pegawai_model')->updateDataPegawai($_POST) > 0) {
-            header('Location: ' . BASEURL . 'pegawai');
+            header('Location: ' . BASEURL . '/pegawai');
             exit;
         } else {
-            header('Location: ' . BASEURL . 'pegawai');
+            header('Location: ' . BASEURL . '/pegawai');
             exit;
         }
     }
@@ -93,10 +93,10 @@ class Pegawai extends Controller
     public function delete($id)
     {
         if ($this->model('Pegawai_model')->deleteDataPegawai($id) > 0) {
-            header('Location: ' . BASEURL . 'pegawai');
+            header('Location: ' . BASEURL . '/pegawai');
             exit;
         } else {
-            header('Location: ' . BASEURL . 'pegawai');
+            header('Location: ' . BASEURL . '/pegawai');
             exit;
         }
     }

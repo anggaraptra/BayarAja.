@@ -49,10 +49,10 @@ class Kelas extends Controller
     public function add()
     {
         if ($this->model('Kelas_model')->addDataKelas($_POST) > 0) {
-            header('Location: ' . BASEURL . 'kelas');
+            header('Location: ' . BASEURL . '/kelas');
             exit;
         } else {
-            header('Location: ' . BASEURL . 'kelas');
+            header('Location: ' . BASEURL . '/kelas');
             exit;
         }
     }
@@ -82,10 +82,10 @@ class Kelas extends Controller
     public function update()
     {
         if ($this->model('Kelas_model')->updateDataKelas($_POST) > 0) {
-            header('Location: ' . BASEURL . 'kelas');
+            header('Location: ' . BASEURL . '/kelas');
             exit;
         } else {
-            header('Location: ' . BASEURL . 'kelas');
+            header('Location: ' . BASEURL . '/kelas');
             exit;
         }
     }
@@ -93,10 +93,10 @@ class Kelas extends Controller
     public function delete($id)
     {
         if ($this->model('Kelas_model')->deleteDataKelas($id) > 0) {
-            header('Location: ' . BASEURL . 'kelas');
+            header('Location: ' . BASEURL . '/kelas');
             exit;
         } else {
-            header('Location: ' . BASEURL . 'kelas');
+            header('Location: ' . BASEURL . '/kelas');
             exit;
         }
     }

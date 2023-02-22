@@ -9,12 +9,14 @@ class Pembayaran_model
         $this->db = new Database();
     }
 
+    // method untuk mengambil semua data
     public function getAllPembayaran()
     {
         $this->db->query('SELECT * FROM ' . $this->table);
         return $this->db->resultSet();
     }
 
+    // method untuk mengambil data berdasarkan id
     public function getPembayaranById($id)
     {
         $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id_bayar=:id');
@@ -22,6 +24,7 @@ class Pembayaran_model
         return $this->db->single();
     }
 
+    // method untuk menambah data
     public function addDataPembayaran($data)
     {
         $query = "INSERT INTO " . $this->table . " VALUES (0, :id_pegawai, :nis, :tanggal_bayar, :bulan_bayar, :tahun_bayar, :jumlah_bayar, :keterangan)";
@@ -39,6 +42,7 @@ class Pembayaran_model
         return $this->db->rowCount();
     }
 
+    // method untuk mengubah data
     public function updateDataPembayaran($data)
     {
         $query = "UPDATE " . $this->table . " SET id_pegawai=:id_pegawai, nis=:nis, tanggal_bayar=:tanggal_bayar, bulan_bayar=:bulan_bayar, tahun_bayar=:tahun_bayar, jumlah_bayar=:jumlah_bayar, keterangan=:keterangan WHERE id_bayar=:id";
@@ -57,6 +61,7 @@ class Pembayaran_model
         return $this->db->rowCount();
     }
 
+    // method untuk menghapus data
     public function deleteDataPembayaran($id)
     {
         $query = "DELETE FROM " . $this->table . " WHERE id_bayar=:id";

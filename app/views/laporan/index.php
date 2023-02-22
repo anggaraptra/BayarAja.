@@ -4,5 +4,7 @@
         <h5 class="sub-text">Home / <span>Laporan Pembayaran</span></h5>
     </div>
 
-    <div class="content laporan"></div>
+    <div class="content laporan">
+
+    </div>
 </section>

@@ -1,21 +1,24 @@
 <?php
 class Siswa_model
 {
+    // property untuk menampung nama tabel
     private $table = "tb_siswa";
     private $db;
 
-    // Constructor untuk memanggil dan instansiasi class Database
+    // constructor untuk memanggil dan instansiasi class database
     public function __construct()
     {
         $this->db = new Database();
     }
 
+    // method untuk mengambil semua data
     public function getAllSiswa()
     {
         $this->db->query('SELECT * FROM ' . $this->table);
         return $this->db->resultSet();
     }
 
+    // method untuk mengambil data berdasarkan nis siswa
     public function getSiswaByNis($nis)
     {
         $this->db->query('SELECT * FROM ' . $this->table . ' WHERE nis=:nis');
@@ -23,6 +26,7 @@ class Siswa_model
         return $this->db->single();
     }
 
+    // method untuk menambah data
     public function addDataSiswa($data)
     {
         $query = 'INSERT INTO ' . $this->table . ' VALUES (:nis, :nama_siswa, :id_kelas, :angkatan, :telp, :alamat, :telp_ortu, :password)';
@@ -41,6 +45,7 @@ class Siswa_model
         return $this->db->rowCount();
     }
 
+    // method untuk mengubah data
     public function updateDataSiswa($data)
     {
         $query = 'UPDATE ' . $this->table . ' SET nama_siswa=:nama_siswa, id_kelas=:id_kelas, angkatan=:angkatan, telp=:telp, alamat=:alamat, telp_ortu=:telp_ortu, password=:password WHERE nis=:nis';
@@ -59,6 +64,7 @@ class Siswa_model
         return $this->db->rowCount();
     }
 
+    // method untuk menghapus data
     public function deleteDataSiswa($nis)
     {
         $query = 'DELETE FROM ' . $this->table . ' WHERE nis=:nis';
@@ -70,9 +76,14 @@ class Siswa_model
         return $this->db->rowCount();
     }
 
+    // method untuk mencari data siswa
     public function searchDataSiswa()
     {
-        $keyword = $_POST['keyword'];
+        if (@$_POST['keyword']) {
+            $keyword = $_POST['keyword'];
+        } else {
+            $keyword = !null;
+        }
         $this->db->query('SELECT * FROM ' . $this->table . ' WHERE nis LIKE :keyword OR nama_siswa LIKE :keywordName');
         $this->db->bind('keyword', "$keyword");
         $this->db->bind('keywordName', "%$keyword%");

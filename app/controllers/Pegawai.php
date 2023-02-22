@@ -4,8 +4,24 @@ class Pegawai extends Controller
 {
     public function index()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
         // data
-        $data['judul'] = 'Data Pegawai';
+        $data['title'] = 'Data Pegawai';
         $data['statusDashboard'] = '';
         $data['statusKelas'] = '';
         $data['statusSiswa'] = '';
@@ -26,8 +42,24 @@ class Pegawai extends Controller
 
     public function formAdd()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
         // data
-        $data['judul'] = 'Tambah Pegawai';
+        $data['title'] = 'Tambah Pegawai';
         $data['statusDashboard'] = '';
         $data['statusKelas'] = '';
         $data['statusSiswa'] = '';
@@ -37,9 +69,6 @@ class Pegawai extends Controller
         $data['statusHistory'] = '';
         $data['statusLaporan'] = '';
 
-        // model
-
-
         // view
         $this->view('templates/header', $data);
         $this->view('pegawai/page-tambah', $data);
@@ -48,6 +77,23 @@ class Pegawai extends Controller
 
     public function add()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        // cek apakah data berhasil ditambahkan atau tidak
         if ($this->model('Pegawai_model')->addDataPegawai($_POST) > 0) {
             header('Location: ' . BASEURL . '/pegawai');
             exit;
@@ -59,8 +105,24 @@ class Pegawai extends Controller
 
     public function getUpdate($id)
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
         // data
-        $data['judul'] = 'Update Pegawai';
+        $data['title'] = 'Update Pegawai';
         $data['statusDashboard'] = '';
         $data['statusKelas'] = '';
         $data['statusSiswa'] = '';
@@ -81,6 +143,23 @@ class Pegawai extends Controller
 
     public function update()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
+        }
+
+        // cek apakah data berhasil diupdate
         if ($this->model('Pegawai_model')->updateDataPegawai($_POST) > 0) {
             header('Location: ' . BASEURL . '/pegawai');
             exit;
@@ -92,6 +171,23 @@ class Pegawai extends Controller
 
     public function delete($id)
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        // cek apakah data berhasil dihapus
         if ($this->model('Pegawai_model')->deleteDataPegawai($id) > 0) {
             header('Location: ' . BASEURL . '/pegawai');
             exit;

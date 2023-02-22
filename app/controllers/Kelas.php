@@ -4,8 +4,19 @@ class Kelas extends Controller
 {
     public function index()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
         // data
-        $data['judul'] = 'Data Kelas';
+        $data['title'] = 'Data Kelas';
         $data['statusDashboard'] = '';
         $data['statusKelas'] = 'active';
         $data['statusSiswa'] = '';
@@ -26,8 +37,19 @@ class Kelas extends Controller
 
     public function formAdd()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
         // data
-        $data['judul'] = 'Tambah Kelas';
+        $data['title'] = 'Tambah Kelas';
         $data['statusDashboard'] = '';
         $data['statusKelas'] = 'active';
         $data['statusSiswa'] = '';
@@ -37,9 +59,6 @@ class Kelas extends Controller
         $data['statusHistory'] = '';
         $data['statusLaporan'] = '';
 
-        // model
-
-
         // view
         $this->view('templates/header', $data);
         $this->view('kelas/page-tambah', $data);
@@ -48,10 +67,24 @@ class Kelas extends Controller
 
     public function add()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        // cek apakah data berhasil ditambahkan
         if ($this->model('Kelas_model')->addDataKelas($_POST) > 0) {
+            Flasher::setFlashInfo('Data berhasil ditambahkan!', 'berhasil');
             header('Location: ' . BASEURL . '/kelas');
             exit;
         } else {
+            Flasher::setFlashInfo('Data gagal ditambahkan!', 'gagal');
             header('Location: ' . BASEURL . '/kelas');
             exit;
         }
@@ -59,8 +92,19 @@ class Kelas extends Controller
 
     public function getUpdate($id)
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
         // data
-        $data['judul'] = 'Update Kelas';
+        $data['title'] = 'Update Kelas';
         $data['statusDashboard'] = '';
         $data['statusKelas'] = 'active';
         $data['statusSiswa'] = '';
@@ -81,10 +125,24 @@ class Kelas extends Controller
 
     public function update()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        // cek apakah data berhasil diupdate
         if ($this->model('Kelas_model')->updateDataKelas($_POST) > 0) {
+            Flasher::setFlashInfo('Data berhasil diupdate!', 'berhasil');
             header('Location: ' . BASEURL . '/kelas');
             exit;
         } else {
+            Flasher::setFlashInfo('Data gagal diupdate!', 'gagal');
             header('Location: ' . BASEURL . '/kelas');
             exit;
         }
@@ -92,10 +150,24 @@ class Kelas extends Controller
 
     public function delete($id)
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        // cek apakah data berhasil dihapus
         if ($this->model('Kelas_model')->deleteDataKelas($id) > 0) {
+            Flasher::setFlashInfo('Data berhasil dihapus!', 'berhasil');
             header('Location: ' . BASEURL . '/kelas');
             exit;
         } else {
+            Flasher::setFlashInfo('Data gagal dihapus!', 'gagal');
             header('Location: ' . BASEURL . '/kelas');
             exit;
         }

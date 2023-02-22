@@ -4,8 +4,19 @@ class Spp extends Controller
 {
     public function index()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
         // data
-        $data['judul'] = 'Data SPP';
+        $data['title'] = 'Data SPP';
         $data['statusDashboard'] = '';
         $data['statusKelas'] = '';
         $data['statusSiswa'] = '';
@@ -26,8 +37,19 @@ class Spp extends Controller
 
     public function formAdd()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
         // data
-        $data['judul'] = 'Tambah SPP';
+        $data['title'] = 'Tambah SPP';
         $data['statusDashboard'] = '';
         $data['statusKelas'] = '';
         $data['statusSiswa'] = '';
@@ -37,9 +59,6 @@ class Spp extends Controller
         $data['statusHistory'] = '';
         $data['statusLaporan'] = '';
 
-        // model
-
-
         // view
         $this->view('templates/header', $data);
         $this->view('spp/page-tambah', $data);
@@ -48,6 +67,18 @@ class Spp extends Controller
 
     public function add()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        // cek apakah data berhasil ditambahkan atau tidak
         if ($this->model('Spp_model')->addDataSpp($_POST) > 0) {
             header('Location: ' . BASEURL . '/spp');
             exit;
@@ -59,8 +90,19 @@ class Spp extends Controller
 
     public function getUpdate($angkatan)
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
         // data
-        $data['judul'] = 'Update SPP';
+        $data['title'] = 'Update SPP';
         $data['statusDashboard'] = '';
         $data['statusKelas'] = '';
         $data['statusSiswa'] = '';
@@ -81,6 +123,18 @@ class Spp extends Controller
 
     public function update()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        // cek apakah data berhasil diupdate atau tidak
         if ($this->model('Spp_model')->updateDataSpp($_POST) > 0) {
             header('Location: ' . BASEURL . '/spp');
             exit;
@@ -92,6 +146,18 @@ class Spp extends Controller
 
     public function delete($angkatan)
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        // cek apakah data berhasil dihapus atau tidak
         if ($this->model('Spp_model')->deleteDataSpp($angkatan) > 0) {
             header('Location: ' . BASEURL . '/spp');
             exit;

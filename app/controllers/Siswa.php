@@ -4,8 +4,19 @@ class Siswa extends Controller
 {
     public function index()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
         // data
-        $data['judul'] = 'Data Siswa';
+        $data['title'] = 'Data Siswa';
         $data['statusDashboard'] = '';
         $data['statusKelas'] = '';
         $data['statusSiswa'] = 'active';
@@ -28,8 +39,19 @@ class Siswa extends Controller
 
     public function formAdd()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
         // data
-        $data['judul'] = 'Tambah Siswa';
+        $data['title'] = 'Tambah Siswa';
         $data['statusDashboard'] = '';
         $data['statusKelas'] = '';
         $data['statusSiswa'] = 'active';
@@ -51,6 +73,18 @@ class Siswa extends Controller
 
     public function add()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        // cek apakah data berhasil ditambahkan atau tidak
         if ($this->model('Siswa_model')->addDataSiswa($_POST) > 0) {
             header('Location: ' . BASEURL . '/siswa');
             exit;
@@ -62,8 +96,19 @@ class Siswa extends Controller
 
     public function getUpdate($nis)
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
         // data
-        $data['judul'] = 'Update Siswa';
+        $data['title'] = 'Update Siswa';
         $data['statusDashboard'] = '';
         $data['statusKelas'] = '';
         $data['statusSiswa'] = 'active';
@@ -86,6 +131,18 @@ class Siswa extends Controller
 
     public function update()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        // cek apakah data berhadil diupdate atau tidak
         if ($this->model('Siswa_model')->updateDataSiswa($_POST) > 0) {
             header('Location: ' . BASEURL . '/siswa');
             exit;
@@ -97,6 +154,18 @@ class Siswa extends Controller
 
     public function delete($nis)
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        // cek apakah data berhasil dihapus atau tidak
         if ($this->model('Siswa_model')->deleteDataSiswa($nis) > 0) {
             header('Location: ' . BASEURL . '/siswa');
             exit;

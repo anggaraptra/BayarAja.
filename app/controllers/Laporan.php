@@ -4,8 +4,19 @@ class Laporan extends Controller
 {
     public function index()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
         // data
-        $data['judul'] = 'Laporan Pembayaran';
+        $data['title'] = 'Laporan Pembayaran';
         $data['statusDashboard'] = '';
         $data['statusKelas'] = '';
         $data['statusSiswa'] = '';
@@ -14,9 +25,6 @@ class Laporan extends Controller
         $data['statusPembayaran'] = '';
         $data['statusHistory'] = '';
         $data['statusLaporan'] = 'active';
-
-        // model
-
 
         // view
         $this->view('templates/header', $data);

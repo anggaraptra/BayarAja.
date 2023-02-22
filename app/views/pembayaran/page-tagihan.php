@@ -14,7 +14,7 @@
                     <th>Jatuh Tempo</th>
                     <th>Tanggal Bayar</th>
                     <th>Jumlah Bayar</th>
-                    <th></th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,6 +47,9 @@
                         <td>10-<?= $bulanIndo[date('m', strtotime("+$i month", strtotime($awalTempo)))]; ?></td>
                         <td></td>
                         <td></td>
+                        <td>
+                            <a href="">Bayar</a>
+                        </td>
                     </tr>
                 <?php endfor; ?>
             </tbody>

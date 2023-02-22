@@ -4,8 +4,19 @@ class Dashboard extends Controller
 {
     public function index()
     {
+        // cek session login
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
         // data
-        $data['judul'] = 'Dashboard';
+        $data['title'] = 'Dashboard';
         $data['statusDashboard'] = 'active';
         $data['statusKelas'] = '';
         $data['statusSiswa'] = '';
@@ -14,9 +25,6 @@ class Dashboard extends Controller
         $data['statusPembayaran'] = '';
         $data['statusHistory'] = '';
         $data['statusLaporan'] = '';
-
-        // model
-
 
         // view
         $this->view('templates/header', $data);

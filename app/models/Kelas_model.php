@@ -9,12 +9,14 @@ class Kelas_model
         $this->db = new Database();
     }
 
+    // method untuk mengambil semua data
     public function getAllKelas()
     {
         $this->db->query('SELECT * FROM ' . $this->table);
         return $this->db->resultSet();
     }
 
+    // method untuk mengambil data berdasarkan id
     public function getKelasById($id)
     {
         $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id_kelas=:id');
@@ -22,6 +24,7 @@ class Kelas_model
         return $this->db->single();
     }
 
+    // method untuk menambah data
     public function addDataKelas($data)
     {
         $query = "INSERT INTO " . $this->table . " VALUES (0, :kelas, :keterangan)";
@@ -34,6 +37,7 @@ class Kelas_model
         return $this->db->rowCount();
     }
 
+    // method untuk mengubah data
     public function updateDataKelas($data)
     {
         $query = "UPDATE " . $this->table . " SET kelas=:kelas, keterangan=:keterangan WHERE id_kelas=:id";
@@ -47,6 +51,7 @@ class Kelas_model
         return $this->db->rowCount();
     }
 
+    // method untuk menghapus data
     public function deleteDataKelas($id)
     {
         $query = "DELETE FROM " . $this->table . " WHERE id_kelas=:id";

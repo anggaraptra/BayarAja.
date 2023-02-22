@@ -1,21 +1,41 @@
 <?php
 class Flasher
 {
-    public static function setFlash($pesan, $aksi, $tipe)
+    // method untuk mengirimkan pesan dan menerima parameter pesannya
+    public static function setFlashInfo($pesan, $tipe)
     {
         $_SESSION['flash'] = [
             'pesan' => $pesan,
-            'aksi' => $aksi,
-            'tipe' => $tipe
+            'tipe' => $tipe,
         ];
     }
 
-    public static function flash()
+    // method untuk mengirimkan pesan dan menerima parameter pesannya
+    public static function setFlashLogin($psn)
+    {
+        $_SESSION['flash'] = [
+            'pesan' => $psn,
+        ];
+    }
+
+    // method untuk menampilkan pesan
+    public static function flashInfo()
     {
         if (isset($_SESSION['flash'])) {
-            echo '<div class="alert alert-' . $_SESSION['flash']['tipe'] . ' alert-dismissible fade show" role="alert">
-                    Data <strong>' . $_SESSION['flash']['pesan'] . '</strong> ' . $_SESSION['flash']['aksi'] . '
-                </div>';
+            echo '<script>
+                alert("' . $_SESSION['flash']['tipe'] . ' ' . $_SESSION['flash']['pesan'] . '");
+            </script>';
+            unset($_SESSION['flash']);
+        }
+    }
+
+    // method untuk menampilkan pesan khusus login
+    public static function flashLogin()
+    {
+        if (isset($_SESSION['flash'])) {
+            echo '<script>
+                    alert("' . $_SESSION['flash']['pesan'] . '");
+                </script>';
             unset($_SESSION['flash']);
         }
     }

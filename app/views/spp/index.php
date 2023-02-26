@@ -4,17 +4,27 @@
         <h5 class="sub-text">Home / <span>Data Spp</span></h5>
     </div>
 
+    <?php Flasher::flash(); ?>
+
     <?php if ($data['spp'] != null) : ?>
         <div class="content spp">
-            <div class="add">
-                <a href="<?= BASEURL; ?>/spp/formAdd" class="btn">Tambah Data</a>
-            </div>
+
+            <?php if (@$_SESSION['level'] == 'admin') : ?>
+                <div class="add">
+                    <a href="<?= BASEURL; ?>/spp/formAdd" class="btn">Tambah Data</a>
+                </div>
+            <?php endif; ?>
+
             <table class="table">
                 <thead>
                     <tr>
                         <th>Tahun</th>
                         <th>Nominal</th>
-                        <th>Aksi</th>
+
+                        <?php if (@$_SESSION['level'] == 'admin') : ?>
+                            <th>Aksi</th>
+                        <?php endif; ?>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -22,10 +32,14 @@
                         <tr>
                             <td><?= $spp['angkatan']; ?></td>
                             <td><?= $spp['nominal']; ?></td>
-                            <td>
-                                <a href="<?= BASEURL; ?>/spp/getUpdate/<?= $spp['angkatan']; ?>" class="btn">Update</a>
-                                <a href="<?= BASEURL; ?>/spp/delete/<?= $spp['angkatan']; ?>" class="btn" onclick="return confirm('Yakin?');">Hapus</a>
-                            </td>
+
+                            <?php if (@$_SESSION['level'] == 'admin') : ?>
+                                <td>
+                                    <a href="<?= BASEURL; ?>/spp/getUpdate/<?= $spp['angkatan']; ?>" class="btn">Update</a>
+                                    <a href="<?= BASEURL; ?>/spp/delete/<?= $spp['angkatan']; ?>" class="btn" onclick="return confirm('Yakin?');">Hapus</a>
+                                </td>
+                            <?php endif; ?>
+
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

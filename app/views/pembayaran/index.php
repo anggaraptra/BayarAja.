@@ -8,7 +8,7 @@
 
     <div class="content pembayaran">
         <form action="<?= BASEURL; ?>/pembayaran/biodata" method="POST" class="">
-            <input class="" type="search" placeholder="Search nis" name="keyword" id="keyword" autocomplete="off" required>
+            <input class="" type="search" placeholder="Search nis" name="keyword" id="keyword" required>
         </form>
 
         <div class="history">
@@ -23,7 +23,6 @@
                     <th>Nama Siswa</th>
                     <th>Tanggal Bayar</th>
                     <th>Jumlah Bayar</th>
-                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,9 +46,7 @@
 
                         <td><?= $history['tanggal_bayar']; ?></td>
                         <td><?= $history['jumlah_bayar']; ?></td>
-                        <td>
-                            <a href="">Delete</a>
-                        </td>
+
                     </tr>
                 <?php endforeach; ?>
             </tbody>

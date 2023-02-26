@@ -26,7 +26,7 @@
     <!-- Navbar start-->
     <nav class="navbar">
         <div class="logo">
-            <a href="#" class="navbar-logo text">Pembayaran<span>SPP. </span></a>
+            <a href="<?= BASEURL; ?>" class="navbar-logo text">Pembayaran<span>SPP. </span></a>
         </div>
 
         <div class="toggle-sidebar">
@@ -40,10 +40,12 @@
                     <span class="text"><?= $_SESSION['nama']; ?></span>
                     <?php if (@$_SESSION['level']) : ?>
                         <span class="text"><?= $_SESSION['level']; ?></span>
+                    <?php else : ?>
+                        <span class="text">siswa</span>
                     <?php endif; ?>
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item text" href="#">Profile</a></li>
+                    <li><a class="dropdown-item text" href="<?= BASEURL; ?>/profile">Profile</a></li>
                 </ul>
             </div>
         </div>
@@ -59,7 +61,7 @@
                     <li class="search-box">
                         <i class='icon'><?= SEARCH; ?></i>
                         <form action="<?= BASEURL; ?>/pembayaran/biodata" method="POST">
-                            <input type="search" name="keyword" id="keyword" placeholder="Search...">
+                            <input type="search" name="keyword" id="keyword" placeholder="Search siswa..." autocomplete="off">
                         </form>
                     </li>
                 <?php endif; ?>

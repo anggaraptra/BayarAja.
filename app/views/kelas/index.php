@@ -4,19 +4,27 @@
         <h5 class="sub-text">Home / <span>Data Kelas</span></h5>
     </div>
 
-    <?php Flasher::flashInfo(); ?>
+    <?php Flasher::flash(); ?>
 
     <?php if ($data['kelas'] != null) : ?>
         <div class="content kelas">
-            <div class="add">
-                <a href="<?= BASEURL ?>/kelas/formAdd" class="btn">Tambah Data</a>
-            </div>
+
+            <?php if (@$_SESSION['level'] == 'admin') : ?>
+                <div class="add">
+                    <a href="<?= BASEURL ?>/kelas/formAdd" class="btn">Tambah Data</a>
+                </div>
+            <?php endif; ?>
+
             <table class="table">
                 <thead>
                     <tr>
                         <th>Kelas</th>
                         <th>Keterangan</th>
-                        <th>Aksi</th>
+
+                        <?php if (@$_SESSION['level'] == 'admin') : ?>
+                            <th>Aksi</th>
+                        <?php endif; ?>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -24,10 +32,14 @@
                         <tr>
                             <td><?= $kelas['kelas']; ?></td>
                             <td><?= $kelas['keterangan']; ?></td>
-                            <td>
-                                <a href="<?= BASEURL; ?>/kelas/getUpdate/<?= $kelas['id_kelas']; ?>" class="btn">Update</a>
-                                <a href="<?= BASEURL; ?>/kelas/delete/<?= $kelas['id_kelas']; ?>" class="btn" onclick="return confirm('Yakin?');">Hapus</a>
-                            </td>
+
+                            <?php if (@$_SESSION['level'] == 'admin') : ?>
+                                <td>
+                                    <a href="<?= BASEURL; ?>/kelas/getUpdate/<?= $kelas['id_kelas']; ?>" class="btn">Update</a>
+                                    <a href="<?= BASEURL; ?>/kelas/delete/<?= $kelas['id_kelas']; ?>" class="btn" onclick="return confirm('Yakin?');">Hapus</a>
+                                </td>
+                            <?php endif; ?>
+
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

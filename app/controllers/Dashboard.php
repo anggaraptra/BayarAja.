@@ -11,8 +11,10 @@ class Dashboard extends Controller
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/history');
-            exit;
+            echo "<script>
+                    alert('Anda tidak memiliki akses ke halaman ini!');
+                    window.location.href = '" . BASEURL . "/history';
+            </script>";
         }
 
         // data

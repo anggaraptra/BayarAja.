@@ -4,11 +4,17 @@
         <h5 class="sub-text">Home / <span>Data Siswa</span></h5>
     </div>
 
+    <?php Flasher::flash(); ?>
+
     <?php if ($data['siswa'] != null) : ?>
         <div class="content siswa">
-            <div class="add">
-                <a href="<?= BASEURL; ?>/siswa/formAdd" class="btn btn-primary">Tambah Data</a>
-            </div>
+
+            <?php if (@$_SESSION['level'] == 'admin') : ?>
+                <div class="add">
+                    <a href="<?= BASEURL; ?>/siswa/formAdd" class="btn btn-primary">Tambah Data</a>
+                </div>
+            <?php endif; ?>
+
             <table class="table">
                 <thead>
                     <tr>
@@ -19,7 +25,11 @@
                         <th>Telp</th>
                         <th>Alamat</th>
                         <th>Telp Ortu</th>
-                        <th>Aksi</th>
+
+                        <?php if (@$_SESSION['level'] == 'admin') : ?>
+                            <th>Aksi</th>
+                        <?php endif; ?>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -38,10 +48,14 @@
                             <td><?= $siswa['telp']; ?></td>
                             <td><?= $siswa['alamat']; ?></td>
                             <td><?= $siswa['telp_ortu']; ?></td>
-                            <td>
-                                <a href="<?= BASEURL; ?>/siswa/getUpdate/<?= $siswa['nis']; ?>" class="btn">Update</a>
-                                <a href="<?= BASEURL; ?>/siswa/delete/<?= $siswa['nis']; ?>" class="btn" onclick="return confirm('Yakin?');">Hapus</a>
-                            </td>
+
+                            <?php if (@$_SESSION['level'] == 'admin') : ?>
+                                <td>
+                                    <a href="<?= BASEURL; ?>/siswa/getUpdate/<?= $siswa['nis']; ?>" class="btn">Update</a>
+                                    <a href="<?= BASEURL; ?>/siswa/delete/<?= $siswa['nis']; ?>" class="btn" onclick="return confirm('Yakin?');">Hapus</a>
+                                </td>
+                            <?php endif; ?>
+
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

@@ -14,7 +14,7 @@ class Siswa_model
     // method untuk mengambil semua data
     public function getAllSiswa()
     {
-        $this->db->query('SELECT * FROM ' . $this->table);
+        $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY nis DESC');
         return $this->db->resultSet();
     }
 

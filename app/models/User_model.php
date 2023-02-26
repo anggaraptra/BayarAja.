@@ -24,12 +24,14 @@ class User_model
 
         if ($rowPegawai && $rowPegawai['level'] == 'admin') {
             $_SESSION['login'] = true;
+            $_SESSION['id_pegawai'] = $rowPegawai['id_pegawai'];
             $_SESSION['username'] = $rowPegawai['username'];
             $_SESSION['nama'] = $rowPegawai['nama_pegawai'];
             $_SESSION['level'] = $rowPegawai['level'];
             return $this->db->rowCount();
         } elseif ($rowPegawai && $rowPegawai['level'] == 'petugas') {
             $_SESSION['login'] = true;
+            $_SESSION['id_pegawai'] = $rowPegawai['id_pegawai'];
             $_SESSION['username'] = $rowPegawai['username'];
             $_SESSION['nama'] = $rowPegawai['nama_pegawai'];
             $_SESSION['level'] = $rowPegawai['level'];

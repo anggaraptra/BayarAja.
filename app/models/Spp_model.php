@@ -12,7 +12,7 @@ class Spp_model
     // method untuk mengambil semua data
     public function getAllSpp()
     {
-        $this->db->query('SELECT * FROM ' . $this->table);
+        $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY angkatan DESC');
         return $this->db->resultSet();
     }
 

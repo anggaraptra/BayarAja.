@@ -11,13 +11,17 @@ class Pegawai extends Controller
         }
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/pembayaran');
-            exit;
+            echo '<script>
+                alert("Anda tidak memiliki akses ke halaman ini!");
+                window.location.href = "' . BASEURL . '/pembayaran";
+            </script>';
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/history');
-            exit;
+            echo "<script>
+                alert('Anda tidak memiliki akses ke halaman ini!');
+                window.location.href = '" . BASEURL . "/history';
+            </script>";
         }
 
         // data
@@ -49,13 +53,17 @@ class Pegawai extends Controller
         }
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/pembayaran');
-            exit;
+            echo '<script>
+                alert("Anda tidak memiliki akses ke halaman ini!");
+                window.location.href = "' . BASEURL . '/pembayaran";
+            </script>';
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/history');
-            exit;
+            echo "<script>
+                alert('Anda tidak memiliki akses ke halaman ini!');
+                window.location.href = '" . BASEURL . "/history';
+            </script>";
         }
 
         // data
@@ -84,20 +92,26 @@ class Pegawai extends Controller
         }
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/pembayaran');
-            exit;
+            echo '<script>
+                alert("Anda tidak memiliki akses ke halaman ini!");
+                window.location.href = "' . BASEURL . '/pembayaran";
+            </script>';
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/history');
-            exit;
+            echo "<script>
+                alert('Anda tidak memiliki akses ke halaman ini!');
+                window.location.href = '" . BASEURL . "/history';
+            </script>";
         }
 
         // cek apakah data berhasil ditambahkan atau tidak
         if ($this->model('Pegawai_model')->addDataPegawai($_POST) > 0) {
+            Flasher::setFlash('Data berhasil ditambahkan!', 'berhasil');
             header('Location: ' . BASEURL . '/pegawai');
             exit;
         } else {
+            Flasher::setFlash('Data gagal ditambahkan!', 'gagal');
             header('Location: ' . BASEURL . '/pegawai');
             exit;
         }
@@ -112,13 +126,17 @@ class Pegawai extends Controller
         }
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/pembayaran');
-            exit;
+            echo '<script>
+                alert("Anda tidak memiliki akses ke halaman ini!");
+                window.location.href = "' . BASEURL . '/pembayaran";
+            </script>';
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/history');
-            exit;
+            echo "<script>
+                alert('Anda tidak memiliki akses ke halaman ini!');
+                window.location.href = '" . BASEURL . "/history';
+            </script>";
         }
 
         // data
@@ -150,20 +168,26 @@ class Pegawai extends Controller
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/history');
-            exit;
+            echo '<script>
+                alert("Anda tidak memiliki akses ke halaman ini!");
+                window.location.href = "' . BASEURL . '/pembayaran";
+            </script>';
         }
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/pembayaran');
-            exit;
+            echo "<script>
+                alert('Anda tidak memiliki akses ke halaman ini!');
+                window.location.href = '" . BASEURL . "/history';
+            </script>";
         }
 
         // cek apakah data berhasil diupdate
         if ($this->model('Pegawai_model')->updateDataPegawai($_POST) > 0) {
+            Flasher::setFlash('Data berhasil diupdate!', 'berhasil');
             header('Location: ' . BASEURL . '/pegawai');
             exit;
         } else {
+            Flasher::setFlash('Data gagal diupdate!', 'gagal');
             header('Location: ' . BASEURL . '/pegawai');
             exit;
         }
@@ -178,20 +202,26 @@ class Pegawai extends Controller
         }
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/pembayaran');
-            exit;
+            echo '<script>
+                alert("Anda tidak memiliki akses ke halaman ini!");
+                window.location.href = "' . BASEURL . '/pembayaran";
+            </script>';
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/history');
-            exit;
+            echo "<script>
+                alert('Anda tidak memiliki akses ke halaman ini!');
+                window.location.href = '" . BASEURL . "/history';
+            </script>";
         }
 
         // cek apakah data berhasil dihapus
         if ($this->model('Pegawai_model')->deleteDataPegawai($id) > 0) {
+            Flasher::setFlash('Data berhasil dihapus!', 'berhasil');
             header('Location: ' . BASEURL . '/pegawai');
             exit;
         } else {
+            Flasher::setFlash('Data gagal dihapus!', 'gagal');
             header('Location: ' . BASEURL . '/pegawai');
             exit;
         }

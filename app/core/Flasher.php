@@ -2,7 +2,7 @@
 class Flasher
 {
     // method untuk mengirimkan pesan dan menerima parameter pesannya
-    public static function setFlashInfo($pesan, $tipe)
+    public static function setFlash($pesan, $tipe)
     {
         $_SESSION['flash'] = [
             'pesan' => $pesan,
@@ -19,7 +19,7 @@ class Flasher
     }
 
     // method untuk menampilkan pesan
-    public static function flashInfo()
+    public static function flash()
     {
         if (isset($_SESSION['flash'])) {
             echo '<script>

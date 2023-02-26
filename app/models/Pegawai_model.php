@@ -12,7 +12,7 @@ class Pegawai_model
     // method untuk mengambil semua data
     public function getAllPegawai()
     {
-        $this->db->query('SELECT * FROM ' . $this->table);
+        $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY id_pegawai DESC');
         return $this->db->resultSet();
     }
 

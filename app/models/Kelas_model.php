@@ -12,7 +12,7 @@ class Kelas_model
     // method untuk mengambil semua data
     public function getAllKelas()
     {
-        $this->db->query('SELECT * FROM ' . $this->table);
+        $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY id_kelas DESC');
         return $this->db->resultSet();
     }
 

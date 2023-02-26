@@ -15,6 +15,7 @@
                     <th>NIS</th>
                     <th>Nama Siswa</th>
                     <th>Tanggal Bayar</th>
+                    <th>Bulan Bayar</th>
                     <th>Jumlah Bayar</th>
                     <th>Aksi</th>
                 </tr>
@@ -39,6 +40,7 @@
                         <?php endforeach; ?>
 
                         <td><?= $history['tanggal_bayar']; ?></td>
+                        <td><?= $history['bulan_bayar']; ?></td>
                         <td><?= $history['jumlah_bayar']; ?></td>
                         <td>
                             <button>Cetak</button>

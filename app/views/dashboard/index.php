@@ -1,7 +1,7 @@
 <section class="home">
     <div class="page-title">
         <h1 class="head-text">Dashboard</h1>
-        <h5 class="sub-text">Home / <span>Dashboard</span></h5>
+        <h5 class="sub-text">Home / </h5>
     </div>
 
     <?php Flasher::flashLogin(); ?>

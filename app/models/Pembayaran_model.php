@@ -12,7 +12,7 @@ class Pembayaran_model
     // method untuk mengambil semua data
     public function getAllPembayaran()
     {
-        $this->db->query('SELECT * FROM ' . $this->table);
+        $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY id_bayar DESC');
         return $this->db->resultSet();
     }
 
@@ -22,6 +22,23 @@ class Pembayaran_model
         $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id_bayar=:id');
         $this->db->bind('id', $id);
         return $this->db->single();
+    }
+
+    // method untuk mengambil data berdasarkan nis
+    public function getPembayaranByNis($nis)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE nis=:nis');
+        $this->db->bind('nis', $nis);
+        return $this->db->resultSet();
+    }
+
+    // method untuk mengambil data berdasarkan nis dan bulan
+    public function getPembayaranByNisAndMonth($nis, $bulan)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE nis=:nis AND bulan_bayar=:bulan');
+        $this->db->bind('nis', $nis);
+        $this->db->bind('bulan', $bulan);
+        return $this->db->resultSet();
     }
 
     // method untuk menambah data

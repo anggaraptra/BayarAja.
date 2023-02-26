@@ -37,7 +37,7 @@ class History extends Controller
         $this->view('templates/footer');
     }
 
-    public function siswa($nis)
+    public function siswa($nis = null)
     {
         // cek session login
         if (!@$_SESSION['login']) {
@@ -47,6 +47,16 @@ class History extends Controller
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'admin' || @$_SESSION['level'] == 'petugas') {
             header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        if ($nis == null) {
+            header('Location: ' . BASEURL . '/history/siswa/' . $_SESSION['nis']);
+            exit;
+        }
+
+        if ($nis !== $_SESSION['nis']) {
+            header('Location: ' . BASEURL . '/history/siswa/' . $_SESSION['nis']);
             exit;
         }
 

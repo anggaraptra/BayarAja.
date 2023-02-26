@@ -11,8 +11,10 @@ class Siswa extends Controller
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/history');
-            exit;
+            echo "<script>
+                alert('Anda tidak memiliki akses ke halaman ini!');
+                window.location.href = '" . BASEURL . "/history';
+            </script>";
         }
 
         // data
@@ -45,9 +47,18 @@ class Siswa extends Controller
             exit;
         }
 
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
+            echo '<script>
+                alert("Petugas tidak bisa menambah data siswa!");
+                window.location.href = "' . BASEURL . '/pembayaran";
+            </script>';
+        }
+
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/history');
-            exit;
+            echo "<script>
+                alert('Anda tidak memiliki akses ke halaman ini!');
+                window.location.href = '" . BASEURL . "/history';
+            </script>";
         }
 
         // data
@@ -79,16 +90,27 @@ class Siswa extends Controller
             exit;
         }
 
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
+            echo '<script>
+                alert("Petugas tidak bisa menambah data siswa!");
+                window.location.href = "' . BASEURL . '/pembayaran";
+            </script>';
+        }
+
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/history');
-            exit;
+            echo "<script>
+                alert('Anda tidak memiliki akses ke halaman ini!');
+                window.location.href = '" . BASEURL . "/history';
+            </script>";
         }
 
         // cek apakah data berhasil ditambahkan atau tidak
         if ($this->model('Siswa_model')->addDataSiswa($_POST) > 0) {
+            Flasher::setFlash('Data berhasil ditambahkan!', 'berhasil');
             header('Location: ' . BASEURL . '/siswa');
             exit;
         } else {
+            Flasher::setFlash('Data gagal ditambahkan!', 'gagal');
             header('Location: ' . BASEURL . '/siswa');
             exit;
         }
@@ -102,9 +124,18 @@ class Siswa extends Controller
             exit;
         }
 
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
+            echo '<script>
+                alert("Petugas tidak bisa update data siswa!");
+                window.location.href = "' . BASEURL . '/pembayaran";
+            </script>';
+        }
+
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/history');
-            exit;
+            echo "<script>
+                alert('Anda tidak memiliki akses ke halaman ini!');
+                window.location.href = '" . BASEURL . "/history';
+            </script>";
         }
 
         // data
@@ -137,16 +168,27 @@ class Siswa extends Controller
             exit;
         }
 
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
+            echo '<script>
+                alert("Petugas tidak bisa update data siswa!");
+                window.location.href = "' . BASEURL . '/pembayaran";
+            </script>';
+        }
+
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/history');
-            exit;
+            echo "<script>
+                alert('Anda tidak memiliki akses ke halaman ini!');
+                window.location.href = '" . BASEURL . "/history';
+            </script>";
         }
 
         // cek apakah data berhadil diupdate atau tidak
         if ($this->model('Siswa_model')->updateDataSiswa($_POST) > 0) {
+            Flasher::setFlash('Data berhasil diupdate!', 'berhasil');
             header('Location: ' . BASEURL . '/siswa');
             exit;
         } else {
+            Flasher::setFlash('Data gagal diupdate!', 'gagal');
             header('Location: ' . BASEURL . '/siswa');
             exit;
         }
@@ -160,16 +202,27 @@ class Siswa extends Controller
             exit;
         }
 
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
+            echo '<script>
+                alert("Petugas tidak bisa menghapus data siswa!");
+                window.location.href = "' . BASEURL . '/pembayaran";
+            </script>';
+        }
+
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/history');
-            exit;
+            echo "<script>
+                alert('Anda tidak memiliki akses ke halaman ini!');
+                window.location.href = '" . BASEURL . "/history';
+            </script>";
         }
 
         // cek apakah data berhasil dihapus atau tidak
         if ($this->model('Siswa_model')->deleteDataSiswa($nis) > 0) {
+            Flasher::setFlash('Data berhasil dihapus!', 'berhasil');
             header('Location: ' . BASEURL . '/siswa');
             exit;
         } else {
+            Flasher::setFlash('Data gagal dihapus!', 'gagal');
             header('Location: ' . BASEURL . '/siswa');
             exit;
         }

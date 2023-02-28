@@ -5,7 +5,7 @@
     </div>
 
     <div class="content bayar">
-        <form action="<?= BASEURL; ?>/pembayaran/bayar" method="POST">
+        <form action="<?= BASEURL; ?>/pembayaran/bayar/<?= $data['nis']; ?>" method="POST">
             <input type="hidden" name="id_pegawai" value="<?= $_SESSION['id_pegawai']; ?>">
             <input type="hidden" name="nis" value="<?= $data['nis']; ?>">
             <input type="hidden" name="tahun_bayar" value="<?= $data['tahun']; ?>">

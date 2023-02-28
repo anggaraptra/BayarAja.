@@ -4,8 +4,6 @@
         <h5 class="sub-text">Home / <span>History Pembayaran</span></h5>
     </div>
 
-    <?php Flasher::flashLogin() ?>
-
     <div class="content history">
         <table class="table">
             <thead>

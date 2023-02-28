@@ -14,17 +14,39 @@
                 <td>Laporan Pembayaran Kelas</td>
                 <td>
                     <form action="<?= BASEURL; ?>/laporan/kelas" method="POST" target="_blank">
-                        <select class="form-control" name="kelas" id="">
-                            <?php foreach ($data['kelas'] as $kls) : ?>
-                                <option value="<?= $kls['id_kelas']; ?>"><?= $kls['kelas']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <button class="btn btn-success btn-lg" type="submit" name="tampil">Tampilkan</button>
+                        <div class="options-kelas">
+                            <select class="form-control" name="kelas" id="" required>
+                                <option value="">Pilih Kelas</option>
+                                <?php foreach ($data['kelas'] as $kls) : ?>
+                                    <option value="<?= $kls['kelas']; ?>"><?= $kls['kelas']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="option-bulan">
+                            <select class="form-control" name="bulan" id="" required>
+                                <option value="">Pilih Bulan</option>
+                                <option value="Januari">Januari</option>
+                                <option value="Februari">Februari</option>
+                                <option value="Maret">Maret</option>
+                                <option value="April">April</option>
+                                <option value="Mei">Mei</option>
+                                <option value="Juni">Juni</option>
+                                <option value="Juli">Juli</option>
+                                <option value="Agustus">Agustus</option>
+                                <option value="September">September</option>
+                                <option value="Oktober">Oktober</option>
+                                <option value="November">November</option>
+                                <option value="Desember">Desember</option>
+                            </select>
+
+                        </div>
+                        <button class="" type="submit" name="tampilKelas">Tampilkan</button>
                     </form>
                 </td>
             </tr>
 
-            <form class="col-md-2" action="<?= BASEURL; ?>/laporan/pembayaran" method="POST" target="_blank">
+            <form action="<?= BASEURL; ?>/laporan/pembayaran" method="POST" target="_blank">
                 <tr>
                     <td>Laporan Pembayaran</td>
                     <td>
@@ -36,7 +58,7 @@
                             <label for="">Sampai Tanggal</label>
                             <input class="form-control" type="date" name="tgl2" value="<?= date('Y-m-d') ?>">
                         </div>
-                        <button class="btn btn-success btn-lg" type="submit" name="tampil">Tampilkan</button>
+                        <button class="" type="submit" name="tampilPembayaran">Tampilkan</button>
                     </td>
                 </tr>
             </form>

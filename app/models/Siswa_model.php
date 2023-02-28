@@ -14,16 +14,43 @@ class Siswa_model
     // method untuk mengambil semua data
     public function getAllSiswa()
     {
-        $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY nis DESC');
+        $query = 'SELECT * FROM ' . $this->table . ' ORDER BY nis DESC';
+
+        $this->db->query($query);
         return $this->db->resultSet();
     }
 
     // method untuk mengambil data berdasarkan nis siswa
     public function getSiswaByNis($nis)
     {
-        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE nis=:nis');
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE nis=:nis';
+
+        $this->db->query($query);
         $this->db->bind('nis', $nis);
         return $this->db->single();
+    }
+
+    // method untuk mengambil data berdasarkan nis dan password
+    public function getSiswaByNisAndPassword($nis, $password)
+    {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE nis=:nis AND password=:password';
+
+        $this->db->query($query);
+        $this->db->bind('nis', $nis);
+        $this->db->bind('password', $password);
+        return $this->db->single();
+    }
+
+
+    // get siswa by kelas and bulan bayar
+    public function getSiswaByKelasAndBulan($kelas, $bulan)
+    {
+        $query = 'SELECT ' . $this->table . '.*, tb_kelas.kelas, tb_kelas.id_kelas, tb_pembayaran.jumlah_bayar, tb_pembayaran.bulan_bayar FROM ' . $this->table . ' JOIN tb_kelas ON ' . $this->table . '.id_kelas = tb_kelas.id_kelas JOIN tb_pembayaran ON ' . $this->table . '.nis = tb_pembayaran.nis WHERE tb_kelas.kelas = :kelas AND tb_pembayaran.bulan_bayar = :bulan ORDER BY nis ASC';
+
+        $this->db->query($query);
+        $this->db->bind('kelas', $kelas);
+        $this->db->bind('bulan', $bulan);
+        return $this->db->resultSet();
     }
 
     // method untuk menambah data
@@ -84,7 +111,10 @@ class Siswa_model
         } else {
             $keyword = !null;
         }
-        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE nis LIKE :keyword OR nama_siswa LIKE :keywordName');
+
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE nis LIKE :keyword OR nama_siswa LIKE :keywordName';
+
+        $this->db->query($query);
         $this->db->bind('keyword', "$keyword");
         $this->db->bind('keywordName', "%$keyword%");
         return $this->db->resultSet();

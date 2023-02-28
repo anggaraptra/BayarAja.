@@ -140,7 +140,7 @@
 
             <div class="bottom-content">
                 <li class="">
-                    <a onclick="return confirm('Ingin logout?')" class="logout" href="<?= BASEURL; ?>/login/processLogout">
+                    <a class="logout" href="<?= BASEURL; ?>/login/processLogout">
                         <i class='icon'><?= LOGOUT; ?></i>
                         <span class="text nav-text">Logout</span>
                     </a>

@@ -12,15 +12,40 @@ class Pegawai_model
     // method untuk mengambil semua data
     public function getAllPegawai()
     {
-        $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY id_pegawai DESC');
+        $query = 'SELECT * FROM ' . $this->table . ' ORDER BY id_pegawai DESC';
+
+        $this->db->query($query);
         return $this->db->resultSet();
     }
 
     // method untuk mengambil data berdasarkan id
     public function getPegawaiById($id)
     {
-        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id_pegawai=:id');
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE id_pegawai=:id';
+
+        $this->db->query($query);
         $this->db->bind('id', $id);
+        return $this->db->single();
+    }
+
+    // method untuk mengambil data berdasarkan username
+    public function getPegawaiByUsername($username)
+    {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE username=:username';
+
+        $this->db->query($query);
+        $this->db->bind('username', $username);
+        return $this->db->single();
+    }
+
+    // method untuk mengambil data berdasarkan username dan password    
+    public function getPegawaiByUsernameAndPassword($username, $password)
+    {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE username=:username AND password=:password';
+
+        $this->db->query($query);
+        $this->db->bind('username', $username);
+        $this->db->bind('password', $password);
         return $this->db->single();
     }
 

@@ -12,14 +12,18 @@ class Spp_model
     // method untuk mengambil semua data
     public function getAllSpp()
     {
-        $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY angkatan DESC');
+        $query = 'SELECT * FROM ' . $this->table . ' ORDER BY angkatan DESC';
+
+        $this->db->query($query);
         return $this->db->resultSet();
     }
 
     // method untuk mengambil data berdasarkan angkatan
     public function getSppByAngkatan($angkatan)
     {
-        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE angkatan=:angkatan');
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE angkatan=:angkatan';
+
+        $this->db->query($query);
         $this->db->bind('angkatan', $angkatan);
         return $this->db->single();
     }

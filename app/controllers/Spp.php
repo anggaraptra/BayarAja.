@@ -100,11 +100,11 @@ class Spp extends Controller
 
         // cek apakah data berhasil ditambahkan atau tidak
         if ($this->model('Spp_model')->addDataSpp($_POST) > 0) {
-            Flasher::setFlash('Data berhasil ditambahkan!', 'berhasil');
+            Flasher::setFlashMessage('success', 'Data berhasil ditambahkan!');
             header('Location: ' . BASEURL . '/spp');
             exit;
         } else {
-            Flasher::setFlash('Data gagal ditambahkan!', 'gagal');
+            Flasher::setFlashMessage('failed', 'Data gagal ditambahkan!');
             header('Location: ' . BASEURL . '/spp');
             exit;
         }
@@ -176,11 +176,11 @@ class Spp extends Controller
 
         // cek apakah data berhasil diupdate atau tidak
         if ($this->model('Spp_model')->updateDataSpp($_POST) > 0) {
-            Flasher::setFlash('Data berhasil diupdate!', 'berhasil');
+            Flasher::setFlashMessage('success', 'Data berhasil diupdate!');
             header('Location: ' . BASEURL . '/spp');
             exit;
         } else {
-            Flasher::setFlash('Data gagal diupdate!', 'gagal');
+            Flasher::setFlashMessage('failed', 'Data gagal diupdate!');
             header('Location: ' . BASEURL . '/spp');
             exit;
         }
@@ -210,11 +210,11 @@ class Spp extends Controller
 
         // cek apakah data berhasil dihapus atau tidak
         if ($this->model('Spp_model')->deleteDataSpp($angkatan) > 0) {
-            Flasher::setFlash('Data berhasil dihapus!', 'berhasil');
+            Flasher::setFlashMessage('success', 'Data berhasil dihapus!');
             header('Location: ' . BASEURL . '/spp');
             exit;
         } else {
-            Flasher::setFlash('Data gagal dihapus!', 'gagal');
+            Flasher::setFlashMessage('failed', 'Data gagal dihapus!');
             header('Location: ' . BASEURL . '/spp');
             exit;
         }

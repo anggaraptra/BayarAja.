@@ -4,8 +4,6 @@
         <h5 class="sub-text">Home / <span>Data Spp</span></h5>
     </div>
 
-    <?php Flasher::flash(); ?>
-
     <?php if ($data['spp'] != null) : ?>
         <div class="content spp">
 

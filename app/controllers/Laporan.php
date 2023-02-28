@@ -30,6 +30,7 @@ class Laporan extends Controller
 
         // model
         $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
+        $data['pembayaran'] = $this->model('Pembayaran_model')->getAllPembayaran();
 
         // view
         $this->view('templates/header', $data);
@@ -52,19 +53,18 @@ class Laporan extends Controller
             </script>";
         }
 
+        if (empty($_POST['kelas']) || empty($_POST['bulan'])) {
+            echo "<script>
+                alert('Kelas dan bulan harus diisi!');
+                window.location.href = '" . BASEURL . "/laporan';
+            </script>";
+        }
+
         // data
         $data['title'] = 'Laporan Pembayaran Kelas';
-        // $data['statusDashboard'] = '';
-        // $data['statusKelas'] = '';
-        // $data['statusSiswa'] = '';
-        // $data['statusPegawai'] = '';
-        // $data['statusSpp'] = '';
-        // $data['statusPembayaran'] = '';
-        // $data['statusHistory'] = '';
-        // $data['statusLaporan'] = 'active';
 
         // model
-        $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
+        $data['siswa'] = $this->model('Siswa_model')->getSiswaByKelasAndBulan($_POST['kelas'], $_POST['bulan']);
 
         // view
         $this->view('laporan/kelas', $data);
@@ -85,19 +85,19 @@ class Laporan extends Controller
             </script>";
         }
 
+        if (empty($_POST['tgl1']) || empty($_POST['tgl2'])) {
+            echo "<script>
+                alert('Tanggal harus diisi!');
+                window.location.href = '" . BASEURL . "/laporan';
+            </script>";
+        }
+
         // data
         $data['title'] = 'Laporan Pembayaran';
-        // $data['statusDashboard'] = '';
-        // $data['statusKelas'] = '';
-        // $data['statusSiswa'] = '';
-        // $data['statusPegawai'] = '';
-        // $data['statusSpp'] = '';
-        // $data['statusPembayaran'] = '';
-        // $data['statusHistory'] = '';
-        // $data['statusLaporan'] = 'active';
 
         // model
-        $data['pembayaran'] = $this->model('Pembayaran_model')->getAllPembayaran();
+        $data['pembayaran'] = $this->model('Pembayaran_model')->getPembayaranByDate($_POST['tgl1'], $_POST['tgl2']);
+        $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
 
         // view
         $this->view('laporan/pembayaran', $data);

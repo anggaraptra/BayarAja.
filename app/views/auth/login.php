@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <?php Flasher::flashLogin(); ?>
+    <?php Flasher::flashMessage(); ?>
     <div class="container-login">
         <div class="wrapper-login">
             <div class="judul-login">

@@ -107,11 +107,11 @@ class Pegawai extends Controller
 
         // cek apakah data berhasil ditambahkan atau tidak
         if ($this->model('Pegawai_model')->addDataPegawai($_POST) > 0) {
-            Flasher::setFlash('Data berhasil ditambahkan!', 'berhasil');
+            Flasher::setFlashMessage('success', 'Data berhasil ditambahkan!');
             header('Location: ' . BASEURL . '/pegawai');
             exit;
         } else {
-            Flasher::setFlash('Data gagal ditambahkan!', 'gagal');
+            Flasher::setFlashMessage('failed', 'Data gagal ditambahkan!');
             header('Location: ' . BASEURL . '/pegawai');
             exit;
         }
@@ -183,11 +183,11 @@ class Pegawai extends Controller
 
         // cek apakah data berhasil diupdate
         if ($this->model('Pegawai_model')->updateDataPegawai($_POST) > 0) {
-            Flasher::setFlash('Data berhasil diupdate!', 'berhasil');
+            Flasher::setFlashMessage('success', 'Data berhasil diupdate!');
             header('Location: ' . BASEURL . '/pegawai');
             exit;
         } else {
-            Flasher::setFlash('Data gagal diupdate!', 'gagal');
+            Flasher::setFlashMessage('failed', 'Data gagal diupdate!');
             header('Location: ' . BASEURL . '/pegawai');
             exit;
         }
@@ -217,11 +217,11 @@ class Pegawai extends Controller
 
         // cek apakah data berhasil dihapus
         if ($this->model('Pegawai_model')->deleteDataPegawai($id) > 0) {
-            Flasher::setFlash('Data berhasil dihapus!', 'berhasil');
+            Flasher::setFlashMessage('success', 'Data berhasil dihapus!');
             header('Location: ' . BASEURL . '/pegawai');
             exit;
         } else {
-            Flasher::setFlash('Data gagal dihapus!', 'gagal');
+            Flasher::setFlashMessage('failed', 'Data gagal dihapus!');
             header('Location: ' . BASEURL . '/pegawai');
             exit;
         }

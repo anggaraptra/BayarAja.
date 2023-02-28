@@ -20,27 +20,52 @@ class Login extends Controller
         $data['title'] = 'Login';
 
         // view
-        $this->view('login/index', $data);
+        $this->view('auth/login', $data);
     }
 
     public function process()
     {
-        // process login dan mengirimkan session sesuai yang login
-        if ($this->model('User_model')->login($_POST) > 0 && $_SESSION['level'] == 'admin') {
-            Flasher::setFlashLogin('Selamat datang ' . $_SESSION['nama'] . ' (' . $_SESSION['level'] . ') !');
+        if (isset($_POST['username'])) {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+
+            if ($pegawai = $this->model('Pegawai_model')->getPegawaiByUsername($username)) {
+                if ($password == $pegawai['password']) {
+                    $_SESSION['login'] = true;
+                    $_SESSION['id_pegawai'] = $pegawai['id_pegawai'];
+                    $_SESSION['username'] = $pegawai['username'];
+                    $_SESSION['nama'] = $pegawai['nama_pegawai'];
+                    $_SESSION['level'] = $pegawai['level'];
+                } else {
+                    Flasher::setFlashMessage('warning', 'Password tidak sesuai!');
+                    header('Location: ' . BASEURL . '/login');
+                    exit;
+                }
+            } elseif ($siswa = $this->model('Siswa_model')->getSiswaByNis($username)) {
+                if ($password == $siswa['password']) {
+                    $_SESSION['login'] = true;
+                    $_SESSION['nis'] = $siswa['nis'];
+                    $_SESSION['nama'] = $siswa['nama_siswa'];
+                } else {
+                    Flasher::setFlashMessage('warning', 'Password tidak sesuai!');
+                    header('Location: ' . BASEURL . '/login');
+                    exit;
+                }
+            } else {
+                Flasher::setFlashMessage('error', 'Username dan password tidak sesuai!');
+                header('Location: ' . BASEURL . '/login');
+                exit;
+            }
+        }
+
+        if (@$_SESSION['login'] && $_SESSION['level'] == 'admin') {
             header('Location: ' . BASEURL . '/dashboard');
             exit;
-        } elseif ($this->model('User_model')->login($_POST) > 0 && $_SESSION['level'] == 'petugas') {
-            Flasher::setFlashLogin('Selamat datang ' . $_SESSION['nama'] . ' (' . $_SESSION['level'] . ') !');
+        } elseif (@$_SESSION['login'] && $_SESSION['level'] == 'petugas') {
             header('Location: ' . BASEURL . '/pembayaran');
             exit;
-        } elseif ($this->model('User_model')->login($_POST) > 0 && @$_SESSION['nis']) {
-            Flasher::setFlashLogin('Selamat datang ' . $_SESSION['nama'] . ' !');
-            header('Location: ' . BASEURL . '/history');
-            exit;
-        } else {
-            Flasher::setFlashLogin('Username atau password salah!');
-            header('Location: ' . BASEURL . '/login');
+        } elseif (@$_SESSION['login'] && @$_SESSION['nis']) {
+            header('Location: ' . BASEURL . '/history/siswa/' . $_SESSION['nis']);
             exit;
         }
     }
@@ -48,7 +73,9 @@ class Login extends Controller
     public function processLogout()
     {
         // process logout
-        $this->model('User_model')->logout();
+        $_SESSION = [];
+        session_unset();
+        session_destroy();
         header('Location: ' . BASEURL . '/login');
         exit;
     }

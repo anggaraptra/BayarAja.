@@ -72,7 +72,7 @@ class Pembayaran extends Controller
         $this->view('templates/footer');
     }
 
-    public function tagihan($nis)
+    public function tagihan($nis = null)
     {
         // cek session login
         if (!@$_SESSION['login']) {
@@ -85,20 +85,10 @@ class Pembayaran extends Controller
             exit;
         }
 
-        // if ($nis == null) {
-        //     header('Location: ' . BASEURL . '/pembayaran/tagihan/' . $_SESSION['nis'] . '');
-        //     exit;
-        // }
-
-        // if ($nis !== $_SESSION['nis']) {
-        //     header('Location: ' . BASEURL . '/pembayaran/tagihan/' . $_SESSION['nis'] . '');
-        //     exit;
-        // }
-
-        // if ($nis == null) {
-        //     header('Location: ' . !@$_SESSION['nis'] ? '' . BASEURL . '/pembayaran/tagihan/' : '' . BASEURL . '/pembayaran/tagihan/' . $_SESSION['nis'] . '');
-        //     exit;
-        // }
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/' . $_SESSION['nis'] . '');
+            exit;
+        }
 
         // data
         $data['title'] = 'Tagihan Siswa';
@@ -173,7 +163,7 @@ class Pembayaran extends Controller
         }
 
         if ($nis == null || $bulan == null || $tahun == null) {
-            header('Location: ' . BASEURL . '/pembayaran/tagihan/' . $_SESSION['nis'] . '');
+            header('Location: ' . BASEURL . '/pembayaran');
             exit;
         }
 
@@ -200,7 +190,7 @@ class Pembayaran extends Controller
         $this->view('templates/footer');
     }
 
-    public function bayar()
+    public function bayar($nis)
     {
         // cek session login
         if (!@$_SESSION['login']) {
@@ -214,12 +204,12 @@ class Pembayaran extends Controller
         }
 
         if ($this->model('Pembayaran_model')->addDataPembayaran($_POST) > 0) {
-            Flasher::setFlash('Data pembayaran berhasil ditambah!', 'berhasil');
-            header('Location: ' . BASEURL . '/pembayaran');
+            Flasher::setFlashMessage('success', 'Berhasil melakukan pembayaran!');
+            header('Location: ' . BASEURL . '/pembayaran/tagihan/' . $nis . '');
             exit;
         } else {
-            Flasher::setFlash('Data pembayaran gagal ditambah!', 'gagal');
-            header('Location: ' . BASEURL . '/pembayaran');
+            Flasher::setFlashMessage('failed', 'Gagal melakukan pembayaran!');
+            header('Location: ' . BASEURL . '/pembayaran/tagihan/' . $nis . '');
             exit;
         }
     }

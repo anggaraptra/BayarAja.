@@ -4,8 +4,6 @@
         <h5 class="sub-text">Home / <span>Pembayaran SPP</span></h5>
     </div>
 
-    <?php Flasher::flashLogin(); ?>
-
     <div class="content pembayaran">
         <form action="<?= BASEURL; ?>/pembayaran/biodata" method="POST" class="">
             <input class="" type="search" placeholder="Search nis" name="keyword" id="keyword" required>

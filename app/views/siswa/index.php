@@ -4,8 +4,6 @@
         <h5 class="sub-text">Home / <span>Data Siswa</span></h5>
     </div>
 
-    <?php Flasher::flash(); ?>
-
     <?php if ($data['siswa'] != null) : ?>
         <div class="content siswa">
 

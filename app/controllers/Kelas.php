@@ -100,11 +100,11 @@ class Kelas extends Controller
 
         // cek apakah data berhasil ditambahkan
         if ($this->model('Kelas_model')->addDataKelas($_POST) > 0) {
-            Flasher::setFlash('Data berhasil ditambahkan!', 'berhasil');
+            Flasher::setFlashMessage('success', 'Data berhasil ditambahkan!');
             header('Location: ' . BASEURL . '/kelas');
             exit;
         } else {
-            Flasher::setFlash('Data gagal ditambahkan!', 'gagal');
+            Flasher::setFlashMessage('failed', 'Data gagal ditambahkan!');
             header('Location: ' . BASEURL . '/kelas');
             exit;
         }
@@ -176,11 +176,11 @@ class Kelas extends Controller
 
         // cek apakah data berhasil diupdate
         if ($this->model('Kelas_model')->updateDataKelas($_POST) > 0) {
-            Flasher::setFlash('Data berhasil diupdate!', 'berhasil');
+            Flasher::setFlashMessage('success', 'Data berhasil diupdate!');
             header('Location: ' . BASEURL . '/kelas');
             exit;
         } else {
-            Flasher::setFlash('Data gagal diupdate!', 'gagal');
+            Flasher::setFlashMessage('failed', 'Data gagal diupdate!');
             header('Location: ' . BASEURL . '/kelas');
             exit;
         }
@@ -210,11 +210,11 @@ class Kelas extends Controller
 
         // cek apakah data berhasil dihapus
         if ($this->model('Kelas_model')->deleteDataKelas($id) > 0) {
-            Flasher::setFlash('Data berhasil dihapus!', 'berhasil');
+            Flasher::setFlashMessage('success', 'Data berhasil dihapus!');
             header('Location: ' . BASEURL . '/kelas');
             exit;
         } else {
-            Flasher::setFlash('Data gagal dihapus!', 'gagal');
+            Flasher::setFlashMessage('failed', 'Data gagal dihapus!');
             header('Location: ' . BASEURL . '/kelas');
             exit;
         }

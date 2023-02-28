@@ -12,14 +12,18 @@ class Kelas_model
     // method untuk mengambil semua data
     public function getAllKelas()
     {
-        $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY id_kelas DESC');
+        $query = 'SELECT * FROM ' . $this->table . ' ORDER BY id_kelas DESC';
+
+        $this->db->query($query);
         return $this->db->resultSet();
     }
 
     // method untuk mengambil data berdasarkan id
     public function getKelasById($id)
     {
-        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id_kelas=:id');
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE id_kelas=:id';
+
+        $this->db->query($query);
         $this->db->bind('id', $id);
         return $this->db->single();
     }

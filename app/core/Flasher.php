@@ -1,4 +1,5 @@
 <?php
+
 class Flasher
 {
     // method untuk mengirimkan pesan dan menerima parameter pesannya
@@ -9,14 +10,6 @@ class Flasher
             'message' => $message,
         ];
     }
-
-    // method untuk mengirimkan pesan dan menerima parameter pesannya
-    // public static function setFlashLogin($psn)
-    // {
-    //     $_SESSION['flash'] = [
-    //         'pesan' => $psn,
-    //     ];
-    // }
 
     // method untuk menampilkan pesan
     public static function flashMessage()
@@ -32,15 +25,4 @@ class Flasher
             unset($_SESSION['flashMessage']);
         }
     }
-
-    // method untuk menampilkan pesan khusus login
-    // public static function flashLogin()
-    // {
-    //     if (isset($_SESSION['flash'])) {
-    //         echo '<script>
-    //                 alert("' . $_SESSION['flash']['pesan'] . '");
-    //             </script>';
-    //         unset($_SESSION['flash']);
-    //     }
-    // }
 }

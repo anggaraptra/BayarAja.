@@ -5,6 +5,9 @@
     </div>
 
     <div class="content history">
+
+        <?php Flasher::flashMessage() ?>
+
         <table class="table">
             <thead>
                 <tr>

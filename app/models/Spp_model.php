@@ -1,4 +1,5 @@
 <?php
+
 class Spp_model
 {
     private $table = "tb_spp";

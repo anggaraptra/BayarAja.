@@ -17,14 +17,16 @@ class Pembayaran extends Controller
 
         // data
         $data['title'] = 'Pembayaran';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = 'active';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => '',
+            'pegawai' => '',
+            'spp' => '',
+            'pembayaran' => 'active',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // model
         $data['pembayaran'] = $this->model('Pembayaran_model')->getAllPembayaran();
@@ -33,6 +35,7 @@ class Pembayaran extends Controller
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('pembayaran/index', $data);
         $this->view('templates/footer');
     }
@@ -52,14 +55,16 @@ class Pembayaran extends Controller
 
         // data
         $data['title'] = 'Biodata Siswa';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = 'active';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => '',
+            'pegawai' => '',
+            'spp' => '',
+            'pembayaran' => 'active',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // model
         $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
@@ -68,6 +73,7 @@ class Pembayaran extends Controller
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('pembayaran/page-biodata', $data);
         $this->view('templates/footer');
     }
@@ -92,20 +98,23 @@ class Pembayaran extends Controller
 
         // data
         $data['title'] = 'Tagihan Siswa';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = 'active';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => '',
+            'pegawai' => '',
+            'spp' => '',
+            'pembayaran' => 'active',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // model
         $data['siswa'] = $this->model('Siswa_model')->getSiswaByNis($nis);
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('pembayaran/page-tagihan', $data);
         $this->view('templates/footer');
     }
@@ -130,14 +139,16 @@ class Pembayaran extends Controller
 
         // data
         $data['title'] = 'Tagihan Siswa';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = 'active';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => '',
+            'pegawai' => '',
+            'spp' => '',
+            'pembayaran' => 'active',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // model
         $data['siswa'] = $this->model('Siswa_model')->getSiswaByNis($nis);
@@ -145,6 +156,7 @@ class Pembayaran extends Controller
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('pembayaran/page-tagihan', $data);
         $this->view('templates/footer');
     }
@@ -169,14 +181,16 @@ class Pembayaran extends Controller
 
         // data
         $data['title'] = 'Bayar Tagihan';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = 'active';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => '',
+            'pegawai' => '',
+            'spp' => '',
+            'pembayaran' => 'active',
+            'history' => '',
+            'laporan' => ''
+        ];
         $data['nis'] = $nis;
         $data['bulan'] = $bulan;
         $data['tahun'] = $tahun;
@@ -186,6 +200,7 @@ class Pembayaran extends Controller
 
         // view 
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('pembayaran/page-pembayaran', $data);
         $this->view('templates/footer');
     }

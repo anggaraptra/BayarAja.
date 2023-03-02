@@ -19,20 +19,23 @@ class Spp extends Controller
 
         // data
         $data['title'] = 'Data SPP';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = 'active';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => '',
+            'pegawai' => '',
+            'spp' => 'active',
+            'pembayaran' => '',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // model
         $data['spp'] = $this->model('Spp_model')->getAllSpp();
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('spp/index', $data);
         $this->view('templates/footer');
     }
@@ -61,17 +64,20 @@ class Spp extends Controller
 
         // data
         $data['title'] = 'Tambah SPP';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = 'active';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => '',
+            'pegawai' => '',
+            'spp' => 'active',
+            'pembayaran' => '',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('spp/page-tambah', $data);
         $this->view('templates/footer');
     }
@@ -134,20 +140,23 @@ class Spp extends Controller
 
         // data
         $data['title'] = 'Update SPP';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = 'active';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => '',
+            'pegawai' => '',
+            'spp' => 'active',
+            'pembayaran' => '',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // model
         $data['spp'] = $this->model('Spp_model')->getSppByAngkatan($angkatan);
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('spp/page-update', $data);
         $this->view('templates/footer');
     }

@@ -1,4 +1,5 @@
 <?php
+
 class Pembayaran_model
 {
     private $table = "tb_pembayaran";

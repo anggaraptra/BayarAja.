@@ -1,4 +1,5 @@
 <?php
+
 class Siswa_model
 {
     // property untuk menampung nama tabel

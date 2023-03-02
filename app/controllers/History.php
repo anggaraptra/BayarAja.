@@ -17,14 +17,16 @@ class History extends Controller
 
         // data
         $data['title'] = 'History Pembayaran';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = 'active';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => '',
+            'pegawai' => '',
+            'spp' => '',
+            'pembayaran' => '',
+            'history' => 'active',
+            'laporan' => ''
+        ];
 
         // model
         $data['pegawai'] = $this->model('Pegawai_model')->getAllPegawai();
@@ -33,6 +35,7 @@ class History extends Controller
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('history/index', $data);
         $this->view('templates/footer');
     }
@@ -62,14 +65,16 @@ class History extends Controller
 
         // data
         $data['title'] = 'History Pembayaran';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = 'active';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => '',
+            'pegawai' => '',
+            'spp' => '',
+            'pembayaran' => '',
+            'history' => 'active',
+            'laporan' => ''
+        ];
 
         // model
         $data['pegawai'] = $this->model('Pegawai_model')->getAllPegawai();
@@ -78,6 +83,7 @@ class History extends Controller
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('history/history-siswa', $data);
         $this->view('templates/footer');
     }

@@ -19,20 +19,23 @@ class Kelas extends Controller
 
         // data
         $data['title'] = 'Data Kelas';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = 'active';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => 'active',
+            'siswa' => '',
+            'pegawai' => '',
+            'spp' => '',
+            'pembayaran' => '',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // model
         $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('kelas/index', $data);
         $this->view('templates/footer');
     }
@@ -61,17 +64,20 @@ class Kelas extends Controller
 
         // data
         $data['title'] = 'Tambah Kelas';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = 'active';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => 'active',
+            'siswa' => '',
+            'pegawai' => '',
+            'spp' => '',
+            'pembayaran' => '',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('kelas/page-tambah', $data);
         $this->view('templates/footer');
     }
@@ -134,20 +140,23 @@ class Kelas extends Controller
 
         // data
         $data['title'] = 'Update Kelas';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = 'active';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => 'active',
+            'siswa' => '',
+            'pegawai' => '',
+            'spp' => '',
+            'pembayaran' => '',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // model
         $data['kelas'] = $this->model('Kelas_model')->getKelasById($id);
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('kelas/page-update', $data);
         $this->view('templates/footer');
     }

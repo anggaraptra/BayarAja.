@@ -5,6 +5,9 @@
     </div>
 
     <div class="content pembayaran">
+
+        <?php Flasher::flashMessage() ?>
+
         <form action="<?= BASEURL; ?>/pembayaran/biodata" method="POST" class="">
             <input class="" type="search" placeholder="Search nis" name="keyword" id="keyword" required>
         </form>

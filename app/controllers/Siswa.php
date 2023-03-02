@@ -19,14 +19,16 @@ class Siswa extends Controller
 
         // data
         $data['title'] = 'Data Siswa';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = 'active';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => 'active',
+            'pegawai' => '',
+            'spp' => '',
+            'pembayaran' => '',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // model
         $data['siswa'] = $this->model('Siswa_model')->getAllSiswa();
@@ -35,6 +37,7 @@ class Siswa extends Controller
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('siswa/index', $data);
         $this->view('templates/footer');
     }
@@ -63,14 +66,16 @@ class Siswa extends Controller
 
         // data
         $data['title'] = 'Tambah Siswa';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = 'active';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => 'active',
+            'pegawai' => '',
+            'spp' => '',
+            'pembayaran' => '',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // model
         $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
@@ -78,6 +83,7 @@ class Siswa extends Controller
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('siswa/page-tambah', $data);
         $this->view('templates/footer');
     }
@@ -140,14 +146,16 @@ class Siswa extends Controller
 
         // data
         $data['title'] = 'Update Siswa';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = 'active';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => 'active',
+            'pegawai' => '',
+            'spp' => '',
+            'pembayaran' => '',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // model
         $data['siswa'] = $this->model('Siswa_model')->getSiswaByNis($nis);
@@ -156,6 +164,7 @@ class Siswa extends Controller
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('siswa/page-update', $data);
         $this->view('templates/footer');
     }

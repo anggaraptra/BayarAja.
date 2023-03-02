@@ -59,12 +59,15 @@ class Login extends Controller
         }
 
         if (@$_SESSION['login'] && $_SESSION['level'] == 'admin') {
+            Flasher::setFlashMessage('success', 'Selamat datang admin!');
             header('Location: ' . BASEURL . '/dashboard');
             exit;
         } elseif (@$_SESSION['login'] && $_SESSION['level'] == 'petugas') {
+            Flasher::setFlashMessage('success', 'Selamat datang petugas!');
             header('Location: ' . BASEURL . '/pembayaran');
             exit;
         } elseif (@$_SESSION['login'] && @$_SESSION['nis']) {
+            Flasher::setFlashMessage('success', 'Selamat datang ' . $_SESSION['nama'] . '!');
             header('Location: ' . BASEURL . '/history/siswa/' . $_SESSION['nis']);
             exit;
         }

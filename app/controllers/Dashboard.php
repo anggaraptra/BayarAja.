@@ -19,17 +19,20 @@ class Dashboard extends Controller
 
         // data
         $data['title'] = 'Dashboard';
-        $data['statusDashboard'] = 'active';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => 'active',
+            'kelas' => '',
+            'siswa' => '',
+            'pegawai' => '',
+            'spp' => '',
+            'pembayaran' => '',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('dashboard/index');
         $this->view('templates/footer');
     }

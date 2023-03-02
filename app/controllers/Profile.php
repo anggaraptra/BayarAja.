@@ -12,19 +12,22 @@ class Profile extends Controller
 
         // data
         $data['title'] = 'Profile';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => '',
+            'pegawai' => '',
+            'spp' => '',
+            'pembayaran' => '',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // model
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('profile/index', $data);
         $this->view('templates/footer');
     }

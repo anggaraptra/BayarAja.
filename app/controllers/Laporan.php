@@ -19,14 +19,16 @@ class Laporan extends Controller
 
         // data
         $data['title'] = 'Laporan Pembayaran';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = '';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = 'active';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => '',
+            'pegawai' => '',
+            'spp' => '',
+            'pembayaran' => '',
+            'history' => '',
+            'laporan' => 'active'
+        ];
 
         // model
         $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
@@ -34,6 +36,7 @@ class Laporan extends Controller
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('laporan/index', $data);
         $this->view('templates/footer');
     }

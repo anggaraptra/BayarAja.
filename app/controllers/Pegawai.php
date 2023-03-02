@@ -26,20 +26,23 @@ class Pegawai extends Controller
 
         // data
         $data['title'] = 'Data Pegawai';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = 'active';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => '',
+            'pegawai' => 'active',
+            'spp' => '',
+            'pembayaran' => '',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // model
         $data['pegawai'] = $this->model('Pegawai_model')->getAllPegawai();
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('pegawai/index', $data);
         $this->view('templates/footer');
     }
@@ -68,17 +71,20 @@ class Pegawai extends Controller
 
         // data
         $data['title'] = 'Tambah Pegawai';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = 'active';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => '',
+            'pegawai' => 'active',
+            'spp' => '',
+            'pembayaran' => '',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('pegawai/page-tambah', $data);
         $this->view('templates/footer');
     }
@@ -141,20 +147,23 @@ class Pegawai extends Controller
 
         // data
         $data['title'] = 'Update Pegawai';
-        $data['statusDashboard'] = '';
-        $data['statusKelas'] = '';
-        $data['statusSiswa'] = '';
-        $data['statusPegawai'] = 'active';
-        $data['statusSpp'] = '';
-        $data['statusPembayaran'] = '';
-        $data['statusHistory'] = '';
-        $data['statusLaporan'] = '';
+        $status = [
+            'dashboard' => '',
+            'kelas' => '',
+            'siswa' => '',
+            'pegawai' => 'active',
+            'spp' => '',
+            'pembayaran' => '',
+            'history' => '',
+            'laporan' => ''
+        ];
 
         // model
         $data['pegawai'] = $this->model('Pegawai_model')->getPegawaiById($id);
 
         // view
         $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, $status);
         $this->view('pegawai/page-update', $data);
         $this->view('templates/footer');
     }

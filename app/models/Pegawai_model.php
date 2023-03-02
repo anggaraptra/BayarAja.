@@ -1,4 +1,5 @@
 <?php
+
 class Pegawai_model
 {
     private $table = "tb_pegawai";

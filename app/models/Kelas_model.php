@@ -1,4 +1,5 @@
 <?php
+
 class Kelas_model
 {
     private $table = "tb_kelas";

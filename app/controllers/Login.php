@@ -6,7 +6,7 @@ class Login extends Controller
     {
         // cek setiap session yang ada dan level
         if (@$_SESSION['login'] && $_SESSION['level'] == 'admin') {
-            header('Location: ' . BASEURL . '/dashboard');
+            header('Location: ' . BASEURL . '');
             exit;
         } elseif (@$_SESSION['login'] && $_SESSION['level'] == 'petugas') {
             header('Location: ' . BASEURL . '/pembayaran');
@@ -34,7 +34,7 @@ class Login extends Controller
                     $_SESSION['login'] = true;
                     $_SESSION['id_pegawai'] = $pegawai['id_pegawai'];
                     $_SESSION['username'] = $pegawai['username'];
-                    $_SESSION['nama'] = $pegawai['nama_pegawai'];
+                    $_SESSION['nama'] = $pegawai['nama_lengkap'];
                     $_SESSION['level'] = $pegawai['level'];
                 } else {
                     Flasher::setFlashMessage('warning', 'Password tidak sesuai!');

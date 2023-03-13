@@ -4,31 +4,20 @@ class Laporan extends Controller
 {
     public function index()
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            echo "<script>
-                alert('Anda tidak memiliki akses ke halaman ini!');
-                window.location.href = '" . BASEURL . "/history';
-            </script>";
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
         }
 
         // data
         $data['title'] = 'Laporan Pembayaran';
-        $status = [
-            'dashboard' => '',
-            'kelas' => '',
-            'siswa' => '',
-            'pegawai' => '',
-            'spp' => '',
-            'pembayaran' => '',
-            'history' => '',
-            'laporan' => 'active'
-        ];
 
         // model
         $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
@@ -36,31 +25,29 @@ class Laporan extends Controller
 
         // view
         $this->view('templates/header', $data);
-        $this->view('templates/navsidebar', $data, $status);
+        $this->view('templates/navsidebar', $data, 'laporan');
         $this->view('laporan/index', $data);
         $this->view('templates/footer');
     }
 
     public function kelas()
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            echo "<script>
-                alert('Anda tidak memiliki akses ke halaman ini!');
-                window.location.href = '" . BASEURL . "/history';
-            </script>";
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
         }
 
         if (empty($_POST['kelas']) || empty($_POST['bulan'])) {
-            echo "<script>
-                alert('Kelas dan bulan harus diisi!');
-                window.location.href = '" . BASEURL . "/laporan';
-            </script>";
+            Flasher::setFlashMessage('danger', 'Kelas dan bulan harus diisi!');
+            header('Location: ' . BASEURL . '/laporan');
+            exit;
         }
 
         // data
@@ -75,24 +62,22 @@ class Laporan extends Controller
 
     public function pembayaran()
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            echo "<script>
-                alert('Anda tidak memiliki akses ke halaman ini!');
-                window.location.href = '" . BASEURL . "/history';
-            </script>";
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
         }
 
         if (empty($_POST['tgl1']) || empty($_POST['tgl2'])) {
-            echo "<script>
-                alert('Tanggal harus diisi!');
-                window.location.href = '" . BASEURL . "/laporan';
-            </script>";
+            Flasher::setFlashMessage('danger', 'Tanggal harus diisi!');
+            header('Location: ' . BASEURL . '/laporan');
+            exit;
         }
 
         // data

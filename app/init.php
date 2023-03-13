@@ -9,3 +9,4 @@ require_once 'core/Flasher.php';
 // Load Config
 require_once 'config/config.php';
 require_once 'config/icons.php';
+require_once 'config/functions.php';

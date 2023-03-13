@@ -1,24 +1,25 @@
 <section class="home">
     <div class="page-title">
         <h1 class="head-text">History</h1>
-        <h5 class="sub-text">Home / <span>History Pembayaran (<?= $_SESSION['nama']; ?>)</span></h5>
+        <h5 class="sub-text"><a href="">Home</a> / <span>History Pembayaran (<?= $_SESSION['nama']; ?>)</span></h5>
+    </div>
+
+    <div class="container-alert">
+        <?php Flasher::flashMessage() ?>
     </div>
 
     <div class="content history">
 
-        <?php Flasher::flashMessage() ?>
-
-        <table class="table">
+        <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>Id Bayar</th>
-                    <th>Nama Petugas</th>
+                    <th>Petugas</th>
                     <th>NIS</th>
-                    <th>Nama Siswa</th>
+                    <th>Nama</th>
                     <th>Tanggal Bayar</th>
-                    <th>Bulan Bayar</th>
                     <th>Jumlah Bayar</th>
-                    <th>Aksi</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -30,7 +31,7 @@
 
                         <?php foreach ($data['pegawai'] as $ptg) : ?>
                             <?php if ($ptg['id_pegawai'] == $history['id_pegawai'] && $data['siswa']['nis'] == $history['nis']) : ?>
-                                <td><?= $ptg['nama_pegawai']; ?></td>
+                                <td><?= $ptg['nama_lengkap']; ?></td>
                             <?php endif; ?>
                         <?php endforeach; ?>
 
@@ -55,8 +56,8 @@
                         <?php endif; ?>
 
                         <?php if ($data['siswa']['nis'] == $history['nis']) : ?>
-                            <td>
-                                <button>Cetak</button>
+                            <td class="aksi">
+                                <a href="" class="btn">Cetak</a>
                             </td>
                         <?php endif; ?>
                     </tr>

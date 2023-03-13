@@ -1,18 +1,24 @@
 <section class="home">
     <div class="page-title">
         <h1 class="head-text">Kelas</h1>
-        <h5 class="sub-text">Home / Data Kelas / <span>Tambah</span></h5>
+        <h5 class="sub-text"><a href="<?= BASEURL; ?>">Home</a> / <a href="<?= BASEURL; ?>/kelas">Data Kelas</a> / <span>Tambah</span></h5>
     </div>
 
-    <div class="content tambah-kelas">
+    <div class="content form-add add-kelas">
         <form action="<?= BASEURL ?>/kelas/add" method="POST">
-            <label for="kelas">Kelas</label>
-            <input type="text" name="kelas" id="kelas" placeholder="Masukkan Kelas" required>
-            <br>
-            <label for="keterangan">Keterangan</label>
-            <textarea name="keterangan" id="" cols="30" rows="10"></textarea>
-            <br>
-            <button type="submit" name="tambah">Tambah</button>
+            <div class="input-group">
+                <label for="kelas">Kelas</label>
+                <input type="text" name="kelas" id="kelas" class="form-control" placeholder="ex:XII RPL 1" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
+            </div>
+
+            <div class="input-group">
+                <label for="keterangan">Keterangan</label>
+                <textarea name="keterangan" id="" class="form-control" placeholder="ex:Rekayasa Perangkat Lunak"></textarea>
+            </div>
+
+            <button type="submit" name="tambah" class="btn">
+                Tambah
+            </button>
         </form>
     </div>
 </section>

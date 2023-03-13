@@ -36,6 +36,16 @@ class Pembayaran_model
 
         $this->db->query($query);
         $this->db->bind('nis', $nis);
+        return $this->db->single();
+    }
+
+    // method untuk mengambil data pembayaran berdasarkan nis
+    public function getPembayaranByNisAll($nis)
+    {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE nis=:nis';
+
+        $this->db->query($query);
+        $this->db->bind('nis', $nis);
         return $this->db->resultSet();
     }
 
@@ -51,63 +61,44 @@ class Pembayaran_model
     }
 
     // method untuk mengambil data berdasarkan tanggal 1 dan tanggal 2
-    public function getPembayaranByDate($tanggal1, $tanggal2)
-    {
-        $query = 'SELECT ' . $this->table . '.*, tb_siswa.nis, tb_siswa.nama_siswa, tb_siswa.id_kelas FROM ' . $this->table . ' INNER JOIN tb_siswa ON ' . $this->table . '.nis = tb_siswa.nis WHERE tanggal_bayar BETWEEN :tanggal1 AND :tanggal2 ORDER BY tanggal_bayar ASC';
+    // public function getPembayaranByDate($tanggal1, $tanggal2)
+    // {
+    //     $query = 'SELECT ' . $this->table . '.*, tb_siswa.nis, tb_siswa.nama_siswa, tb_siswa.kelas FROM ' . $this->table . ' INNER JOIN tb_siswa ON ' . $this->table . '.nis = tb_siswa.nis WHERE tanggal_bayar BETWEEN :tanggal1 AND :tanggal2 ORDER BY tanggal_bayar ASC';
 
-        $this->db->query($query);
-        $this->db->bind('tanggal1', $tanggal1);
-        $this->db->bind('tanggal2', $tanggal2);
-        return $this->db->resultSet();
-    }
-
+    //     $this->db->query($query);
+    //     $this->db->bind('tanggal1', $tanggal1);
+    //     $this->db->bind('tanggal2', $tanggal2);
+    //     return $this->db->resultSet();
+    // }
 
     // method untuk menambah data
-    public function addDataPembayaran($data)
+    public function addDataPembayaran($nisSiswa, $jatuhTempo, $idSpp, $bulan, $tahun)
     {
-        $query = "INSERT INTO " . $this->table . " VALUES (0, :id_pegawai, :nis, :tanggal_bayar, :bulan_bayar, :tahun_bayar, :jumlah_bayar, :keterangan)";
+        $query = "INSERT INTO " . $this->table . " VALUES (0, :nis, :id_spp, :jatuh_tempo, :bulan_bayar, :tahun_bayar, null, null, null)";
 
         $this->db->query($query);
-        $this->db->bind('id_pegawai', htmlspecialchars($data['id_pegawai']));
-        $this->db->bind('nis', htmlspecialchars($data['nis']));
-        $this->db->bind('tanggal_bayar', htmlspecialchars($data['tanggal_bayar']));
-        $this->db->bind('bulan_bayar', htmlspecialchars($data['bulan_bayar']));
-        $this->db->bind('tahun_bayar', htmlspecialchars($data['tahun_bayar']));
-        $this->db->bind('jumlah_bayar', htmlspecialchars($data['jumlah_bayar']));
-        $this->db->bind('keterangan', htmlspecialchars($data['keterangan']));
-
+        $this->db->bind('nis', $nisSiswa);
+        $this->db->bind('id_spp', $idSpp);
+        $this->db->bind('jatuh_tempo', $jatuhTempo);
+        $this->db->bind('bulan_bayar', $bulan);
+        $this->db->bind('tahun_bayar', $tahun);
         $this->db->execute();
+
         return $this->db->rowCount();
     }
 
-    // method untuk mengubah data
-    public function updateDataPembayaran($data)
+    // method untuk update data pembayaran
+    public function updatePembayaran($idBayar, $jumlahBayar, $ket, $sisaBayar)
     {
-        $query = "UPDATE " . $this->table . " SET id_pegawai=:id_pegawai, nis=:nis, tanggal_bayar=:tanggal_bayar, bulan_bayar=:bulan_bayar, tahun_bayar=:tahun_bayar, jumlah_bayar=:jumlah_bayar, keterangan=:keterangan WHERE id_bayar=:id";
+        $query = "UPDATE " . $this->table . " SET jumlah_bayar=:jumlah_bayar, keterangan=:keterangan, sisa_bayar=:sisa_bayar WHERE id_bayar=:id_bayar";
 
         $this->db->query($query);
-        $this->db->bind('id_pegawai', htmlspecialchars($data['id_pegawai']));
-        $this->db->bind('nis', htmlspecialchars($data['nis']));
-        $this->db->bind('tanggal_bayar', htmlspecialchars($data['tanggal_bayar']));
-        $this->db->bind('bulan_bayar', htmlspecialchars($data['bulan_bayar']));
-        $this->db->bind('tahun_bayar', htmlspecialchars($data['tahun_bayar']));
-        $this->db->bind('jumlah_bayar', htmlspecialchars($data['jumlah_bayar']));
-        $this->db->bind('keterangan', htmlspecialchars($data['keterangan']));
-
-        $this->db->bind('id', $data['id_bayar']);
+        $this->db->bind('jumlah_bayar', $jumlahBayar);
+        $this->db->bind('keterangan', $ket);
+        $this->db->bind('sisa_bayar', $sisaBayar);
+        $this->db->bind('id_bayar', $idBayar);
         $this->db->execute();
-        return $this->db->rowCount();
-    }
 
-    // method untuk menghapus data
-    public function deleteDataPembayaran($id)
-    {
-        $query = "DELETE FROM " . $this->table . " WHERE id_bayar=:id";
-
-        $this->db->query($query);
-        $this->db->bind('id', $id);
-
-        $this->db->execute();
         return $this->db->rowCount();
     }
 }

@@ -4,104 +4,79 @@ class Spp extends Controller
 {
     public function index()
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            echo "<script>
-                alert('Anda tidak memiliki akses ke halaman ini!');
-                window.location.href = '" . BASEURL . "/history';
-            </script>";
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
         }
 
         // data
         $data['title'] = 'Data SPP';
-        $status = [
-            'dashboard' => '',
-            'kelas' => '',
-            'siswa' => '',
-            'pegawai' => '',
-            'spp' => 'active',
-            'pembayaran' => '',
-            'history' => '',
-            'laporan' => ''
-        ];
 
         // model
         $data['spp'] = $this->model('Spp_model')->getAllSpp();
 
         // view
         $this->view('templates/header', $data);
-        $this->view('templates/navsidebar', $data, $status);
+        $this->view('templates/navsidebar', $data, 'spp');
         $this->view('spp/index', $data);
         $this->view('templates/footer');
     }
 
     public function formAdd()
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
         }
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            echo '<script>
-                alert("Petugas tidak bisa menambah data spp!");
-                window.location.href = "' . BASEURL . '/pembayaran";
-            </script>';
+            Flasher::setFlashMessage('danger', 'Petugas tidak bisa menambah data spp!');
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            echo "<script>
-                alert('Anda tidak memiliki akses ke halaman ini!');
-                window.location.href = '" . BASEURL . "/history';
-            </script>";
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
         }
 
         // data
         $data['title'] = 'Tambah SPP';
-        $status = [
-            'dashboard' => '',
-            'kelas' => '',
-            'siswa' => '',
-            'pegawai' => '',
-            'spp' => 'active',
-            'pembayaran' => '',
-            'history' => '',
-            'laporan' => ''
-        ];
 
         // view
         $this->view('templates/header', $data);
-        $this->view('templates/navsidebar', $data, $status);
+        $this->view('templates/navsidebar', $data, 'spp');
         $this->view('spp/page-tambah', $data);
         $this->view('templates/footer');
     }
 
     public function add()
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
         }
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            echo '<script>
-                alert("Petugas tidak bisa menambah data spp!");
-                window.location.href = "' . BASEURL . '/pembayaran";
-            </script>';
+            Flasher::setFlashMessage('danger', 'Petugas tidak bisa menambah data spp!');
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            echo "<script>
-                alert('Anda tidak memiliki akses ke halaman ini!');
-                window.location.href = '" . BASEURL . "/history';
-            </script>";
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
         }
 
         // cek apakah data berhasil ditambahkan atau tidak
@@ -116,71 +91,57 @@ class Spp extends Controller
         }
     }
 
-    public function getUpdate($angkatan)
+    public function getUpdate($id)
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
         }
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            echo '<script>
-                alert("Petugas tidak bisa update data spp!");
-                window.location.href = "' . BASEURL . '/pembayaran";
-            </script>';
+            Flasher::setFlashMessage('danger', 'Petugas tidak bisa update data spp!');
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            echo "<script>
-                alert('Anda tidak memiliki akses ke halaman ini!');
-                window.location.href = '" . BASEURL . "/history';
-            </script>";
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
         }
 
         // data
         $data['title'] = 'Update SPP';
-        $status = [
-            'dashboard' => '',
-            'kelas' => '',
-            'siswa' => '',
-            'pegawai' => '',
-            'spp' => 'active',
-            'pembayaran' => '',
-            'history' => '',
-            'laporan' => ''
-        ];
 
         // model
-        $data['spp'] = $this->model('Spp_model')->getSppByAngkatan($angkatan);
+        $data['spp'] = $this->model('Spp_model')->getSppById($id);
 
         // view
         $this->view('templates/header', $data);
-        $this->view('templates/navsidebar', $data, $status);
+        $this->view('templates/navsidebar', $data, 'spp');
         $this->view('spp/page-update', $data);
         $this->view('templates/footer');
     }
 
     public function update()
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
         }
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            echo '<script>
-                alert("Petugas tidak bisa update data spp!");
-                window.location.href = "' . BASEURL . '/pembayaran";
-            </script>';
+            Flasher::setFlashMessage('danger', 'Petugas tidak bisa update data spp!');
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            echo "<script>
-                alert('Anda tidak memiliki akses ke halaman ini!');
-                window.location.href = '" . BASEURL . "/history';
-            </script>";
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
         }
 
         // cek apakah data berhasil diupdate atau tidak
@@ -197,24 +158,22 @@ class Spp extends Controller
 
     public function delete($angkatan)
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
         }
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            echo '<script>
-                alert("Petugas tidak bisa menghapus data spp!");
-                window.location.href = "' . BASEURL . '/pembayaran";
-            </script>';
+            Flasher::setFlashMessage('danger', 'Petugas tidak bisa menghapus data spp!');
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            echo "<script>
-                alert('Anda tidak memiliki akses ke halaman ini!');
-                window.location.href = '" . BASEURL . "/history';
-            </script>";
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
         }
 
         // cek apakah data berhasil dihapus atau tidak

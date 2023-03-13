@@ -4,7 +4,7 @@ class History extends Controller
 {
     public function index()
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
@@ -17,16 +17,6 @@ class History extends Controller
 
         // data
         $data['title'] = 'History Pembayaran';
-        $status = [
-            'dashboard' => '',
-            'kelas' => '',
-            'siswa' => '',
-            'pegawai' => '',
-            'spp' => '',
-            'pembayaran' => '',
-            'history' => 'active',
-            'laporan' => ''
-        ];
 
         // model
         $data['pegawai'] = $this->model('Pegawai_model')->getAllPegawai();
@@ -35,14 +25,14 @@ class History extends Controller
 
         // view
         $this->view('templates/header', $data);
-        $this->view('templates/navsidebar', $data, $status);
+        $this->view('templates/navsidebar', $data, 'history');
         $this->view('history/index', $data);
         $this->view('templates/footer');
     }
 
     public function siswa($nis = null)
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
@@ -65,16 +55,6 @@ class History extends Controller
 
         // data
         $data['title'] = 'History Pembayaran';
-        $status = [
-            'dashboard' => '',
-            'kelas' => '',
-            'siswa' => '',
-            'pegawai' => '',
-            'spp' => '',
-            'pembayaran' => '',
-            'history' => 'active',
-            'laporan' => ''
-        ];
 
         // model
         $data['pegawai'] = $this->model('Pegawai_model')->getAllPegawai();
@@ -83,7 +63,7 @@ class History extends Controller
 
         // view
         $this->view('templates/header', $data);
-        $this->view('templates/navsidebar', $data, $status);
+        $this->view('templates/navsidebar', $data, 'history');
         $this->view('history/history-siswa', $data);
         $this->view('templates/footer');
     }

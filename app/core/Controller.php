@@ -10,7 +10,7 @@ class Controller
     }
 
     // method untuk memanggil view dan mengirimkan data
-    public function view($view, $data = [], $status = [])
+    public function view($view, $data = [], $activeTab = '')
     {
         require_once '../app/views/' . $view . '.php'; // memanggil view
     }

@@ -4,111 +4,85 @@ class Pegawai extends Controller
 {
     public function index()
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
         }
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            echo '<script>
-                alert("Anda tidak memiliki akses ke halaman ini!");
-                window.location.href = "' . BASEURL . '/pembayaran";
-            </script>';
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            echo "<script>
-                alert('Anda tidak memiliki akses ke halaman ini!');
-                window.location.href = '" . BASEURL . "/history';
-            </script>";
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
         }
 
         // data
         $data['title'] = 'Data Pegawai';
-        $status = [
-            'dashboard' => '',
-            'kelas' => '',
-            'siswa' => '',
-            'pegawai' => 'active',
-            'spp' => '',
-            'pembayaran' => '',
-            'history' => '',
-            'laporan' => ''
-        ];
 
         // model
         $data['pegawai'] = $this->model('Pegawai_model')->getAllPegawai();
 
         // view
         $this->view('templates/header', $data);
-        $this->view('templates/navsidebar', $data, $status);
+        $this->view('templates/navsidebar', $data, 'pegawai');
         $this->view('pegawai/index', $data);
         $this->view('templates/footer');
     }
 
     public function formAdd()
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
         }
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            echo '<script>
-                alert("Anda tidak memiliki akses ke halaman ini!");
-                window.location.href = "' . BASEURL . '/pembayaran";
-            </script>';
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            echo "<script>
-                alert('Anda tidak memiliki akses ke halaman ini!');
-                window.location.href = '" . BASEURL . "/history';
-            </script>";
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
         }
 
         // data
         $data['title'] = 'Tambah Pegawai';
-        $status = [
-            'dashboard' => '',
-            'kelas' => '',
-            'siswa' => '',
-            'pegawai' => 'active',
-            'spp' => '',
-            'pembayaran' => '',
-            'history' => '',
-            'laporan' => ''
-        ];
 
         // view
         $this->view('templates/header', $data);
-        $this->view('templates/navsidebar', $data, $status);
+        $this->view('templates/navsidebar', $data, 'pegawai');
         $this->view('pegawai/page-tambah', $data);
         $this->view('templates/footer');
     }
 
     public function add()
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
         }
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            echo '<script>
-                alert("Anda tidak memiliki akses ke halaman ini!");
-                window.location.href = "' . BASEURL . '/pembayaran";
-            </script>';
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            echo "<script>
-                alert('Anda tidak memiliki akses ke halaman ini!');
-                window.location.href = '" . BASEURL . "/history';
-            </script>";
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
         }
 
         // cek apakah data berhasil ditambahkan atau tidak
@@ -125,69 +99,55 @@ class Pegawai extends Controller
 
     public function getUpdate($id)
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
         }
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            echo '<script>
-                alert("Anda tidak memiliki akses ke halaman ini!");
-                window.location.href = "' . BASEURL . '/pembayaran";
-            </script>';
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            echo "<script>
-                alert('Anda tidak memiliki akses ke halaman ini!');
-                window.location.href = '" . BASEURL . "/history';
-            </script>";
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
         }
 
         // data
         $data['title'] = 'Update Pegawai';
-        $status = [
-            'dashboard' => '',
-            'kelas' => '',
-            'siswa' => '',
-            'pegawai' => 'active',
-            'spp' => '',
-            'pembayaran' => '',
-            'history' => '',
-            'laporan' => ''
-        ];
 
         // model
         $data['pegawai'] = $this->model('Pegawai_model')->getPegawaiById($id);
 
         // view
         $this->view('templates/header', $data);
-        $this->view('templates/navsidebar', $data, $status);
+        $this->view('templates/navsidebar', $data, 'pegawai');
         $this->view('pegawai/page-update', $data);
         $this->view('templates/footer');
     }
 
     public function update()
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
         }
 
-        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            echo '<script>
-                alert("Anda tidak memiliki akses ke halaman ini!");
-                window.location.href = "' . BASEURL . '/pembayaran";
-            </script>';
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
         }
 
-        if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            echo "<script>
-                alert('Anda tidak memiliki akses ke halaman ini!');
-                window.location.href = '" . BASEURL . "/history';
-            </script>";
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
         }
 
         // cek apakah data berhasil diupdate
@@ -204,24 +164,22 @@ class Pegawai extends Controller
 
     public function delete($id)
     {
-        // cek session login
+        // cek session
         if (!@$_SESSION['login']) {
             header('Location: ' . BASEURL . '/login');
             exit;
         }
 
         if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
-            echo '<script>
-                alert("Anda tidak memiliki akses ke halaman ini!");
-                window.location.href = "' . BASEURL . '/pembayaran";
-            </script>';
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            echo "<script>
-                alert('Anda tidak memiliki akses ke halaman ini!');
-                window.location.href = '" . BASEURL . "/history';
-            </script>";
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
         }
 
         // cek apakah data berhasil dihapus

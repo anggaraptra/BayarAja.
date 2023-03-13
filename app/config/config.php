@@ -11,4 +11,4 @@ const DB_USER = 'root';
 const DB_PASS = '';
 
 // Site Name
-const SITENAME = 'Pembayaran SPP';
+const SITENAME = 'Bayar Aja';

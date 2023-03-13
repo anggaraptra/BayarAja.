@@ -12,6 +12,15 @@ class Siswa_model
         $this->db = new Database();
     }
 
+    // method untuk menghitung jumlah data
+    public function getAllDataSiswa()
+    {
+        $query = 'SELECT nis FROM ' . $this->table;
+
+        $this->db->query($query);
+        return $this->db->count();
+    }
+
     // method untuk mengambil semua data
     public function getAllSiswa()
     {
@@ -19,6 +28,16 @@ class Siswa_model
 
         $this->db->query($query);
         return $this->db->resultSet();
+    }
+
+    // method untuk mengambil data berdasarkan id
+    public function getSiswaById($idSiswa)
+    {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE id_siswa=:id_siswa';
+
+        $this->db->query($query);
+        $this->db->bind('id_siswa', $idSiswa);
+        return $this->db->single();
     }
 
     // method untuk mengambil data berdasarkan nis siswa
@@ -42,7 +61,6 @@ class Siswa_model
         return $this->db->single();
     }
 
-
     // get siswa by kelas and bulan bayar
     public function getSiswaByKelasAndBulan($kelas, $bulan)
     {
@@ -57,35 +75,51 @@ class Siswa_model
     // method untuk menambah data
     public function addDataSiswa($data)
     {
-        $query = 'INSERT INTO ' . $this->table . ' VALUES (:nis, :nama_siswa, :id_kelas, :angkatan, :telp, :alamat, :telp_ortu, :password)';
+        $nis = htmlspecialchars($data['nis']);
+        // $password = password_hash(htmlspecialchars($data['password']), PASSWORD_BCRYPT);
+        $password = htmlspecialchars($data['password']);
+        $tanggalMasuk = $data['tanggal_masuk'];
+        $angkatan = htmlspecialchars($data['angkatan']);
+        $namaSiswa = htmlspecialchars($data['nama_siswa']);
+        $kelas = htmlspecialchars($data['kelas']);
+        $telp = htmlspecialchars($data['telp']);
+        $alamat = htmlspecialchars($data['alamat']);
+        $telpOrtu = htmlspecialchars($data['telp_ortu']);
+
+        $query = 'INSERT INTO ' . $this->table . ' VALUES (0, :nis, :password, :tanggal_masuk, :angkatan, :nama_siswa, :kelas, :telp, :alamat, :telp_ortu)';
 
         $this->db->query($query);
-        $this->db->bind('nis', htmlspecialchars($data['nis']));
-        $this->db->bind('nama_siswa', htmlspecialchars($data['nama_siswa']));
-        $this->db->bind('id_kelas', htmlspecialchars($data['id_kelas']));
-        $this->db->bind('angkatan', htmlspecialchars($data['angkatan']));
-        $this->db->bind('telp', htmlspecialchars($data['telp']));
-        $this->db->bind('alamat', htmlspecialchars($data['alamat']));
-        $this->db->bind('telp_ortu', htmlspecialchars($data['telp_ortu']));
-        $this->db->bind('password', htmlspecialchars($data['password']));
+        $this->db->bind('nis', $nis);
+        $this->db->bind('password', $password);
+        $this->db->bind('tanggal_masuk', $tanggalMasuk);
+        $this->db->bind('angkatan', $angkatan);
+        $this->db->bind('nama_siswa', $namaSiswa);
+        $this->db->bind('kelas', $kelas);
+        $this->db->bind('telp', $telp);
+        $this->db->bind('alamat', $alamat);
+        $this->db->bind('telp_ortu', $telpOrtu);
 
         $this->db->execute();
-        return $this->db->rowCount();
+        return [
+            'rowCount' => $this->db->rowCount(),
+            'lastInsertId' => $this->db->lastInsertId(),
+        ];
     }
 
     // method untuk mengubah data
     public function updateDataSiswa($data)
     {
-        $query = 'UPDATE ' . $this->table . ' SET nama_siswa=:nama_siswa, id_kelas=:id_kelas, angkatan=:angkatan, telp=:telp, alamat=:alamat, telp_ortu=:telp_ortu, password=:password WHERE nis=:nis';
+        $query = 'UPDATE ' . $this->table . ' SET nama_siswa=:nama_siswa, kelas=:kelas, angkatan=:angkatan, telp=:telp, alamat=:alamat, telp_ortu=:telp_ortu, password=:password WHERE nis=:nis';
 
         $this->db->query($query);
         $this->db->bind('nama_siswa', htmlspecialchars($data['nama_siswa']));
-        $this->db->bind('id_kelas', htmlspecialchars($data['id_kelas']));
+        $this->db->bind('kelas', htmlspecialchars($data['kelas']));
         $this->db->bind('angkatan', htmlspecialchars($data['angkatan']));
         $this->db->bind('telp', htmlspecialchars($data['telp']));
         $this->db->bind('alamat', htmlspecialchars($data['alamat']));
-        $this->db->bind('telp_ortu', htmlspecialchars($data['telp_ortu']));
         $this->db->bind('password', htmlspecialchars($data['password']));
+        $this->db->bind('telp_ortu', htmlspecialchars($data['telp_ortu']));
+
         $this->db->bind('nis', htmlspecialchars($data['nis']));
 
         $this->db->execute();

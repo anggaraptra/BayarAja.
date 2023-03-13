@@ -88,4 +88,11 @@ class Database
     {
         return $this->dbh->lastInsertId();
     }
+
+    // menghitung jumlah table 
+    public function count()
+    {
+        $this->execute();
+        return $this->stmt->rowCount();
+    }
 }

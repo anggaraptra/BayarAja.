@@ -55,8 +55,24 @@ class Siswa extends Controller
         $data['title'] = 'Tambah Siswa';
 
         // model
+        $data['kelasRow'] = $this->model('Kelas_model')->getAllDataKelas();
+        $data['sppRow'] = $this->model('Spp_model')->getAllDataSpp();
+
+        if ($data['kelasRow'] == 0) {
+            Flasher::setFlashMessage('danger', 'Data kelas kosong, silahkan tambah data kelas terlebih dahulu!');
+            header('Location: ' . BASEURL . '/siswa');
+            exit;
+        }
+
+        if ($data['sppRow'] == 0) {
+            Flasher::setFlashMessage('danger', 'Data spp kosong, silahkan tambah data spp terlebih dahulu!');
+            header('Location: ' . BASEURL . '/siswa');
+            exit;
+        }
+
         $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
         $data['spp'] = $this->model('Spp_model')->getAllSpp();
+        $data['siswa'] = $this->model('Siswa_model')->getLastSiswa();
 
         // view
         $this->view('templates/header', $data);
@@ -89,6 +105,8 @@ class Siswa extends Controller
         if (isset($_POST['tambahSiswa'])) {
             if ($this->model('Siswa_model')->getSiswaByNis($_POST['nis'])) {
                 Flasher::setFlashMessage('danger', 'NIS sudah terdaftar!');
+                header('Location: ' . BASEURL . '/siswa/formAdd');
+                exit;
             } else {
                 $awalTempo = date($_POST['tanggal_masuk']);
                 $hasil = $this->model('Siswa_model')->addDataSiswa($_POST);
@@ -122,24 +140,13 @@ class Siswa extends Controller
                         header('Location: ' . BASEURL . '/siswa');
                         exit;
                     } else {
-                        Flasher::setFlashMessage('danger', 'Data gagal ditambahkan!');
+                        Flasher::setFlashMessage('failed', 'Data gagal ditambahkan!');
                         header('Location: ' . BASEURL . '/siswa');
                         exit;
                     }
                 }
             }
         }
-
-        // cek apakah data berhasil ditambahkan atau tidak
-        // if ($this->model('Siswa_model')->addDataSiswa($_POST) > 0) {
-        //     Flasher::setFlashMessage('success', 'Data berhasil ditambahkan!');
-        //     header('Location: ' . BASEURL . '/siswa');
-        //     exit;
-        // } else {
-        //     Flasher::setFlashMessage('failed', 'Data gagal ditambahkan!');
-        //     header('Location: ' . BASEURL . '/siswa');
-        //     exit;
-        // }
     }
 
     public function getUpdate($nis)
@@ -197,7 +204,7 @@ class Siswa extends Controller
             exit;
         }
 
-        // cek apakah data berhadil diupdate atau tidak
+        // cek apakah data berhasil diupdate atau tidak
         if ($this->model('Siswa_model')->updateDataSiswa($_POST) > 0) {
             Flasher::setFlashMessage('success', 'Data berhasil diupdate!');
             header('Location: ' . BASEURL . '/siswa');

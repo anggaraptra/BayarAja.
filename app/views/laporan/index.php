@@ -23,10 +23,17 @@
                     <td>
                         <form action="<?= BASEURL; ?>/laporan/kelas" method="POST" target="_blank" class="form-pembayaran-kelas">
                             <div class="option-kelas">
-                                <select class="form-control" name="kelas" id="" required>
+                                <select class="form-control" name="id_kelas" id="" required>
                                     <option value="">Pilih Kelas</option>
                                     <?php foreach ($data['kelas'] as $kls) : ?>
-                                        <option value="<?= $kls['kelas']; ?>"><?= $kls['kelas']; ?></option>
+                                        <option value="<?= $kls['id_kelas']; ?>"><?= $kls['kelas']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+
+                                <select class="form-control" name="angkatan" id="" required>
+                                    <option value="">Pilih Angkatan</option>
+                                    <?php foreach ($data['spp'] as $spp) : ?>
+                                        <option value="<?= $spp['angkatan']; ?>"><?= $spp['angkatan']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -49,7 +56,7 @@
                                 </select>
                             </div>
 
-                            <button class="btn" type="submit" name="tampilKelas">Tampilkan</button>
+                            <button class="btn" type="submit" name="submit">Tampilkan</button>
                         </form>
                     </td>
                 </tr>
@@ -59,11 +66,11 @@
                         <form action="<?= BASEURL; ?>/laporan/pembayaran" method="POST" target="_blank" class="form-tanggal">
                             <div class="input-group">
                                 <label for="">Mulai Tanggal</label>
-                                <input class="form-control" type="date" name="tgl1" value="<?= date('Y-m-d') ?>">
+                                <input class="form-control" type="date" name="tgl1" value="<?= date('Y-m-d') ?>" required>
                             </div>
                             <div class="input-group">
                                 <label for="">Sampai Tanggal</label>
-                                <input class="form-control" type="date" name="tgl2" value="<?= date('Y-m-d') ?>">
+                                <input class="form-control" type="date" name="tgl2" value="<?= date('Y-m-d') ?>" required>
                             </div>
                             <div class="input-group">
                                 <button class="btn" type="submit" name="tampilPembayaran">Tampilkan</button>

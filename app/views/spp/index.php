@@ -1,7 +1,7 @@
 <section class="home">
     <div class="page-title">
         <h1 class="head-text">SPP</h1>
-        <h5 class="sub-text"><a href="<?= BASEURL; ?>">Home</a> / <span>Data Spp</span></h5>
+        <h5 class="sub-text"><a href="<?= BASEURL; ?>">Home</a> / <span>Data SPP</span></h5>
     </div>
 
     <div class="container-alert">
@@ -52,7 +52,7 @@
         </div>
     <?php else : ?>
         <div class="content content-null spp">
-            <h1 class="">Data Spp Kosong</h1>
+            <h1 class="">Data Spp Kosong!</h1>
             <a href="<?= BASEURL; ?>/spp/formAdd" class="btn btn-primary">
                 <i class="icon"><?= ADD; ?></i>
                 Tambah Data

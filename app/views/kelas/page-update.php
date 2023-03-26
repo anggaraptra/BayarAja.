@@ -10,7 +10,7 @@
 
             <div class="input-group">
                 <label for="kelas">Kelas</label>
-                <input type="text" name="kelas" id="kelas" class="form-control" value="<?= $data['kelas']['kelas'] ?>" placeholder="ex:XII RPL 1" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
+                <input type="text" name="kelas" id="kelas" class="form-control" value="<?= $data['kelas']['kelas'] ?>" placeholder="ex:XII RPL 1" maxlength="7" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
             </div>
 
             <div class="input-group">

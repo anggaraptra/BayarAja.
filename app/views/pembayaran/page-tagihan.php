@@ -6,7 +6,16 @@
 
     <?php if ($data['siswa'] != null) : ?>
         <div class="content tagihan">
-            <h1>Tagihan (<?= $data['siswa']['nama_siswa']; ?>)</h1>
+            <div class="header-tagihan">
+                <h1>Tagihan (<?= $data['siswa']['nama_siswa']; ?>)</h1>
+
+                <?php foreach ($data['spp'] as $spp) : ?>
+                    <?php if ($spp['id_spp'] == $data['pembayaran'][0]['id_spp']) : ?>
+                        <h1>Nominal <?= rupiah($spp['nominal']); ?></h1>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
+            </div>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -14,7 +23,6 @@
                         <th>Bulan</th>
                         <th>Jatuh Tempo</th>
                         <th>Tahun</th>
-                        <th>Tanggal Bayar</th>
                         <th>Jumlah Bayar</th>
                         <th>Keterangan</th>
 
@@ -30,11 +38,10 @@
                         <?php foreach ($data['pembayaran'] as $pmbyr) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $pmbyr['bulan_bayar']; ?></td>
+                                <td><?= $pmbyr['bulan']; ?></td>
                                 <td><?= $pmbyr['jatuh_tempo']; ?></td>
-                                <td><?= $pmbyr['tahun_bayar']; ?></td>
-                                <td></td>
-                                <td><?= $pmbyr['jumlah_bayar']; ?></td>
+                                <td><?= $pmbyr['tahun']; ?></td>
+                                <td><?= rupiah($pmbyr['jumlah_bayar']); ?></td>
                                 <td><?= $pmbyr['keterangan']; ?></td>
 
                                 <?php if (!@$_SESSION['nis']) : ?>

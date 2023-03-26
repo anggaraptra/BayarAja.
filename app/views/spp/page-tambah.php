@@ -4,11 +4,15 @@
         <h5 class="sub-text"><a href="<?= BASEURL; ?>">Home</a> / <a href="<?= BASEURL; ?>/spp">Data Spp</a> / <span>Tambah</span></h5>
     </div>
 
+    <div class="container-alert">
+        <?php Flasher::flashMessage() ?>
+    </div>
+
     <div class="content form-add add-spp">
         <form action="<?= BASEURL ?>/spp/add" method="POST">
             <div class="input-group">
                 <label for="angkatan">Angkatan</label>
-                <input type="number" name="angkatan" id="angkatan" class="form-control" placeholder="Tahun. ex:2023" maxlength="4" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
+                <input type="number" name="angkatan" id="angkatan" class="form-control" placeholder="Tahun. ex:<?= date('Y'); ?>" maxlength="4" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
             </div>
 
             <div class="input-group">

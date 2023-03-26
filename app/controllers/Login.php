@@ -4,6 +4,22 @@ class Login extends Controller
 {
     public function index()
     {
+        // cek cookie
+        if (@$_COOKIE['id'] && @$_COOKIE['key']) {
+            $id = $_COOKIE['id'];
+            $key = $_COOKIE['key'];
+
+            $resultPegawai = $this->model('Pegawai_model')->getPegawaiById($id);
+
+            if ($key === hash('sha256', $resultPegawai['username'])) {
+                $_SESSION['login'] = true;
+                $_SESSION['id_pegawai'] = $resultPegawai['id_pegawai'];
+                $_SESSION['username'] = $resultPegawai['username'];
+                $_SESSION['nama'] = $resultPegawai['nama_lengkap'];
+                $_SESSION['level'] = $resultPegawai['level'];
+            }
+        }
+
         // cek setiap session yang ada dan level
         if (@$_SESSION['login'] && $_SESSION['level'] == 'admin') {
             header('Location: ' . BASEURL . '');
@@ -30,7 +46,7 @@ class Login extends Controller
             $password = $_POST['password'];
 
             if ($pegawai = $this->model('Pegawai_model')->getPegawaiByUsername($username)) {
-                if ($password == $pegawai['password']) {
+                if (password_verify($password, $pegawai['password'])) {
                     $_SESSION['login'] = true;
                     $_SESSION['id_pegawai'] = $pegawai['id_pegawai'];
                     $_SESSION['username'] = $pegawai['username'];
@@ -41,8 +57,14 @@ class Login extends Controller
                     header('Location: ' . BASEURL . '/login');
                     exit;
                 }
+
+                // cookie
+                if (@$_POST['rememberMe']) {
+                    setcookie('id', $pegawai['id_pegawai'], time() + 3600);
+                    setcookie('key', hash('sha256', $pegawai['username']),  time() + 3600);
+                }
             } elseif ($siswa = $this->model('Siswa_model')->getSiswaByNis($username)) {
-                if ($password == $siswa['password']) {
+                if (password_verify($password, $siswa['password'])) {
                     $_SESSION['login'] = true;
                     $_SESSION['nis'] = $siswa['nis'];
                     $_SESSION['nama'] = $siswa['nama_siswa'];
@@ -59,15 +81,15 @@ class Login extends Controller
         }
 
         if (@$_SESSION['login'] && $_SESSION['level'] == 'admin') {
-            Flasher::setFlashMessage('success', 'Selamat datang admin!');
+            Flasher::setFlashMessage('info', 'Selamat datang admin!');
             header('Location: ' . BASEURL . '/dashboard');
             exit;
         } elseif (@$_SESSION['login'] && $_SESSION['level'] == 'petugas') {
-            Flasher::setFlashMessage('success', 'Selamat datang petugas!');
+            Flasher::setFlashMessage('info', 'Selamat datang petugas!');
             header('Location: ' . BASEURL . '/pembayaran');
             exit;
         } elseif (@$_SESSION['login'] && @$_SESSION['nis']) {
-            Flasher::setFlashMessage('success', 'Selamat datang ' . $_SESSION['nama'] . '!');
+            Flasher::setFlashMessage('info', 'Selamat datang ' . $_SESSION['nama'] . '!');
             header('Location: ' . BASEURL . '/history/siswa/' . $_SESSION['nis']);
             exit;
         }
@@ -79,6 +101,11 @@ class Login extends Controller
         $_SESSION = [];
         session_unset();
         session_destroy();
+
+        // hapus cookie
+        setcookie('id', '', time() - 3600);
+        setcookie('key', '', time() - 3600);
+
         header('Location: ' . BASEURL . '/login');
         exit;
     }

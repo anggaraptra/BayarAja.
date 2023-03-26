@@ -20,7 +20,9 @@ class Flasher
 
             echo '<div class="alert ' . $alertType . '">
                     <p class="message">' . $alertMessage . '</p>
-                    <button type="button" class="btn-close">x</button>
+                    <button type="button" class="btn-close">
+                        <span>&times;</span>
+                    </button>
                 </div>';
             unset($_SESSION['flashMessage']);
         }

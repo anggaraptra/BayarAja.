@@ -10,7 +10,7 @@
 
             <div class="input-group">
                 <label for="angkatan">Angkatan</label>
-                <input type="text" name="angkatan" id="angkatan" class="form-control" value="<?= $data['spp']['angkatan']; ?>" placeholder="Masukkan Angkatan" readonly required>
+                <input type="text" name="angkatan" id="angkatan" class="form-control" value="<?= $data['spp']['angkatan']; ?>" placeholder="Tahun. ex:<?= date('Y'); ?>" readonly required>
             </div>
 
             <div class="input-group">

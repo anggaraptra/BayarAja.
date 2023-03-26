@@ -3,7 +3,7 @@
     <a class="logo" href="<?= BASEURL; ?>">
         <i class="icon logo-light"><?= LOGOLIGHT; ?></i>
         <i class="icon logo-dark d-none"><?= LOGODARK; ?></i>
-        <h1 class="navbar-logo text">Bayar<span>Aja. </span></h1>
+        <h1 class="navbar-logo text">Bayar<span>Aja.</span></h1>
     </a>
 
     <div class="toggle-sidebar">
@@ -41,8 +41,8 @@
             <?php if (@$_SESSION['login'] && @$_SESSION['level'] == 'admin' || @$_SESSION['level'] == 'petugas') : ?>
                 <li class="search-box">
                     <i class='icon search'><?= SEARCH; ?></i>
-                    <form action="<?= BASEURL; ?>/pembayaran/detail" method="POST">
-                        <input type="number" name="keyword" id="keyword" placeholder="Search NIS..." autocomplete="off" required maxlength="4" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                    <form action="<?= BASEURL; ?>/pembayaran/biodata" method="POST">
+                        <input type="text" name="keyword" id="keyword" placeholder="Search Siswa..." autocomplete="off" required maxlength="20" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                     </form>
                 </li>
             <?php endif; ?>
@@ -105,18 +105,16 @@
                 <?php endif; ?>
 
                 <!-- Spp -->
-                <?php if (@$_SESSION['login'] && @$_SESSION['level'] == 'admin' || @$_SESSION['level'] == 'petugas') : ?>
-                    <li class="nav-link">
-                        <?php if ($activeTab == 'spp') : ?>
-                            <a href="<?= BASEURL; ?>/spp" class="active">
-                            <?php else : ?>
-                                <a href="<?= BASEURL; ?>/spp">
-                                <?php endif; ?>
-                                <i class='icon'><?= RECEIPT; ?></i>
-                                <span class="text nav-text">Data SPP</span>
-                                </a>
-                    </li>
-                <?php endif; ?>
+                <li class="nav-link">
+                    <?php if ($activeTab == 'spp') : ?>
+                        <a href="<?= BASEURL; ?>/spp" class="active">
+                        <?php else : ?>
+                            <a href="<?= BASEURL; ?>/spp">
+                            <?php endif; ?>
+                            <i class='icon'><?= RECEIPT; ?></i>
+                            <span class="text nav-text">Data SPP</span>
+                            </a>
+                </li>
 
                 <!-- Pembayaran -->
                 <li class="nav-link">
@@ -162,7 +160,7 @@
         <!-- Bottom content -->
         <div class="bottom-content">
             <li class="">
-                <a class="logout" href="<?= BASEURL; ?>/login/processLogout">
+                <a class="logout" href="<?= BASEURL; ?>/login/processLogout" onclick="return confirm('Ingin logout?')">
                     <i class='icon'><?= LOGOUT; ?></i>
                     <span class="text nav-text">Logout</span>
                 </a>

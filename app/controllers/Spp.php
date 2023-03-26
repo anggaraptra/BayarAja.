@@ -10,12 +10,6 @@ class Spp extends Controller
             exit;
         }
 
-        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
-            header('Location: ' . BASEURL . '/history');
-            exit;
-        }
-
         // data
         $data['title'] = 'Data SPP';
 
@@ -80,14 +74,20 @@ class Spp extends Controller
         }
 
         // cek apakah data berhasil ditambahkan atau tidak
-        if ($this->model('Spp_model')->addDataSpp($_POST) > 0) {
-            Flasher::setFlashMessage('success', 'Data berhasil ditambahkan!');
-            header('Location: ' . BASEURL . '/spp');
+        if ($this->model('Spp_model')->getSppByAngkatan($_POST['angkatan'])) {
+            Flasher::setFlashMessage('danger', 'Data gagal ditambahkan! Tahun angkatan sudah ada!');
+            header('Location: ' . BASEURL . '/spp/formAdd');
             exit;
         } else {
-            Flasher::setFlashMessage('failed', 'Data gagal ditambahkan!');
-            header('Location: ' . BASEURL . '/spp');
-            exit;
+            if ($this->model('Spp_model')->addDataSpp($_POST) > 0) {
+                Flasher::setFlashMessage('success', 'Data berhasil ditambahkan!');
+                header('Location: ' . BASEURL . '/spp');
+                exit;
+            } else {
+                Flasher::setFlashMessage('failed', 'Data gagal ditambahkan!');
+                header('Location: ' . BASEURL . '/spp');
+                exit;
+            }
         }
     }
 
@@ -176,13 +176,21 @@ class Spp extends Controller
             exit;
         }
 
-        // cek apakah data berhasil dihapus atau tidak
-        if ($this->model('Spp_model')->deleteDataSpp($angkatan) > 0) {
-            Flasher::setFlashMessage('success', 'Data berhasil dihapus!');
-            header('Location: ' . BASEURL . '/spp');
-            exit;
+        $data['bayarRow'] = $this->model('Pembayaran_model')->getAllDataPembayaran();
+
+        if ($data['bayarRow'] == 0) {
+            // cek apakah data berhasil dihapus atau tidak
+            if ($this->model('Spp_model')->deleteDataSpp($angkatan) > 0) {
+                Flasher::setFlashMessage('success', 'Data berhasil dihapus!');
+                header('Location: ' . BASEURL . '/spp');
+                exit;
+            } else {
+                Flasher::setFlashMessage('failed', 'Data gagal dihapus!');
+                header('Location: ' . BASEURL . '/spp');
+                exit;
+            }
         } else {
-            Flasher::setFlashMessage('failed', 'Data gagal dihapus!');
+            Flasher::setFlashMessage('danger', 'Data spp tidak bisa dihapus karena masih ada data pembayaran yang terkait!');
             header('Location: ' . BASEURL . '/spp');
             exit;
         }

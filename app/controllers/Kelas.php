@@ -80,14 +80,20 @@ class Kelas extends Controller
         }
 
         // cek apakah data berhasil ditambahkan
-        if ($this->model('Kelas_model')->addDataKelas($_POST) > 0) {
-            Flasher::setFlashMessage('success', 'Data berhasil ditambahkan!');
-            header('Location: ' . BASEURL . '/kelas');
+        if ($this->model('Kelas_model')->getKelasByNama($_POST['kelas'])) {
+            Flasher::setFlashMessage('danger', 'Data gagal ditambahkan! Nama kelas sudah ada!');
+            header('Location: ' . BASEURL . '/kelas/formAdd');
             exit;
         } else {
-            Flasher::setFlashMessage('failed', 'Data gagal ditambahkan!');
-            header('Location: ' . BASEURL . '/kelas');
-            exit;
+            if ($this->model('Kelas_model')->addDataKelas($_POST) > 0) {
+                Flasher::setFlashMessage('success', 'Data berhasil ditambahkan!');
+                header('Location: ' . BASEURL . '/kelas');
+                exit;
+            } else {
+                Flasher::setFlashMessage('failed', 'Data gagal ditambahkan!');
+                header('Location: ' . BASEURL . '/kelas');
+                exit;
+            }
         }
     }
 
@@ -176,13 +182,20 @@ class Kelas extends Controller
             exit;
         }
 
-        // cek apakah data berhasil dihapus
-        if ($this->model('Kelas_model')->deleteDataKelas($id) > 0) {
-            Flasher::setFlashMessage('success', 'Data berhasil dihapus!');
-            header('Location: ' . BASEURL . '/kelas');
-            exit;
+        $data['siswaRow'] = $this->model('Siswa_model')->getAllDataSiswa();
+        if ($data['siswaRow'] == 0) {
+            // cek apakah data berhasil dihapus
+            if ($this->model('Kelas_model')->deleteDataKelas($id) > 0) {
+                Flasher::setFlashMessage('success', 'Data berhasil dihapus!');
+                header('Location: ' . BASEURL . '/kelas');
+                exit;
+            } else {
+                Flasher::setFlashMessage('failed', 'Data gagal dihapus!');
+                header('Location: ' . BASEURL . '/kelas');
+                exit;
+            }
         } else {
-            Flasher::setFlashMessage('failed', 'Data gagal dihapus!');
+            Flasher::setFlashMessage('danger', 'Data kelas tidak bisa dihapus karena masih ada data siswa!');
             header('Location: ' . BASEURL . '/kelas');
             exit;
         }

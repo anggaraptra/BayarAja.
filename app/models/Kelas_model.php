@@ -19,6 +19,14 @@ class Kelas_model
         return $this->db->resultSet();
     }
 
+    public function getAllDataKelas()
+    {
+        $query = 'SELECT id_kelas FROM ' . $this->table;
+
+        $this->db->query($query);
+        return $this->db->count();
+    }
+
     // method untuk mengambil data berdasarkan id
     public function getKelasById($id)
     {
@@ -26,6 +34,15 @@ class Kelas_model
 
         $this->db->query($query);
         $this->db->bind('id', $id);
+        return $this->db->single();
+    }
+
+    public function getKelasByNama($kelas)
+    {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE kelas=:kelas';
+
+        $this->db->query($query);
+        $this->db->bind('kelas', $kelas);
         return $this->db->single();
     }
 

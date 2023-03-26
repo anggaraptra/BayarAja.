@@ -17,7 +17,12 @@ class Dashboard extends Controller
         }
 
         // model
-        $data['siswa'] = $this->model('Siswa_model')->getAllDataSiswa();
+        $data['siswaRow'] = $this->model('Siswa_model')->getAllDataSiswa();
+        $data['detailRow'] = $this->model('DetailPembayaran_model')->getAllDataDetailPembayaran();
+        $data['pegawai'] = $this->model('Pegawai_model')->getAllPegawai();
+        $data['pembayaran'] = $this->model('Pembayaran_model')->getAllPembayaran();
+        $data['siswa'] = $this->model('Siswa_model')->getAllSiswa();
+        $data['detail'] = $this->model('DetailPembayaran_model')->getAllDetailPembayaranLatest();
 
         // data
         $data['title'] = 'Dashboard';

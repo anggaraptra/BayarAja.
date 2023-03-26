@@ -18,7 +18,7 @@ class Profile extends Controller
             $data['pegawai'] = $this->model('Pegawai_model')->getPegawaiById($_SESSION['id_pegawai']);
         } else {
             $data['siswa'] = $this->model('Siswa_model')->getSiswaByNis($_SESSION['nis']);
-            $data['kelas'] = $this->model('Kelas_model')->getKelasById($data['siswa']['kelas']);
+            $data['kelas'] = $this->model('Kelas_model')->getKelasById($data['siswa']['id_kelas']);
         }
 
         // view

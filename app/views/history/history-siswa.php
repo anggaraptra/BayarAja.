@@ -13,53 +13,34 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>Id Bayar</th>
                     <th>Petugas</th>
-                    <th>NIS</th>
-                    <th>Nama</th>
+                    <th>Bulan</th>
                     <th>Tanggal Bayar</th>
                     <th>Jumlah Bayar</th>
+                    <th>Kembalian</th>
+                    <th>Keterangan</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($data['pembayaran'] as $history) : ?>
+                <?php foreach ($data['detail'] as $history) : ?>
                     <tr>
-                        <?php if ($data['siswa']['nis'] == $history['nis']) : ?>
-                            <td><?= $history['id_bayar']; ?></td>
-                        <?php endif; ?>
-
-                        <?php foreach ($data['pegawai'] as $ptg) : ?>
-                            <?php if ($ptg['id_pegawai'] == $history['id_pegawai'] && $data['siswa']['nis'] == $history['nis']) : ?>
-                                <td><?= $ptg['nama_lengkap']; ?></td>
+                        <?php foreach ($data['pegawai'] as $p) : ?>
+                            <?php if ($p['id_pegawai'] == $history['id_pegawai']) : ?>
+                                <td><?= $p['nama_lengkap']; ?></td>
                             <?php endif; ?>
                         <?php endforeach; ?>
 
-                        <?php if ($data['siswa']['nis'] == $history['nis']) : ?>
-                            <td><?= $data['siswa']['nis']; ?></td>
-                        <?php endif; ?>
-
-                        <?php if ($data['siswa']['nis'] == $history['nis']) : ?>
-                            <td><?= $data['siswa']['nama_siswa']; ?></td>
-                        <?php endif; ?>
-
-                        <?php if ($data['siswa']['nis'] == $history['nis']) : ?>
-                            <td><?= $history['tanggal_bayar']; ?></td>
-                        <?php endif; ?>
-
-                        <?php if ($data['siswa']['nis'] == $history['nis']) : ?>
-                            <td><?= $history['bulan_bayar']; ?></td>
-                        <?php endif; ?>
-
-                        <?php if ($data['siswa']['nis'] == $history['nis']) : ?>
-                            <td><?= $history['jumlah_bayar']; ?></td>
-                        <?php endif; ?>
-
-                        <?php if ($data['siswa']['nis'] == $history['nis']) : ?>
-                            <td class="aksi">
-                                <a href="" class="btn">Cetak</a>
-                            </td>
-                        <?php endif; ?>
+                        <td><?= $history['bulan']; ?> <?= $history['tahun']; ?></td>
+                        <td><?= $history['tanggal_bayar']; ?></td>
+                        <td><?= rupiah($history['total_bayar']); ?></td>
+                        <td><?= rupiah($history['kembalian']); ?></td>
+                        <td><?= $history['keterangan']; ?></td>
+                        <td class="aksi">
+                            <a target="_blank" href="<?= BASEURL; ?>/history/cetak/<?= $history['id_detail']; ?>" class="btn">
+                                <i class="icon"><?= PRINTER; ?></i>
+                            </a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

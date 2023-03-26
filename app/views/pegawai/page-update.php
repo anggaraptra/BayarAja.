@@ -7,6 +7,7 @@
     <div class="content form-update update-pegawai">
         <form action="<?= BASEURL ?>/pegawai/update" method="POST">
             <input type="hidden" name="id_pegawai" value="<?= $data['pegawai']['id_pegawai']; ?>">
+            <input type="hidden" name="password_lama" value="<?= $data['pegawai']['password']; ?>">
 
             <div class="input-group">
                 <label for="nama_lengkap">Nama Lengkap</label>
@@ -15,7 +16,7 @@
 
             <div class="input-group">
                 <label for="telp">Telepon</label>
-                <input type="number" name="telp" id="telp" class="form-control" value="<?= $data['pegawai']['telp'] ?>" placeholder="ex:089680897900" maxlength="15" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
+                <input type="number" name="telp" id="telp" class="form-control" value="<?= $data['pegawai']['telp'] ?>" placeholder="ex:089680897900" maxlength="13" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
             </div>
 
             <div class="input-group">
@@ -25,7 +26,7 @@
 
             <div class="input-group">
                 <label for="password">Password Pegawai</label>
-                <input type="password" name="password" id="password" class="form-control" value="<?= $data['pegawai']['password']; ?>" placeholder="Masukkan Password Pegawai" required>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Update Password">
             </div>
 
             <div class="input-group">

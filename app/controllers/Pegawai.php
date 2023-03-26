@@ -26,7 +26,7 @@ class Pegawai extends Controller
         $data['title'] = 'Data Pegawai';
 
         // model
-        $data['pegawai'] = $this->model('Pegawai_model')->getAllPegawai();
+        $data['pegawai'] = $this->model('Pegawai_model')->getAllPetugas();
 
         // view
         $this->view('templates/header', $data);
@@ -85,15 +85,22 @@ class Pegawai extends Controller
             exit;
         }
 
+
         // cek apakah data berhasil ditambahkan atau tidak
-        if ($this->model('Pegawai_model')->addDataPegawai($_POST) > 0) {
-            Flasher::setFlashMessage('success', 'Data berhasil ditambahkan!');
-            header('Location: ' . BASEURL . '/pegawai');
+        if ($this->model('Pegawai_model')->getPegawaiByUsername($_POST['username'])) {
+            Flasher::setFlashMessage('danger', 'Username sudah digunakan!');
+            header('Location: ' . BASEURL . '/pegawai/formAdd');
             exit;
         } else {
-            Flasher::setFlashMessage('failed', 'Data gagal ditambahkan!');
-            header('Location: ' . BASEURL . '/pegawai');
-            exit;
+            if ($this->model('Pegawai_model')->addDataPegawai($_POST) > 0) {
+                Flasher::setFlashMessage('success', 'Data berhasil ditambahkan!');
+                header('Location: ' . BASEURL . '/pegawai');
+                exit;
+            } else {
+                Flasher::setFlashMessage('failed', 'Data gagal ditambahkan!');
+                header('Location: ' . BASEURL . '/pegawai');
+                exit;
+            }
         }
     }
 

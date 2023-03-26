@@ -19,6 +19,23 @@ class Pembayaran_model
         return $this->db->resultSet();
     }
 
+    public function getAllDataPembayaran()
+    {
+        $query = 'SELECT id_bayar FROM ' . $this->table;
+
+        $this->db->query($query);
+        return $this->db->count();
+    }
+
+    // method untuk mengambil semua data berdasarkan keterangan
+    public function getAllPembayaranByKet()
+    {
+        $query = 'SELECT ' . $this->table . '.*, tb_siswa.* FROM ' . $this->table . ' JOIN tb_siswa ON ' . $this->table . '.nis = tb_siswa.nis WHERE ' . $this->table . '.keterangan = "belum lunas" ORDER BY id_bayar DESC';
+
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
+
     // method untuk mengambil data berdasarkan id
     public function getPembayaranById($id)
     {
@@ -49,10 +66,21 @@ class Pembayaran_model
         return $this->db->resultSet();
     }
 
+    // method untuk mengambil data berdasarkan id bayar dan nis
+    public function getPembayaranByIdBayarAndNis($idBayar, $nis)
+    {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE id_bayar=:id_bayar AND nis=:nis';
+
+        $this->db->query($query);
+        $this->db->bind('id_bayar', $idBayar);
+        $this->db->bind('nis', $nis);
+        return $this->db->resultSet();
+    }
+
     // method untuk mengambil data berdasarkan nis dan bulan
     public function getPembayaranByNisAndMonth($nis, $bulan)
     {
-        $query = 'SELECT * FROM ' . $this->table . ' WHERE nis=:nis AND bulan_bayar=:bulan';
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE nis=:nis AND bulan=:bulan';
 
         $this->db->query($query);
         $this->db->bind('nis', $nis);
@@ -60,28 +88,17 @@ class Pembayaran_model
         return $this->db->resultSet();
     }
 
-    // method untuk mengambil data berdasarkan tanggal 1 dan tanggal 2
-    // public function getPembayaranByDate($tanggal1, $tanggal2)
-    // {
-    //     $query = 'SELECT ' . $this->table . '.*, tb_siswa.nis, tb_siswa.nama_siswa, tb_siswa.kelas FROM ' . $this->table . ' INNER JOIN tb_siswa ON ' . $this->table . '.nis = tb_siswa.nis WHERE tanggal_bayar BETWEEN :tanggal1 AND :tanggal2 ORDER BY tanggal_bayar ASC';
-
-    //     $this->db->query($query);
-    //     $this->db->bind('tanggal1', $tanggal1);
-    //     $this->db->bind('tanggal2', $tanggal2);
-    //     return $this->db->resultSet();
-    // }
-
     // method untuk menambah data
     public function addDataPembayaran($nisSiswa, $jatuhTempo, $idSpp, $bulan, $tahun)
     {
-        $query = "INSERT INTO " . $this->table . " VALUES (0, :nis, :id_spp, :jatuh_tempo, :bulan_bayar, :tahun_bayar, null, null, null)";
+        $query = "INSERT INTO " . $this->table . " VALUES (0, :nis, :id_spp, :jatuh_tempo, :bulan, :tahun, null, null, null)";
 
         $this->db->query($query);
         $this->db->bind('nis', $nisSiswa);
         $this->db->bind('id_spp', $idSpp);
         $this->db->bind('jatuh_tempo', $jatuhTempo);
-        $this->db->bind('bulan_bayar', $bulan);
-        $this->db->bind('tahun_bayar', $tahun);
+        $this->db->bind('bulan', $bulan);
+        $this->db->bind('tahun', $tahun);
         $this->db->execute();
 
         return $this->db->rowCount();

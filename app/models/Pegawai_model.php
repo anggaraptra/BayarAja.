@@ -19,6 +19,16 @@ class Pegawai_model
         return $this->db->resultSet();
     }
 
+    // method untuk mengambil semua data berdasarkan level petugas
+    public function getAllPetugas()
+    {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE level!=:level ORDER BY id_pegawai DESC';
+
+        $this->db->query($query);
+        $this->db->bind('level', 'admin');
+        return $this->db->resultSet();
+    }
+
     // method untuk mengambil data berdasarkan id
     public function getPegawaiById($id)
     {
@@ -56,8 +66,7 @@ class Pegawai_model
         $namaLengkap = htmlspecialchars($data['nama_lengkap']);
         $telp = htmlspecialchars($data['telp']);
         $username = htmlspecialchars($data['username']);
-        // $password = password_hash(htmlspecialchars($data['password']), PASSWORD_BCRYPT);
-        $password = htmlspecialchars($data['password']);
+        $password = password_hash(htmlspecialchars($data['password']), PASSWORD_BCRYPT);
         $level = htmlspecialchars($data['level']);
 
         $query = "INSERT INTO " . $this->table . " VALUES (0, :nama_lengkap, :telp, :username, :password, :level)";
@@ -82,7 +91,11 @@ class Pegawai_model
         $this->db->bind('nama_lengkap', htmlspecialchars($data['nama_lengkap']));
         $this->db->bind('telp', htmlspecialchars($data['telp']));
         $this->db->bind('username', htmlspecialchars($data['username']));
-        $this->db->bind('password', htmlspecialchars($data['password']));
+        if ($data['password'] == '') {
+            $this->db->bind('password', $data['password_lama']);
+        } else {
+            $this->db->bind('password', password_hash(htmlspecialchars($data['password']), PASSWORD_BCRYPT));
+        }
         $this->db->bind('level', htmlspecialchars($data['level']));
 
         $this->db->bind('id', $data['id_pegawai']);

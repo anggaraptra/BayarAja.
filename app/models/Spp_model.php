@@ -19,6 +19,14 @@ class Spp_model
         return $this->db->resultSet();
     }
 
+    public function getAllDataSpp()
+    {
+        $query = 'SELECT id_spp FROM ' . $this->table;
+
+        $this->db->query($query);
+        return $this->db->count();
+    }
+
     // method untuk mengambil data berdasarkan angkatan
     public function getSppById($id)
     {

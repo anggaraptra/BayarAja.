@@ -4,6 +4,10 @@
         <h5 class="sub-text"><a href="<?= BASEURL; ?>">Home</a> / <a href="<?= BASEURL; ?>/pegawai">Data Pegawai</a> / <span>Tambah</span></h5>
     </div>
 
+    <div class="container-alert">
+        <?php Flasher::flashMessage() ?>
+    </div>
+
     <div class="content form-add add-pegawai">
         <form action="<?= BASEURL ?>/pegawai/add" method="POST">
             <div class="input-group">
@@ -13,7 +17,7 @@
 
             <div class="input-group">
                 <label for="telp">Telepon</label>
-                <input type="number" name="telp" id="telp" class="form-control" placeholder="ex:089680897900" maxlength="15" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
+                <input type="number" name="telp" id="telp" class="form-control" placeholder="ex:089680897900" maxlength="13" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
             </div>
 
             <div class="input-group">

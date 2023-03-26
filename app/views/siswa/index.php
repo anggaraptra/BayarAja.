@@ -44,7 +44,11 @@
                             <td><?= $siswa['nis']; ?></td>
                             <td><?= $siswa['nama_siswa']; ?></td>
 
-                            <td><?= $siswa['kelas']; ?></td>
+                            <?php foreach ($data['kelas'] as $kls) : ?>
+                                <?php if ($kls['id_kelas'] == $siswa['id_kelas']) : ?>
+                                    <td><?= $kls['kelas']; ?></td>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
 
                             <td><?= $siswa['tanggal_masuk']; ?></td>
                             <td><?= $siswa['angkatan']; ?></td>

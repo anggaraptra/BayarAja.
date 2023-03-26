@@ -8,7 +8,7 @@
         <div class="container">
             <div class="profile-image">
                 <?php if (@$_SESSION['nis']) : ?>
-                    <img src="<?= BASEURL; ?>/assets/images/profile1.png" alt="">
+                    <img src="<?= BASEURL; ?>/assets/images/profile.png" alt="">
                 <?php else : ?>
                     <img src="<?= BASEURL; ?>/assets/images/profile-admin.png" alt="">
                 <?php endif; ?>
@@ -34,9 +34,9 @@
                             <td><?= $_SESSION['level']; ?></td>
                         </tr>
                     <?php else : ?>
-                        <tr></tr>
-                        <th>Nama Lengkap</th>
-                        <td><?= $data['siswa']['nama_siswa']; ?></td>
+                        <tr>
+                            <th>Nama Lengkap</th>
+                            <td><?= $data['siswa']['nama_siswa']; ?></td>
                         </tr>
                         <tr>
                             <th>NIS</th>
@@ -44,7 +44,7 @@
                         </tr>
                         <tr>
                             <th>Kelas</th>
-                            <td><?= $data['siswa']['kelas']; ?></td>
+                            <td><?= $data['kelas']['kelas']; ?></td>
                         </tr>
                         <tr>
                             <th>Telepon</th>

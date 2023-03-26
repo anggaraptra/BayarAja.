@@ -45,7 +45,7 @@
         </div>
     <?php else : ?>
         <div class="content content-null pegawai">
-            <h1 class="">Data Pegawai Kosong</h1>
+            <h1 class="">Data Pegawai Kosong!</h1>
             <a href="<?= BASEURL; ?>/pegawai/formAdd" class="btn btn-primary">
                 <i class="icon"><?= ADD; ?></i>
                 Tambah Data

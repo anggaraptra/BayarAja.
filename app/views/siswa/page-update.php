@@ -7,6 +7,7 @@
     <div class="content form-update update-siswa">
         <form action="<?= BASEURL ?>/siswa/update" method="POST">
             <input type="hidden" name="id_siswa" value="<?= $data['siswa']['id_siswa']; ?>">
+            <input type="hidden" name="password_lama" value="<?= $data['siswa']['password']; ?>">
 
             <div class="input-group">
                 <label for="nis">Nis</label>
@@ -15,17 +16,17 @@
 
             <div class="input-group">
                 <label for="nama">Nama Lengkap</label>
-                <input type="text" name="nama_siswa" id="nama_siswa" class="form-control" value="<?= $data['siswa']['nama_siswa'] ?>" placeholder="ex:I Kadek Putra Angga" required>
+                <input type="text" name="nama_siswa" id="nama_siswa" class="form-control" value="<?= $data['siswa']['nama_siswa'] ?>" placeholder="ex:I Kadek Anggara Putra" required>
             </div>
 
             <div class="input-group">
                 <label for="kelas">Kelas</label>
-                <select name="kelas" id="kelas" class="form-control">
+                <select name="id_kelas" id="kelas" class="form-control">
                     <?php foreach ($data['kelas'] as $kelas) : ?>
-                        <?php if ($kelas['kelas'] == $data['siswa']['kelas']) : ?>
-                            <option value="<?= $kelas['kelas'] ?>" selected><?= $kelas['kelas'] ?></option>
+                        <?php if ($kelas['id_kelas'] == $data['siswa']['id_kelas']) : ?>
+                            <option value="<?= $kelas['id_kelas'] ?>" selected><?= $kelas['kelas'] ?></option>
                         <?php else : ?>
-                            <option value="<?= $kelas['kelas'] ?>"><?= $kelas['kelas'] ?></option>
+                            <option value="<?= $kelas['id_kelas'] ?>"><?= $kelas['kelas'] ?></option>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </select>
@@ -46,7 +47,7 @@
 
             <div class="input-group">
                 <label for="telp">Telepon</label>
-                <input type="number" name="telp" id="telp" class="form-control" value="<?= $data['siswa']['telp'] ?>" placeholder="ex:089680897900" maxlength="15" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
+                <input type="number" name="telp" id="telp" class="form-control" value="<?= $data['siswa']['telp'] ?>" placeholder="ex:089680897900" maxlength="13" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
             </div>
 
             <div class="input-group">
@@ -56,12 +57,12 @@
 
             <div class="input-group">
                 <label for="telp_ortu">Telepon Orang Tua</label>
-                <input type="number" name="telp_ortu" id="telp_ortu" class="form-control" value="<?= $data['siswa']['telp_ortu']; ?>" placeholder="ex:089680897900" maxlength="15" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
+                <input type="number" name="telp_ortu" id="telp_ortu" class="form-control" value="<?= $data['siswa']['telp_ortu']; ?>" placeholder="ex:089680897900" maxlength="13" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
             </div>
 
             <div class="input-group">
                 <label for="password">Password Siswa</label>
-                <input type="password" name="password" id="password" class="form-control" value="<?= $data['siswa']['password'] ?>" placeholder="Masukkan Password Siswa" required>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Update Password">
             </div>
 
             <button type="submit" name="update" class="btn">Update</button>

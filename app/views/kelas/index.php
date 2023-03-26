@@ -54,7 +54,7 @@
         </div>
     <?php else : ?>
         <div class="content content-null kelas">
-            <h1 class="">Data Kelas Kosong</h1>
+            <h1 class="">Data Kelas Kosong!</h1>
             <a href="<?= BASEURL; ?>/kelas/formAdd" class="btn btn-primary">
                 <i class="icon"><?= ADD; ?></i>
                 Tambah Data

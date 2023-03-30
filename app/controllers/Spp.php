@@ -10,11 +10,93 @@ class Spp extends Controller
             exit;
         }
 
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas' || @$_SESSION['level'] == 'admin' || @$_SESSION['nis']) {
+            header('Location: ' . BASEURL . '/spp/page/1');
+            exit;
+        }
+
         // data
         $data['title'] = 'Data SPP';
 
         // model
         $data['spp'] = $this->model('Spp_model')->getAllSpp();
+
+        // view
+        $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data, 'spp');
+        $this->view('spp/index', $data);
+        $this->view('templates/footer');
+    }
+
+    public function page($page = 0)
+    {
+        // cek session
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if ($page == 0) {
+            header('Location: ' . BASEURL . '/spp/page/1');
+            exit;
+        }
+
+        // data
+        $data['title'] = 'Data SPP';
+
+        // model
+        // pagination
+        $totalDataPerPage = 5;
+        $totalData = count($this->model('Spp_model')->getAllSpp());
+        $totalPage = ceil($totalData / $totalDataPerPage);
+
+        $data['totalData'] = $totalData;
+
+        if ($totalPage <= 1 && $page != 1) {
+            header('Location: ' . BASEURL . '/spp');
+            exit;
+        }
+
+        if ($page > $totalPage && $totalPage > 1) {
+            header('Location: ' . BASEURL . '/spp/page/' . $totalPage);
+            exit;
+        }
+
+        $currentPage = $page;
+        $startData = ($totalDataPerPage * $currentPage) - $totalDataPerPage;
+        $endData = $startData + $totalDataPerPage;
+        $totalLink = 2;
+
+        if ($currentPage > $totalLink) {
+            $startNumber = $currentPage - $totalLink;
+        } else {
+            $startNumber = 1;
+        }
+
+        if ($currentPage < ($totalPage - $totalLink)) {
+            $endNumber = $currentPage + $totalLink;
+        } else {
+            $endNumber = $totalPage;
+        }
+
+        if ($endNumber != $totalPage) {
+            $startNumber = $currentPage - $totalLink + 1;
+            if ($startNumber < 1) {
+                $startNumber = 1;
+            }
+        }
+
+        $data['spp'] = $this->model('Spp_model')->getSppWithLimit($startData, $totalDataPerPage);
+
+        $data['pagination'] = [
+            'totalPage' => $totalPage,
+            'currentPage' => $currentPage,
+            'startNumber' => $startNumber,
+            'endNumber' => $endNumber,
+            'totalLink' => $totalLink,
+            'startData' => $startData,
+            'endData' => $endData,
+        ];
 
         // view
         $this->view('templates/header', $data);
@@ -73,12 +155,13 @@ class Spp extends Controller
             exit;
         }
 
-        // cek apakah data berhasil ditambahkan atau tidak
+        // cek apakah data spp sudah ada
         if ($this->model('Spp_model')->getSppByAngkatan($_POST['angkatan'])) {
             Flasher::setFlashMessage('danger', 'Data gagal ditambahkan! Tahun angkatan sudah ada!');
             header('Location: ' . BASEURL . '/spp/formAdd');
             exit;
         } else {
+            // cek apakah data berhasil ditambahkan atau tidak
             if ($this->model('Spp_model')->addDataSpp($_POST) > 0) {
                 Flasher::setFlashMessage('success', 'Data berhasil ditambahkan!');
                 header('Location: ' . BASEURL . '/spp');

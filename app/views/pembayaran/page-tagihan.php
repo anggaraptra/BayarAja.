@@ -9,6 +9,15 @@
             <div class="header-tagihan">
                 <h1>Tagihan (<?= $data['siswa']['nama_siswa']; ?>)</h1>
 
+                Tingkatan :
+                <?php if ($data['pagination']['currentPage'] == 1) : ?>
+                    kelas 1
+                <?php elseif ($data['pagination']['currentPage'] == 2) : ?>
+                    kelas 2
+                <?php else : ?>
+                    kelas 3
+                <?php endif; ?>
+
                 <?php foreach ($data['spp'] as $spp) : ?>
                     <?php if ($spp['id_spp'] == $data['pembayaran'][0]['id_spp']) : ?>
                         <h1>Nominal <?= rupiah($spp['nominal']); ?></h1>
@@ -27,7 +36,7 @@
                         <th>Keterangan</th>
 
                         <?php if (!@$_SESSION['nis']) : ?>
-                            <th>Aksi</th>
+                            <th></th>
                         <?php endif; ?>
 
                     </tr>
@@ -49,35 +58,66 @@
                                 <?php endif; ?>
                             </tr>
                         <?php endforeach; ?>
-                    <?php else :  ?>
-                        <tr>
-                            <td colspan="7">Data pembayaran kosong!</td>
-                        </tr>
                     <?php endif; ?>
                 </tbody>
             </table>
-        </div>
-    <?php else : ?>
-        <div class="content tagihan">
-            <h1>Tagihan ...</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Bulan</th>
-                        <th>Jatuh Tempo</th>
-                        <th>Tahun</th>
-                        <th>Tanggal Bayar</th>
-                        <th>Jumlah Bayar</th>
-                        <th>Keterangan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="7">Data tidak ditemukan</td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <!-- Pagination -->
+            <?php if ($data['totalData'] > 0) : ?>
+                <div class="pagination page-kelas">
+
+                    <?php if ($data['pagination']['totalPage'] > 1) : ?>
+                        <div class="right">
+                            <ul class="pagination-list">
+                                <?php if ($data['pagination']['totalPage'] >= 2) : ?>
+
+                                    <!-- Pagination Page -->
+                                    <?php if ($data['pagination']['totalPage'] > 5) : ?>
+                                        <?php
+                                        $endPageNumber = $data['pagination']['endNumber'];
+                                        $totalPage = $data['pagination']['totalPage'];
+
+                                        if ($endPageNumber >= $totalPage) :
+                                        ?>
+                                            <li class="page-item">
+                                                <a class="page-link" href="<?= BASEURL; ?>/pembayaran/tagihanSiswa/1/<?= $data['siswa']['nis']; ?>">1</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link">...</a>
+                                            </li>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+
+                                    <?php for ($pageNumber = $data['pagination']['startNumber']; $pageNumber <= $data['pagination']['endNumber']; $pageNumber++) : ?>
+                                        <?php if ($pageNumber == $data['pagination']['currentPage']) : ?>
+                                            <li class="page-item active">
+                                                <a class="page-link" href="<?= BASEURL; ?>/pembayaran/tagihanSiswa/<?= $pageNumber; ?>/<?= $data['siswa']['nis']; ?>" class="btn btn-active"><?= $pageNumber; ?></a>
+                                            </li>
+                                        <?php else : ?>
+                                            <li class="page-item">
+                                                <a class="page-link" href="<?= BASEURL; ?>/pembayaran/tagihanSiswa/<?= $pageNumber; ?>/<?= $data['siswa']['nis']; ?>"><?= $pageNumber; ?></a>
+                                            </li>
+                                        <?php endif; ?>
+                                    <?php endfor; ?>
+
+                                    <?php if ($data['pagination']['endNumber'] != $data['pagination']['totalPage']) : ?>
+                                        <li class="page-item">
+                                            <a class="page-link">...</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="<?= BASEURL; ?>/pembayaran/tagihanSiswa/<?= $data['pagination']['totalPage']; ?>/<?= $data['siswa']['nis']; ?>"><?= $data['pagination']['totalPage']; ?></a>
+                                        </li>
+                                    <?php endif; ?>
+                                    <!-- End Pagination Page -->
+
+                                <?php endif; ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+            <!-- End Pagination -->
+
         </div>
     <?php endif; ?>
 </section>

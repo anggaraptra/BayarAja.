@@ -66,7 +66,7 @@
                     <div class="input-group">
                         <div class="remember">
                             <input type="checkbox" name="rememberMe" class="remember-me">
-                            <label for="">Ingat saya (petugas)</label>
+                            <label for="">Remember me</label>
                         </div>
                     </div>
                     <div class="input-group">

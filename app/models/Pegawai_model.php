@@ -2,9 +2,11 @@
 
 class Pegawai_model
 {
+    // property
     private $table = "tb_pegawai";
     private $db;
 
+    // constructor untuk memanggil dan instansiasi class database
     public function __construct()
     {
         $this->db = new Database();
@@ -58,6 +60,19 @@ class Pegawai_model
         $this->db->bind('username', $username);
         $this->db->bind('password', $password);
         return $this->db->single();
+    }
+
+    public function getPegawaiWithLimit($startData, $totalDataPerPage)
+    {
+        $query = "SELECT * FROM " . $this->table . " WHERE level!=:level ORDER BY id_pegawai DESC LIMIT :startData, :totalDataPerPage";
+
+        $this->db->query($query);
+        $this->db->bind('level', 'admin');
+        $this->db->bind('startData', $startData, PDO::PARAM_INT);
+        $this->db->bind('totalDataPerPage', $totalDataPerPage, PDO::PARAM_INT);
+
+        $this->db->execute();
+        return $this->db->resultSet();
     }
 
     // method untuk menambah data

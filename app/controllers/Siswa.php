@@ -10,9 +10,34 @@ class Siswa extends Controller
             exit;
         }
 
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'admin' || @$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/siswa/page/1');
+            exit;
+        }
+
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
             Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
             header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+    }
+
+    public function page($page = 0)
+    {
+        // cek session
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        if ($page == 0) {
+            header('Location: ' . BASEURL . '/siswa/page/1');
             exit;
         }
 
@@ -20,7 +45,59 @@ class Siswa extends Controller
         $data['title'] = 'Data Siswa';
 
         // model
-        $data['siswa'] = $this->model('Siswa_model')->getAllSiswa();
+        // pagination
+        $totalDataPerPage = 5;
+        $totalData = count($this->model('Siswa_model')->getAllSiswa());
+        $totalPage = ceil($totalData / $totalDataPerPage);
+
+        $data['totalData'] = $totalData;
+
+        if ($totalPage <= 1 && $page != 1) {
+            header('Location: ' . BASEURL . '/siswa');
+            exit;
+        }
+
+        if ($page > $totalPage && $totalPage > 1) {
+            header('Location: ' . BASEURL . '/siswa/page/' . $totalPage);
+            exit;
+        }
+
+        $currentPage = $page;
+        $startData = ($totalDataPerPage * $currentPage) - $totalDataPerPage;
+        $endData = $startData + $totalDataPerPage;
+        $totalLink = 2;
+
+        if ($currentPage > $totalLink) {
+            $startNumber = $currentPage - $totalLink;
+        } else {
+            $startNumber = 1;
+        }
+
+        if ($currentPage < ($totalPage - $totalLink)) {
+            $endNumber = $currentPage + $totalLink;
+        } else {
+            $endNumber = $totalPage;
+        }
+
+        if ($endNumber != $totalPage) {
+            $startNumber = $currentPage - $totalLink + 1;
+            if ($startNumber < 1) {
+                $startNumber = 1;
+            }
+        }
+
+        $data['siswa'] = $this->model('Siswa_model')->getSiswaWithLimit($startData, $totalDataPerPage);
+
+        $data['pagination'] = [
+            'totalPage' => $totalPage,
+            'currentPage' => $currentPage,
+            'startNumber' => $startNumber,
+            'endNumber' => $endNumber,
+            'totalLink' => $totalLink,
+            'startData' => $startData,
+            'endData' => $endData,
+        ];
+
         $data['spp'] = $this->model('Spp_model')->getAllSpp();
         $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
 

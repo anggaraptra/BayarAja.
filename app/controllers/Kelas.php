@@ -10,9 +10,34 @@ class Kelas extends Controller
             exit;
         }
 
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'admin' || @$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/kelas/page/1');
+            exit;
+        }
+
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
             Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
             header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+    }
+
+    public function page($page = 0)
+    {
+        // cek session
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        if ($page == 0) {
+            header('Location: ' . BASEURL . '/kelas/page/1');
             exit;
         }
 
@@ -20,7 +45,58 @@ class Kelas extends Controller
         $data['title'] = 'Data Kelas';
 
         // model
-        $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
+        // pagination
+        $totalDataPerPage = 5;
+        $totalData = count($this->model('Kelas_model')->getAllKelas());
+        $totalPage = ceil($totalData / $totalDataPerPage);
+
+        $data['totalData'] = $totalData;
+
+        if ($totalPage <= 1 && $page != 1) {
+            header('Location: ' . BASEURL . '/kelas');
+            exit;
+        }
+
+        if ($page > $totalPage && $totalPage > 1) {
+            header('Location: ' . BASEURL . '/kelas/page/' . $totalPage);
+            exit;
+        }
+
+        $currentPage = $page;
+        $startData = ($totalDataPerPage * $currentPage) - $totalDataPerPage;
+        $endData = $startData + $totalDataPerPage;
+        $totalLink = 2;
+
+        if ($currentPage > $totalLink) {
+            $startNumber = $currentPage - $totalLink;
+        } else {
+            $startNumber = 1;
+        }
+
+        if ($currentPage < ($totalPage - $totalLink)) {
+            $endNumber = $currentPage + $totalLink;
+        } else {
+            $endNumber = $totalPage;
+        }
+
+        if ($endNumber != $totalPage) {
+            $startNumber = $currentPage - $totalLink + 1;
+            if ($startNumber < 1) {
+                $startNumber = 1;
+            }
+        }
+
+        $data['kelas'] = $this->model('Kelas_model')->getKelasWithLimit($startData, $totalDataPerPage);
+
+        $data['pagination'] = [
+            'totalPage' => $totalPage,
+            'currentPage' => $currentPage,
+            'startNumber' => $startNumber,
+            'endNumber' => $endNumber,
+            'totalLink' => $totalLink,
+            'startData' => $startData,
+            'endData' => $endData,
+        ];
 
         // view
         $this->view('templates/header', $data);
@@ -79,12 +155,13 @@ class Kelas extends Controller
             exit;
         }
 
-        // cek apakah data berhasil ditambahkan
+        // cek nama kelas
         if ($this->model('Kelas_model')->getKelasByNama($_POST['kelas'])) {
             Flasher::setFlashMessage('danger', 'Data gagal ditambahkan! Nama kelas sudah ada!');
             header('Location: ' . BASEURL . '/kelas/formAdd');
             exit;
         } else {
+            // cek apakah data berhasil ditambahkan
             if ($this->model('Kelas_model')->addDataKelas($_POST) > 0) {
                 Flasher::setFlashMessage('success', 'Data berhasil ditambahkan!');
                 header('Location: ' . BASEURL . '/kelas');
@@ -150,15 +227,22 @@ class Kelas extends Controller
             exit;
         }
 
-        // cek apakah data berhasil diupdate
-        if ($this->model('Kelas_model')->updateDataKelas($_POST) > 0) {
-            Flasher::setFlashMessage('success', 'Data berhasil diupdate!');
-            header('Location: ' . BASEURL . '/kelas');
+        // cek nama kelas
+        if ($this->model('Kelas_model')->getKelasByNama($_POST['kelas']) && $_POST['kelas'] != $_POST['kelas_lama']) {
+            Flasher::setFlashMessage('danger', 'Data gagal ditambahkan! Nama kelas sudah ada!');
+            header('Location: ' . BASEURL . '/kelas/getUpdate/' . $_POST['id_kelas']);
             exit;
         } else {
-            Flasher::setFlashMessage('failed', 'Data gagal diupdate!');
-            header('Location: ' . BASEURL . '/kelas');
-            exit;
+            // cek apakah data berhasil diupdate
+            if ($this->model('Kelas_model')->updateDataKelas($_POST) > 0) {
+                Flasher::setFlashMessage('success', 'Data berhasil diupdate!');
+                header('Location: ' . BASEURL . '/kelas');
+                exit;
+            } else {
+                Flasher::setFlashMessage('failed', 'Data gagal diupdate!');
+                header('Location: ' . BASEURL . '/kelas');
+                exit;
+            }
         }
     }
 

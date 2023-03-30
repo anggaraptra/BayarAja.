@@ -2,9 +2,11 @@
 
 class Pembayaran_model
 {
+    // property
     private $table = "tb_pembayaran";
     private $db;
 
+    // constructor untuk memanggil dan instansiasi class database
     public function __construct()
     {
         $this->db = new Database();
@@ -19,6 +21,7 @@ class Pembayaran_model
         return $this->db->resultSet();
     }
 
+    // method untuk mengambil semua row data
     public function getAllDataPembayaran()
     {
         $query = 'SELECT id_bayar FROM ' . $this->table;
@@ -30,7 +33,7 @@ class Pembayaran_model
     // method untuk mengambil semua data berdasarkan keterangan
     public function getAllPembayaranByKet()
     {
-        $query = 'SELECT ' . $this->table . '.*, tb_siswa.* FROM ' . $this->table . ' JOIN tb_siswa ON ' . $this->table . '.nis = tb_siswa.nis WHERE ' . $this->table . '.keterangan = "belum lunas" ORDER BY id_bayar DESC';
+        $query = 'SELECT ' . $this->table . '.*, tb_siswa.* FROM ' . $this->table . ' JOIN tb_siswa ON ' . $this->table . '.nis = tb_siswa.nis WHERE ' . $this->table . '.keterangan = "belum lunas" ORDER BY id_bayar DESC LIMIT 5';
 
         $this->db->query($query);
         return $this->db->resultSet();
@@ -62,6 +65,17 @@ class Pembayaran_model
         $query = 'SELECT * FROM ' . $this->table . ' WHERE nis=:nis';
 
         $this->db->query($query);
+        $this->db->bind('nis', $nis);
+        return $this->db->resultSet();
+    }
+
+    public function getPembayaranByNisAllLimit($nis, $startData, $totalDataPerPage)
+    {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE nis=:nis LIMIT :startData, :totalDataPerPage';
+
+        $this->db->query($query);
+        $this->db->bind('startData', $startData, PDO::PARAM_INT);
+        $this->db->bind('totalDataPerPage', $totalDataPerPage, PDO::PARAM_INT);
         $this->db->bind('nis', $nis);
         return $this->db->resultSet();
     }

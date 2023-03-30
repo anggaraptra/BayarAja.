@@ -2,11 +2,13 @@
 
 class Database
 {
+    // property untuk koneksi ke database
     private $host = DB_HOST;
     private $user = DB_USER;
     private $pass = DB_PASS;
     private $dbname = DB_NAME;
 
+    // property handler dan statement
     private $dbh;
     private $stmt;
 
@@ -51,6 +53,7 @@ class Database
                     break;
                 default:
                     $type = PDO::PARAM_STR;
+                    break;
             }
         }
         // Bind value
@@ -89,7 +92,7 @@ class Database
         return $this->dbh->lastInsertId();
     }
 
-    // menghitung jumlah table 
+    // menghitung jumlah row 
     public function count()
     {
         $this->execute();

@@ -35,7 +35,6 @@
 </head>
 
 <body id="cetak-history">
-
     <div class="container">
         <div class="header">
             <img src="<?= BASEURL; ?>/assets/images/logo.png" alt="logo">

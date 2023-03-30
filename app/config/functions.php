@@ -11,6 +11,7 @@ function rupiah($angka)
     return $hasil_rupiah;
 }
 
+// Function format rupiah without Rp.
 function rupiahFormat($angka)
 {
     if ($angka == 0) {

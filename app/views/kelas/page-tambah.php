@@ -20,9 +20,7 @@
                 <textarea name="keterangan" id="" class="form-control" placeholder="ex:Rekayasa Perangkat Lunak"></textarea>
             </div>
 
-            <button type="submit" name="tambah" class="btn">
-                Tambah
-            </button>
+            <button type="submit" name="tambah" class="btn">Tambah</button>
         </form>
     </div>
 </section>

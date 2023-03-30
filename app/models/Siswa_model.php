@@ -2,7 +2,7 @@
 
 class Siswa_model
 {
-    // property untuk menampung nama tabel
+    // property
     private $table = "tb_siswa";
     private $db;
 
@@ -80,6 +80,18 @@ class Siswa_model
         $this->db->bind('nis', $nis);
         $this->db->bind('password', $password);
         return $this->db->single();
+    }
+
+    public function getSiswaWithLimit($startData, $totalDataPerPage)
+    {
+        $query = "SELECT * FROM " . $this->table . " ORDER BY nis DESC LIMIT :startData, :totalDataPerPage";
+
+        $this->db->query($query);
+        $this->db->bind('startData', $startData, PDO::PARAM_INT);
+        $this->db->bind('totalDataPerPage', $totalDataPerPage, PDO::PARAM_INT);
+
+        $this->db->execute();
+        return $this->db->resultSet();
     }
 
     // method untuk menambah data

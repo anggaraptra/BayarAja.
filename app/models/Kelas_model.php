@@ -2,9 +2,11 @@
 
 class Kelas_model
 {
+    // property
     private $table = "tb_kelas";
     private $db;
 
+    // constructor untuk memanggil dan instansiasi class database
     public function __construct()
     {
         $this->db = new Database();
@@ -19,6 +21,7 @@ class Kelas_model
         return $this->db->resultSet();
     }
 
+    // method untuk mengambil semua row data
     public function getAllDataKelas()
     {
         $query = 'SELECT id_kelas FROM ' . $this->table;
@@ -37,6 +40,7 @@ class Kelas_model
         return $this->db->single();
     }
 
+    // method untuk mengambil data berdasarkan nama kelas
     public function getKelasByNama($kelas)
     {
         $query = 'SELECT * FROM ' . $this->table . ' WHERE kelas=:kelas';
@@ -44,6 +48,18 @@ class Kelas_model
         $this->db->query($query);
         $this->db->bind('kelas', $kelas);
         return $this->db->single();
+    }
+
+    public function getKelasWithLimit($startData, $totalDataPerPage)
+    {
+        $query = "SELECT * FROM " . $this->table . " ORDER BY id_kelas DESC LIMIT :startData, :totalDataPerPage";
+
+        $this->db->query($query);
+        $this->db->bind('startData', $startData, PDO::PARAM_INT);
+        $this->db->bind('totalDataPerPage', $totalDataPerPage, PDO::PARAM_INT);
+
+        $this->db->execute();
+        return $this->db->resultSet();
     }
 
     // method untuk menambah data

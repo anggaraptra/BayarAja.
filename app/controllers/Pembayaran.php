@@ -11,7 +11,7 @@ class Pembayaran extends Controller
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/' . $_SESSION['nis'] . '');
+            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/1/' . $_SESSION['nis'] . '');
             exit;
         }
 
@@ -40,7 +40,7 @@ class Pembayaran extends Controller
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/' . $_SESSION['nis'] . '');
+            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/1/' . $_SESSION['nis'] . '');
             exit;
         }
 
@@ -64,7 +64,7 @@ class Pembayaran extends Controller
         $this->view('templates/footer');
     }
 
-    public function detail($nis = null)
+    public function detail($page = 0, $nis = null)
     {
         // cek session
         if (!@$_SESSION['login']) {
@@ -73,7 +73,7 @@ class Pembayaran extends Controller
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/' . $_SESSION['nis'] . '');
+            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/1/' . $_SESSION['nis'] . '');
             exit;
         }
 
@@ -87,15 +87,119 @@ class Pembayaran extends Controller
 
         // model
         $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
+
         if ($nis == null) {
             $data['siswa'] = $this->model('Siswa_model')->searchSiswaByNis();
-            $data['pembayaran'] = $this->model('Pembayaran_model')->getPembayaranByNisAll($_POST['keyword']);
+            // pagination
+            $totalDataPerPage = 12;
+            $totalData = count($this->model('Pembayaran_model')->getPembayaranByNisAll($_POST['keyword']));
+            $totalPage = ceil($totalData / $totalDataPerPage);
+
+            $data['totalData'] = $totalData;
+
+            if ($totalPage <= 1 && $page != 1) {
+                header('Location: ' . BASEURL . '/pembayaran/detail/1/' . $_POST['keyword'] . '');
+                exit;
+            }
+
+            if ($page > $totalPage && $totalPage > 1) {
+                header('Location: ' . BASEURL . '/pembayaran/detail/' . $totalPage . '/' . $_POST['keyword'] . '');
+                exit;
+            }
+
+            $currentPage = $page;
+            $startData = ($totalDataPerPage * $currentPage) - $totalDataPerPage;
+            $endData = $startData + $totalDataPerPage;
+            $totalLink = 3;
+
+            if ($currentPage > $totalLink) {
+                $startNumber = $currentPage - $totalLink;
+            } else {
+                $startNumber = 1;
+            }
+
+            if ($currentPage < ($totalPage - $totalLink)) {
+                $endNumber = $currentPage + $totalLink;
+            } else {
+                $endNumber = $totalPage;
+            }
+
+            if ($endNumber != $totalPage) {
+                $startNumber = $currentPage - $totalLink + 1;
+                if ($startNumber < 1) {
+                    $startNumber = 1;
+                }
+            }
+
+            $data['pembayaran'] = $this->model('Pembayaran_model')->getPembayaranByNisAllLimit($_POST['keyword'], $startData, $totalDataPerPage);
+
+            $data['pagination'] = [
+                'totalPage' => $totalPage,
+                'currentPage' => $currentPage,
+                'startNumber' => $startNumber,
+                'endNumber' => $endNumber,
+                'totalLink' => $totalLink,
+                'startData' => $startData,
+                'endData' => $endData,
+            ];
         }
 
         if ($nis !== null) {
             $data['siswa'] = $this->model('Siswa_model')->getSiswaByNis($nis);
-            $data['pembayaran'] = $this->model('Pembayaran_model')->getPembayaranByNisAll($nis);
+            // pagination
+            $totalDataPerPage = 12;
+            $totalData = count($this->model('Pembayaran_model')->getPembayaranByNisAll($nis));
+            $totalPage = ceil($totalData / $totalDataPerPage);
+
+            $data['totalData'] = $totalData;
+
+            if ($totalPage <= 1 && $page != 1) {
+                header('Location: ' . BASEURL . '/pembayaran/detail/1/' . $nis . '');
+                exit;
+            }
+
+            if ($page > $totalPage && $totalPage > 1) {
+                header('Location: ' . BASEURL . '/pembayaran/detail/' . $totalPage . '/' . $nis . '');
+                exit;
+            }
+
+            $currentPage = $page;
+            $startData = ($totalDataPerPage * $currentPage) - $totalDataPerPage;
+            $endData = $startData + $totalDataPerPage;
+            $totalLink = 3;
+
+            if ($currentPage > $totalLink) {
+                $startNumber = $currentPage - $totalLink;
+            } else {
+                $startNumber = 1;
+            }
+
+            if ($currentPage < ($totalPage - $totalLink)) {
+                $endNumber = $currentPage + $totalLink;
+            } else {
+                $endNumber = $totalPage;
+            }
+
+            if ($endNumber != $totalPage) {
+                $startNumber = $currentPage - $totalLink + 1;
+                if ($startNumber < 1) {
+                    $startNumber = 1;
+                }
+            }
+
+            $data['pembayaran'] = $this->model('Pembayaran_model')->getPembayaranByNisAllLimit($nis, $startData, $totalDataPerPage);
+
+            $data['pagination'] = [
+                'totalPage' => $totalPage,
+                'currentPage' => $currentPage,
+                'startNumber' => $startNumber,
+                'endNumber' => $endNumber,
+                'totalLink' => $totalLink,
+                'startData' => $startData,
+                'endData' => $endData,
+            ];
         }
+
         $data['spp'] = $this->model('Spp_model')->getAllSpp();
 
 
@@ -106,7 +210,7 @@ class Pembayaran extends Controller
         $this->view('templates/footer');
     }
 
-    public function tagihanSiswa($nis = null)
+    public function tagihanSiswa($page = 0, $nis = null)
     {
         // cek session
         if (!@$_SESSION['login']) {
@@ -115,12 +219,12 @@ class Pembayaran extends Controller
         }
 
         if ($nis == null) {
-            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/' . $_SESSION['nis'] . '');
+            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/1/' . $_SESSION['nis'] . '');
             exit;
         }
 
         if ($nis !== $_SESSION['nis']) {
-            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/' . $_SESSION['nis'] . '');
+            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/1/' . $_SESSION['nis'] . '');
             exit;
         }
 
@@ -128,8 +232,59 @@ class Pembayaran extends Controller
         $data['title'] = 'Tagihan Siswa';
 
         // model
+        // pagination
+        $totalDataPerPage = 12;
+        $totalData = count($this->model('Pembayaran_model')->getPembayaranByNisAll($nis));
+        $totalPage = ceil($totalData / $totalDataPerPage);
+
+        $data['totalData'] = $totalData;
+
+        if ($totalPage <= 1 && $page != 1) {
+            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/1/' . $nis . '');
+            exit;
+        }
+
+        if ($page > $totalPage && $totalPage > 1) {
+            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/' . $totalPage . '/' . $nis . '');
+            exit;
+        }
+
+        $currentPage = $page;
+        $startData = ($totalDataPerPage * $currentPage) - $totalDataPerPage;
+        $endData = $startData + $totalDataPerPage;
+        $totalLink = 3;
+
+        if ($currentPage > $totalLink) {
+            $startNumber = $currentPage - $totalLink;
+        } else {
+            $startNumber = 1;
+        }
+
+        if ($currentPage < ($totalPage - $totalLink)) {
+            $endNumber = $currentPage + $totalLink;
+        } else {
+            $endNumber = $totalPage;
+        }
+
+        if ($endNumber != $totalPage) {
+            $startNumber = $currentPage - $totalLink + 1;
+            if ($startNumber < 1) {
+                $startNumber = 1;
+            }
+        }
+
+        $data['pembayaran'] = $this->model('Pembayaran_model')->getPembayaranByNisAllLimit($nis, $startData, $totalDataPerPage);
+
+        $data['pagination'] = [
+            'totalPage' => $totalPage,
+            'currentPage' => $currentPage,
+            'startNumber' => $startNumber,
+            'endNumber' => $endNumber,
+            'totalLink' => $totalLink,
+            'startData' => $startData,
+            'endData' => $endData,
+        ];
         $data['siswa'] = $this->model('Siswa_model')->getSiswaByNis($nis);
-        $data['pembayaran'] = $this->model('Pembayaran_model')->getPembayaranByNisAll($nis);
         $data['spp'] = $this->model('Spp_model')->getAllSpp();
 
         // view
@@ -148,7 +303,7 @@ class Pembayaran extends Controller
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/' . $_SESSION['nis']);
+            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/1/' . $_SESSION['nis']);
             exit;
         }
 
@@ -192,7 +347,7 @@ class Pembayaran extends Controller
         }
 
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/' . $_SESSION['nis']);
+            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/1/' . $_SESSION['nis']);
             exit;
         }
 
@@ -243,15 +398,15 @@ class Pembayaran extends Controller
                 if ($rowDetailBayar) {
                     if ($uangKembali !== 0) {
                         Flasher::setFlashMessage('success', 'Berhasil melakukan pembayaran! Uang kembali ' . $namaSiswa . ' adalah Rp. ' . rupiah($uangKembali) . '');
-                        header('Location: ' . BASEURL . '/pembayaran/detail/' . $nisSiswa . '');
+                        header('Location: ' . BASEURL . '/pembayaran/detail/1/' . $nisSiswa . '');
                         exit;
                     } else if ($sisaBayar !== 0) {
                         Flasher::setFlashMessage('success', 'Berhasil melakukan pembayaran! Sisa pembayaran ' . $namaSiswa . ' adalah Rp. ' . rupiah($sisaBayar) . '');
-                        header('Location: ' . BASEURL . '/pembayaran/detail/' . $nisSiswa . '');
+                        header('Location: ' . BASEURL . '/pembayaran/detail/1/' . $nisSiswa . '');
                         exit;
                     } else {
                         Flasher::setFlashMessage('success', 'Berhasil melakukan pembayaran!');
-                        header('Location: ' . BASEURL . '/pembayaran/detail/' . $nisSiswa . '');
+                        header('Location: ' . BASEURL . '/pembayaran/detail/1/' . $nisSiswa . '');
                         exit;
                     }
                 }

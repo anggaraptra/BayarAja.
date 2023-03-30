@@ -4,10 +4,15 @@
         <h5 class="sub-text"><a href="<?= BASEURL; ?>">Home</a> / <a href="<?= BASEURL; ?>/pegawai">Data Pegawai</a> / <span>Update</span></h5>
     </div>
 
+    <div class="container-alert">
+        <?php Flasher::flashMessage() ?>
+    </div>
+
     <div class="content form-update update-pegawai">
         <form action="<?= BASEURL ?>/pegawai/update" method="POST">
             <input type="hidden" name="id_pegawai" value="<?= $data['pegawai']['id_pegawai']; ?>">
             <input type="hidden" name="password_lama" value="<?= $data['pegawai']['password']; ?>">
+            <input type="hidden" name="username_lama" value="<?= $data['pegawai']['username']; ?>">
 
             <div class="input-group">
                 <label for="nama_lengkap">Nama Lengkap</label>

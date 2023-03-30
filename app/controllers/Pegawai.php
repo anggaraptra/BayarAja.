@@ -22,11 +22,93 @@ class Pegawai extends Controller
             exit;
         }
 
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'admin' || @$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/pegawai/page/1');
+            exit;
+        }
+    }
+
+    public function page($page = 0)
+    {
+        // cek session
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'petugas') {
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/pembayaran');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            Flasher::setFlashMessage('danger', 'Anda tidak memiliki akses ke halaman tersebut!');
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        if ($page == 0) {
+            header('Location: ' . BASEURL . '/pegawai/page/1');
+            exit;
+        }
+
         // data
         $data['title'] = 'Data Pegawai';
 
         // model
-        $data['pegawai'] = $this->model('Pegawai_model')->getAllPetugas();
+        // pagination
+        $totalDataPerPage = 5;
+        $totalData = count($this->model('Pegawai_model')->getAllPetugas());
+        $totalPage = ceil($totalData / $totalDataPerPage);
+
+        $data['totalData'] = $totalData;
+
+        if ($totalPage <= 1 && $page != 1) {
+            header('Location: ' . BASEURL . '/pegawai');
+            exit;
+        }
+
+        if ($page > $totalPage && $totalPage > 1) {
+            header('Location: ' . BASEURL . '/pegawai/page/' . $totalPage);
+            exit;
+        }
+
+        $currentPage = $page;
+        $startData = ($totalDataPerPage * $currentPage) - $totalDataPerPage;
+        $endData = $startData + $totalDataPerPage;
+        $totalLink = 2;
+
+        if ($currentPage > $totalLink) {
+            $startNumber = $currentPage - $totalLink;
+        } else {
+            $startNumber = 1;
+        }
+
+        if ($currentPage < ($totalPage - $totalLink)) {
+            $endNumber = $currentPage + $totalLink;
+        } else {
+            $endNumber = $totalPage;
+        }
+
+        if ($endNumber != $totalPage) {
+            $startNumber = $currentPage - $totalLink + 1;
+            if ($startNumber < 1) {
+                $startNumber = 1;
+            }
+        }
+
+        $data['pegawai'] = $this->model('Pegawai_model')->getPegawaiWithLimit($startData, $totalDataPerPage);
+
+        $data['pagination'] = [
+            'totalPage' => $totalPage,
+            'currentPage' => $currentPage,
+            'startNumber' => $startNumber,
+            'endNumber' => $endNumber,
+            'totalLink' => $totalLink,
+            'startData' => $startData,
+            'endData' => $endData,
+        ];
 
         // view
         $this->view('templates/header', $data);
@@ -85,13 +167,13 @@ class Pegawai extends Controller
             exit;
         }
 
-
-        // cek apakah data berhasil ditambahkan atau tidak
+        // cek apakah username sudah digunakan
         if ($this->model('Pegawai_model')->getPegawaiByUsername($_POST['username'])) {
             Flasher::setFlashMessage('danger', 'Username sudah digunakan!');
             header('Location: ' . BASEURL . '/pegawai/formAdd');
             exit;
         } else {
+            // cek apakah data berhasil ditambahkan atau tidak
             if ($this->model('Pegawai_model')->addDataPegawai($_POST) > 0) {
                 Flasher::setFlashMessage('success', 'Data berhasil ditambahkan!');
                 header('Location: ' . BASEURL . '/pegawai');
@@ -157,15 +239,22 @@ class Pegawai extends Controller
             exit;
         }
 
-        // cek apakah data berhasil diupdate
-        if ($this->model('Pegawai_model')->updateDataPegawai($_POST) > 0) {
-            Flasher::setFlashMessage('success', 'Data berhasil diupdate!');
-            header('Location: ' . BASEURL . '/pegawai');
+        // cek apakah username sudah digunakan
+        if ($this->model('Pegawai_model')->getPegawaiByUsername($_POST['username']) && $_POST['username'] != $_POST['username_lama']) {
+            Flasher::setFlashMessage('danger', 'Username sudah digunakan!');
+            header('Location: ' . BASEURL . '/pegawai/getUpdate/' . $_POST['id_pegawai'] . '');
             exit;
         } else {
-            Flasher::setFlashMessage('failed', 'Data gagal diupdate!');
-            header('Location: ' . BASEURL . '/pegawai');
-            exit;
+            // cek apakah data berhasil diupdate
+            if ($this->model('Pegawai_model')->updateDataPegawai($_POST) > 0) {
+                Flasher::setFlashMessage('success', 'Data berhasil diupdate!');
+                header('Location: ' . BASEURL . '/pegawai');
+                exit;
+            } else {
+                Flasher::setFlashMessage('failed', 'Data gagal diupdate!');
+                header('Location: ' . BASEURL . '/pegawai');
+                exit;
+            }
         }
     }
 

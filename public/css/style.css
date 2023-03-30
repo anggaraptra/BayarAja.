@@ -30,6 +30,12 @@
   --btn-hover: rgba(93, 119, 224, 0.85);
   --shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   --profile-color: invert(21%) sepia(0%) saturate(0%) hue-rotate(179deg) brightness(97%) contrast(86%);
+
+  /* Transition */
+  --tran-03: all 0.1s ease;
+  --tran-03: all 0.2s ease;
+  --tran-04: all 0.2s ease;
+  --tran-05: all 0.2s ease;
 }
 
 ::-webkit-scrollbar {
@@ -48,6 +54,7 @@
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: var(--body-color);
+  transition: var(--tran-05);
 }
 
 body.dark {
@@ -85,6 +92,7 @@ body.dark {
   border-radius: 0.5rem;
   color: #fff;
   text-transform: capitalize;
+  transition: var(--tran-05);
 }
 
 .alert p.message {
@@ -275,6 +283,7 @@ button.btn-close:hover {
   justify-content: space-between;
   padding: 0 1rem;
   box-shadow: var(--shadow);
+  transition: var(--tran-05);
 }
 
 .navbar .logo {
@@ -285,6 +294,7 @@ button.btn-close:hover {
 
 .navbar .logo .icon svg {
   margin-right: 0.3rem;
+  transition: var(--tran-05);
 }
 
 .navbar .logo .icon.d-none {
@@ -295,6 +305,7 @@ button.btn-close:hover {
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--text-color);
+  transition: var(--tran-05);
 }
 
 .navbar .logo span {
@@ -319,6 +330,7 @@ button.btn-close:hover {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: var(--tran-05);
 }
 
 .navbar .navbar-profile {
@@ -326,6 +338,7 @@ button.btn-close:hover {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  transition: var(--tran-05);
 }
 
 .navbar .navbar-profile .dropdown .icon-down {
@@ -398,6 +411,7 @@ button.btn-close:hover {
   background: var(--sidebar-color);
   z-index: 100;
   box-shadow: var(--shadow);
+  transition: var(--tran-05);
 }
 .sidebar.close {
   width: 5.5rem;
@@ -434,6 +448,7 @@ button.btn-close:hover {
 .navbar .icon svg {
   color: var(--text-color);
   fill: var(--text-color);
+  transition: var(--tran-03);
 }
 
 .sidebar .text,
@@ -444,7 +459,8 @@ button.btn-close:hover {
   opacity: 1;
 }
 .sidebar.close .text,
-.sidebar.close ::placeholder {
+.sidebar.close ::placeholder,
+.sidebar.close .sun-moon svg {
   opacity: 0;
 }
 
@@ -460,6 +476,7 @@ body.dark .sidebar .menu .toggle-sidebar svg {
   border-radius: 0.3rem;
   background-color: var(--primary-color-light);
   cursor: pointer;
+  transition: var(--tran-05);
 }
 
 .sidebar li.search-box input {
@@ -473,6 +490,7 @@ body.dark .sidebar .menu .toggle-sidebar svg {
   border-radius: 0.3rem;
   font-size: 1rem;
   font-weight: 500;
+  transition: var(--tran-05);
 }
 .sidebar li a {
   list-style: none;
@@ -484,6 +502,7 @@ body.dark .sidebar .menu .toggle-sidebar svg {
   width: 100%;
   border-radius: 0.3rem;
   text-decoration: none;
+  transition: var(--tran-03);
 }
 
 .sidebar li a.active {
@@ -536,6 +555,7 @@ body.dark .sidebar li a.logout:hover {
   border-radius: 0.3rem;
   background-color: var(--primary-color-light);
   position: relative;
+  transition: var(--tran-05);
 }
 
 .menu-bar .mode .sun-moon {
@@ -573,6 +593,7 @@ body.dark .mode .sun-moon i.moon {
   width: 2.5rem;
   border-radius: 1.5rem;
   background-color: var(--toggle-color);
+  transition: var(--tran-05);
 }
 
 .switch::before {
@@ -585,6 +606,7 @@ body.dark .mode .sun-moon i.moon {
   left: 0.3rem;
   transform: translateY(-50%);
   background-color: var(--sidebar-color);
+  transition: var(--tran-04);
 }
 
 body.dark .switch::before {
@@ -622,6 +644,7 @@ body.dark .switch::before {
   background-color: var(--sidebar-color);
   cursor: pointer;
   text-align: center;
+  transition: var(--tran-03);
 }
 
 .home .content.dashboard .card img {
@@ -656,10 +679,11 @@ body.dark .switch::before {
   position: absolute;
   top: 4rem;
   left: 13.7rem;
-  height: 100vh;
+  /* height: 100vh; */
   width: calc(100% - 14rem);
   background-color: var(--body-color);
   font-family: 'HindMadurai', sans-serif;
+  transition: var(--tran-05);
 }
 
 .home .page-title {
@@ -687,6 +711,7 @@ body.dark .switch::before {
 .home .page-title .sub-text span {
   color: var(--active-color);
   cursor: pointer;
+  transition: var(--tran-05);
 }
 
 .home .content {
@@ -728,6 +753,7 @@ body.dark .switch::before {
   cursor: pointer;
   background-color: var(--primary-color);
   color: var(--btn-color);
+  transition: var(--tran-05);
 }
 
 .home .content .add .btn:hover {
@@ -751,6 +777,7 @@ body.dark .switch::before {
   background-color: var(--primary-color);
   fill: var(--btn-color);
   color: var(--btn-color);
+  transition: var(--tran-05);
 }
 
 .home .content table .aksi a:hover {
@@ -880,6 +907,7 @@ table.table tr td {
   border: 1px solid var(--active-color);
   background-color: var(--body-color);
   color: var(--text-color);
+  transition: var(--tran-05);
 }
 
 .home .form-add .input-group .form-control:focus,
@@ -898,6 +926,7 @@ table.table tr td {
   cursor: pointer;
   background-color: var(--primary-color);
   color: var(--btn-color);
+  transition: var(--tran-05);
 }
 
 .home .form-add .btn:hover,
@@ -935,6 +964,7 @@ table.table tr td {
   cursor: pointer;
   background-color: var(--primary-color);
   color: var(--btn-color);
+  transition: var(--tran-05);
 }
 
 .home .content-null .btn.btn-primary svg {
@@ -1005,6 +1035,7 @@ table.table tr td {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  text-transform: capitalize;
 }
 /* End tagihan style */
 
@@ -1037,6 +1068,7 @@ table.table tr td {
   border: 1px solid var(--active-color);
   background-color: var(--body-color);
   color: var(--text-color);
+  transition: var(--tran-05);
 }
 
 .home .laporan table .form-pembayaran-kelas .option-kelas .form-control:focus,
@@ -1052,6 +1084,7 @@ table.table tr td {
   cursor: pointer;
   background-color: var(--primary-color);
   color: var(--btn-color);
+  transition: var(--tran-05);
 }
 
 .home .laporan table .form-pembayaran-kelas .btn:hover {
@@ -1079,6 +1112,7 @@ table.table tr td {
   border: 1px solid var(--active-color);
   background-color: var(--body-color);
   color: var(--text-color);
+  transition: var(--tran-05);
 }
 
 .home .laporan table .form-tanggal .input-group .form-control:focus {
@@ -1093,6 +1127,7 @@ table.table tr td {
   cursor: pointer;
   background-color: var(--primary-color);
   color: var(--btn-color);
+  transition: var(--tran-05);
 }
 
 .home .laporan table .form-tanggal .btn:hover {
@@ -1115,6 +1150,7 @@ table.table tr td {
   align-items: center;
   justify-content: center;
   padding: 8rem 8rem;
+  transition: var(--tran-03);
 }
 
 .home .profile .container .profile-image img {
@@ -1299,8 +1335,69 @@ table.table tr td {
   color: var(--text-color);
   text-align: center;
 }
-
 /* End style Cetak Bukti Pembayaran */
+
+/* Pagination */
+.pagination.page-kelas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.pagination {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0.5rem;
+}
+
+.pagination .left {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  text-transform: capitalize;
+}
+
+.pagination .right {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.pagination .right ul {
+  list-style: none;
+}
+
+.pagination .right ul li {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--active-color);
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.pagination .right ul li a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.pagination .right ul li:hover {
+  background-color: var(--primary-color);
+}
+
+.pagination .right ul li:hover a {
+  color: var(--btn-color);
+}
+
+.pagination .right ul li.active {
+  background-color: var(--primary-color);
+}
+
+.pagination .right ul li.active a {
+  color: var(--btn-color);
+}
+
+/* End style Pagination */
 
 /* Media Print */
 @media print {

@@ -4,9 +4,14 @@
         <h5 class="sub-text"><a href="<?= BASEURL; ?>">Home</a> / <a href="<?= BASEURL; ?>/kelas">Data Kelas</a> / <span>Update</span></h5>
     </div>
 
+    <div class="container-alert">
+        <?php Flasher::flashMessage() ?>
+    </div>
+
     <div class="content form-update update-kelas">
         <form action="<?= BASEURL ?>/kelas/update" method="POST">
             <input type="hidden" name="id_kelas" value="<?= $data['kelas']['id_kelas']; ?>">
+            <input type="hidden" name="kelas_lama" value="<?= $data['kelas']['kelas']; ?>">
 
             <div class="input-group">
                 <label for="kelas">Kelas</label>

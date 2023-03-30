@@ -30,6 +30,7 @@
                         </tr>
                     <?php endif; ?>
                 <?php endforeach; ?>
+
                 <tr>
                     <th>Angkatan</th>
                     <td><?= $data['siswa']['angkatan']; ?></td>
@@ -46,6 +47,24 @@
                     <th>Telepon Ortu</th>
                     <td><?= $data['siswa']['telp_ortu']; ?></td>
                 </tr>
+
+                <?php if ($data['pagination']['currentPage'] == 1) : ?>
+                    <tr>
+                        <th>Tingkatan</th>
+                        <td>Kelas 1</td>
+                    </tr>
+                <?php elseif ($data['pagination']['currentPage'] == 2) : ?>
+                    <tr>
+                        <th>Tingkatan</th>
+                        <td>Kelas 2</td>
+                    </tr>
+                <?php else : ?>
+                    <tr>
+                        <th>Tingkatan</th>
+                        <td>Kelas 3</td>
+                    </tr>
+                <?php endif; ?>
+
             </table>
         </div>
     <?php endif; ?>
@@ -101,6 +120,63 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
+
+            <!-- Pagination -->
+            <?php if ($data['totalData'] > 0) : ?>
+                <div class="pagination page-kelas">
+
+                    <?php if ($data['pagination']['totalPage'] > 1) : ?>
+                        <div class="right">
+                            <ul class="pagination-list">
+                                <?php if ($data['pagination']['totalPage'] >= 2) : ?>
+
+                                    <!-- Pagination Page -->
+                                    <?php if ($data['pagination']['totalPage'] > 5) : ?>
+                                        <?php
+                                        $endPageNumber = $data['pagination']['endNumber'];
+                                        $totalPage = $data['pagination']['totalPage'];
+
+                                        if ($endPageNumber >= $totalPage) :
+                                        ?>
+                                            <li class="page-item">
+                                                <a class="page-link" href="<?= BASEURL; ?>/pembayaran/detail/1/<?= $data['siswa']['nis']; ?>">1</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link">...</a>
+                                            </li>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+
+                                    <?php for ($pageNumber = $data['pagination']['startNumber']; $pageNumber <= $data['pagination']['endNumber']; $pageNumber++) : ?>
+                                        <?php if ($pageNumber == $data['pagination']['currentPage']) : ?>
+                                            <li class="page-item active">
+                                                <a class="page-link" href="<?= BASEURL; ?>/pembayaran/detail/<?= $pageNumber; ?>/<?= $data['siswa']['nis']; ?>" class="btn btn-active"><?= $pageNumber; ?></a>
+                                            </li>
+                                        <?php else : ?>
+                                            <li class="page-item">
+                                                <a class="page-link" href="<?= BASEURL; ?>/pembayaran/detail/<?= $pageNumber; ?>/<?= $data['siswa']['nis']; ?>"><?= $pageNumber; ?></a>
+                                            </li>
+                                        <?php endif; ?>
+                                    <?php endfor; ?>
+
+                                    <?php if ($data['pagination']['endNumber'] != $data['pagination']['totalPage']) : ?>
+                                        <li class="page-item">
+                                            <a class="page-link">...</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="<?= BASEURL; ?>/pembayaran/detail/<?= $data['pagination']['totalPage']; ?>/<?= $data['siswa']['nis']; ?>"><?= $data['pagination']['totalPage']; ?></a>
+                                        </li>
+                                    <?php endif; ?>
+                                    <!-- End Pagination Page -->
+
+                                <?php endif; ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+            <!-- End Pagination -->
+
         </div>
     <?php else : ?>
         <div class="content content-null tagihan">

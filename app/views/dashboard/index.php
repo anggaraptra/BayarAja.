@@ -112,14 +112,14 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
+        <?php else : ?>
+            <div class="content content-null transaksi">
+                <h1 class="">Tidak Ada Transaksi!</h1>
+                <a href="<?= BASEURL; ?>/pembayaran" class="btn btn-primary">
+                    <i class="icon"><?= ADD; ?></i>
+                    Pembayaran
+                </a>
+            </div>
+        <?php endif; ?>
     </div>
-<?php else : ?>
-    <div class="content content-null transaksi">
-        <h1 class="">Tidak Ada Transaksi!</h1>
-        <a href="<?= BASEURL; ?>/pembayaran" class="btn btn-primary">
-            <i class="icon"><?= ADD; ?></i>
-            Pembayaran
-        </a>
-    </div>
-<?php endif; ?>
 </section>

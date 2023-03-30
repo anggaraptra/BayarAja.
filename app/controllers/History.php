@@ -10,8 +10,32 @@ class History extends Controller
             exit;
         }
 
+        if (@$_SESSION['login'] && @$_SESSION['level'] == 'admin' || @$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history/page/1');
+            exit;
+        }
+
         if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/history/siswa/' . $_SESSION['nis']);
+            header('Location: ' . BASEURL . '/history/siswa/1/' . $_SESSION['nis']);
+            exit;
+        }
+    }
+
+    public function page($page = 0)
+    {
+        // cek session
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history/siswa/1/' . $_SESSION['nis']);
+            exit;
+        }
+
+        if ($page == 0) {
+            header('Location: ' . BASEURL . '/history/page/1');
             exit;
         }
 
@@ -19,10 +43,62 @@ class History extends Controller
         $data['title'] = 'History Pembayaran';
 
         // model
+        // pagination
+        $totalDataPerPage = 10;
+        $totalData = count($this->model('DetailPembayaran_model')->getAllDetailPembayaran());
+        $totalPage = ceil($totalData / $totalDataPerPage);
+
+        $data['totalData'] = $totalData;
+
+        if ($totalPage <= 1 && $page != 1) {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        if ($page > $totalPage && $totalPage > 1) {
+            header('Location: ' . BASEURL . '/history/page/' . $totalPage);
+            exit;
+        }
+
+        $currentPage = $page;
+        $startData = ($totalDataPerPage * $currentPage) - $totalDataPerPage;
+        $endData = $startData + $totalDataPerPage;
+        $totalLink = 2;
+
+        if ($currentPage > $totalLink) {
+            $startNumber = $currentPage - $totalLink;
+        } else {
+            $startNumber = 1;
+        }
+
+        if ($currentPage < ($totalPage - $totalLink)) {
+            $endNumber = $currentPage + $totalLink;
+        } else {
+            $endNumber = $totalPage;
+        }
+
+        if ($endNumber != $totalPage) {
+            $startNumber = $currentPage - $totalLink + 1;
+            if ($startNumber < 1) {
+                $startNumber = 1;
+            }
+        }
+
+        $data['detail'] = $this->model('DetailPembayaran_model')->getDetailPembayaranWithLimit($startData, $totalDataPerPage);
+
+        $data['pagination'] = [
+            'totalPage' => $totalPage,
+            'currentPage' => $currentPage,
+            'startNumber' => $startNumber,
+            'endNumber' => $endNumber,
+            'totalLink' => $totalLink,
+            'startData' => $startData,
+            'endData' => $endData,
+        ];
+
         $data['pegawai'] = $this->model('Pegawai_model')->getAllPegawai();
         $data['pembayaran'] = $this->model('Pembayaran_model')->getAllPembayaran();
         $data['siswa'] = $this->model('Siswa_model')->getAllSiswa();
-        $data['detail'] = $this->model('DetailPembayaran_model')->getAllDetailPembayaran();
 
         // view
         $this->view('templates/header', $data);
@@ -31,7 +107,7 @@ class History extends Controller
         $this->view('templates/footer');
     }
 
-    public function siswa($nis = null)
+    public function siswa($page = 0, $nis = null)
     {
         // cek session
         if (!@$_SESSION['login']) {
@@ -45,12 +121,17 @@ class History extends Controller
         }
 
         if ($nis == null) {
-            header('Location: ' . BASEURL . '/history/siswa/' . $_SESSION['nis']);
+            header('Location: ' . BASEURL . '/history/siswa/1/' . $_SESSION['nis']);
             exit;
         }
 
         if ($nis !== $_SESSION['nis']) {
-            header('Location: ' . BASEURL . '/history/siswa/' . $_SESSION['nis']);
+            header('Location: ' . BASEURL . '/history/siswa/1/' . $_SESSION['nis']);
+            exit;
+        }
+
+        if ($page == 0) {
+            header('Location: ' . BASEURL . '/history/siswa/1/' . $nis);
             exit;
         }
 
@@ -58,7 +139,59 @@ class History extends Controller
         $data['title'] = 'History Pembayaran';
 
         // model
-        $data['detail'] = $this->model('DetailPembayaran_model')->getDetailPembayaranByNis($nis);
+        // pagination
+        $totalDataPerPage = 5;
+        $totalData = count($this->model('DetailPembayaran_model')->getDetailPembayaranByNis($nis));
+        $totalPage = ceil($totalData / $totalDataPerPage);
+
+        $data['totalData'] = $totalData;
+
+        if ($totalPage <= 1 && $page != 1) {
+            header('Location: ' . BASEURL . '/history/siswa');
+            exit;
+        }
+
+        if ($page > $totalPage && $totalPage > 1) {
+            header('Location: ' . BASEURL . '/history/siswa/' . $totalPage . '/' . $nis);
+            exit;
+        }
+
+        $currentPage = $page;
+        $startData = ($totalDataPerPage * $currentPage) - $totalDataPerPage;
+        $endData = $startData + $totalDataPerPage;
+        $totalLink = 2;
+
+        if ($currentPage > $totalLink) {
+            $startNumber = $currentPage - $totalLink;
+        } else {
+            $startNumber = 1;
+        }
+
+        if ($currentPage < ($totalPage - $totalLink)) {
+            $endNumber = $currentPage + $totalLink;
+        } else {
+            $endNumber = $totalPage;
+        }
+
+        if ($endNumber != $totalPage) {
+            $startNumber = $currentPage - $totalLink + 1;
+            if ($startNumber < 1) {
+                $startNumber = 1;
+            }
+        }
+
+        $data['detail'] = $this->model('DetailPembayaran_model')->getDetailPembayaranByNisLimit($nis, $startData, $totalDataPerPage);
+
+        $data['pagination'] = [
+            'totalPage' => $totalPage,
+            'currentPage' => $currentPage,
+            'startNumber' => $startNumber,
+            'endNumber' => $endNumber,
+            'totalLink' => $totalLink,
+            'startData' => $startData,
+            'endData' => $endData,
+        ];
+
         $data['pegawai'] = $this->model('Pegawai_model')->getAllPegawai();
 
         // view
@@ -68,7 +201,7 @@ class History extends Controller
         $this->view('templates/footer');
     }
 
-    public function cetak($id)
+    public function cetak($id = null)
     {
         // cek session
         if (!@$_SESSION['login']) {
@@ -77,7 +210,7 @@ class History extends Controller
         }
 
         if ($id == null) {
-            header('Location: ' . BASEURL . '/history/siswa/' . $_SESSION['nis']);
+            header('Location: ' . BASEURL . '/history/siswa/1/' . $_SESSION['nis']);
             exit;
         }
 

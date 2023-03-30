@@ -45,7 +45,7 @@
                     <td><?= $data['siswa']['telp_ortu']; ?></td>
                 </tr>
             </table>
-            <a href="<?= BASEURL; ?>/pembayaran/detail/<?= $data['siswa']['nis']; ?>">Details</a>
+            <a href="<?= BASEURL; ?>/pembayaran/detail/1/<?= $data['siswa']['nis']; ?>">Details</a>
         <?php else : ?>
             <div class="content content-null biodata-siswa">
                 <h1 class="">Biodata siswa tidak ditemukan.</h1>

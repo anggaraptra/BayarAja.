@@ -2,9 +2,11 @@
 
 class Spp_model
 {
+    // property 
     private $table = "tb_spp";
     private $db;
 
+    // constructor untuk memanggil dan instansiasi class database
     public function __construct()
     {
         $this->db = new Database();
@@ -19,6 +21,7 @@ class Spp_model
         return $this->db->resultSet();
     }
 
+    // method untuk mengambil semua row data
     public function getAllDataSpp()
     {
         $query = 'SELECT id_spp FROM ' . $this->table;
@@ -27,7 +30,7 @@ class Spp_model
         return $this->db->count();
     }
 
-    // method untuk mengambil data berdasarkan angkatan
+    // method untuk mengambil data berdasarkan id
     public function getSppById($id)
     {
         $query = 'SELECT * FROM ' . $this->table . ' WHERE id_spp=:id';
@@ -37,6 +40,7 @@ class Spp_model
         return $this->db->single();
     }
 
+    // method untuk mengambil data berdasarkan angkatan
     public function getSppByAngkatan($angkatan)
     {
         $query = 'SELECT * FROM ' . $this->table . ' WHERE angkatan = :angkatan';
@@ -44,6 +48,18 @@ class Spp_model
         $this->db->query($query);
         $this->db->bind('angkatan', $angkatan);
         return $this->db->single();
+    }
+
+    public function getSppWithLimit($startData, $totalDataPerPage)
+    {
+        $query = "SELECT * FROM " . $this->table . " ORDER BY id_spp DESC LIMIT :startData, :totalDataPerPage";
+
+        $this->db->query($query);
+        $this->db->bind('startData', $startData, PDO::PARAM_INT);
+        $this->db->bind('totalDataPerPage', $totalDataPerPage, PDO::PARAM_INT);
+
+        $this->db->execute();
+        return $this->db->resultSet();
     }
 
     // method untuk menambah data

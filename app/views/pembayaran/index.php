@@ -10,7 +10,7 @@
 
     <div class="content pembayaran">
         <div class="search-box">
-            <form action="<?= BASEURL; ?>/pembayaran/detail" method="POST">
+            <form action="<?= BASEURL; ?>/pembayaran/detail/1" method="POST">
                 <input type="number" name="keyword" id="keyword" class="form-control" placeholder="Search NIS..." autocomplete="off" required maxlength="4" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                 <button type="submit" name="cari" class="btn btn-primary">Cari</button>
             </form>
@@ -24,7 +24,6 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>No</th>
                         <th>Nis</th>
                         <th>Nama Siswa</th>
                         <th>Kelas</th>
@@ -35,10 +34,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $no = 1; ?>
                     <?php foreach ($data['pembayaran'] as $pmbyr) : ?>
                         <tr>
-                            <td><?= $no; ?></td>
                             <td><?= $pmbyr['nis']; ?></td>
 
                             <?php foreach ($data['siswa'] as $swa) : ?>
@@ -60,7 +57,6 @@
                                 <a href="<?= BASEURL; ?>/pembayaran/formBayar/<?= $pmbyr['id_bayar']; ?>" class="btn btn-primary">Bayar</a>
                             </td>
                         </tr>
-                        <?php $no++; ?>
                     <?php endforeach; ?>
                 </tbody>
             </table>

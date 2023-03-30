@@ -24,10 +24,10 @@ class Pegawai_model
     // method untuk mengambil semua data berdasarkan level petugas
     public function getAllPetugas()
     {
-        $query = 'SELECT * FROM ' . $this->table . ' WHERE level!=:level ORDER BY id_pegawai DESC';
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE username!=:username ORDER BY id_pegawai DESC';
 
         $this->db->query($query);
-        $this->db->bind('level', 'admin');
+        $this->db->bind('username', 'admin');
         return $this->db->resultSet();
     }
 
@@ -64,10 +64,10 @@ class Pegawai_model
 
     public function getPegawaiWithLimit($startData, $totalDataPerPage)
     {
-        $query = "SELECT * FROM " . $this->table . " WHERE level!=:level ORDER BY id_pegawai DESC LIMIT :startData, :totalDataPerPage";
+        $query = "SELECT * FROM " . $this->table . " WHERE username!=:username ORDER BY id_pegawai DESC LIMIT :startData, :totalDataPerPage";
 
         $this->db->query($query);
-        $this->db->bind('level', 'admin');
+        $this->db->bind('username', 'admin');
         $this->db->bind('startData', $startData, PDO::PARAM_INT);
         $this->db->bind('totalDataPerPage', $totalDataPerPage, PDO::PARAM_INT);
 

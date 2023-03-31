@@ -679,7 +679,7 @@ body.dark .switch::before {
   position: absolute;
   top: 4rem;
   left: 13.7rem;
-  /* height: 100vh; */
+  height: 100vh;
   width: calc(100% - 14rem);
   background-color: var(--body-color);
   font-family: 'HindMadurai', sans-serif;
@@ -1396,7 +1396,6 @@ table.table tr td {
 .pagination .right ul li.active a {
   color: var(--btn-color);
 }
-
 /* End style Pagination */
 
 /* Media Print */

@@ -82,7 +82,7 @@ if (dropdown) {
 // Change title while change tab
 let docTitle = document.title;
 window.addEventListener('blur', () => {
-  document.title = 'Bayar Aja';
+  document.title = 'BayarAja.';
 });
 window.addEventListener('focus', () => {
   document.title = docTitle;

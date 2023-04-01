@@ -21,7 +21,7 @@
                 <tr>
                     <td>Laporan Pembayaran Kelas</td>
                     <td>
-                        <form action="<?= BASEURL; ?>/laporan/kelas" method="POST" target="_blank" class="form-pembayaran-kelas">
+                        <form action="<?= BASEURL; ?>/laporan/kelas" method="POST" class="form-pembayaran-kelas">
                             <div class="option-kelas">
                                 <select class="form-control" name="id_kelas" id="" required>
                                     <option value="">Pilih Kelas</option>
@@ -63,7 +63,7 @@
                 <tr>
                     <td>Laporan Pembayaran</td>
                     <td>
-                        <form action="<?= BASEURL; ?>/laporan/pembayaran" method="POST" target="_blank" class="form-tanggal">
+                        <form action="<?= BASEURL; ?>/laporan/pembayaran" method="POST" class="form-tanggal">
                             <div class="input-group">
                                 <label for="">Mulai Tanggal</label>
                                 <input class="form-control" type="date" name="tgl1" value="<?= date('Y-m-d') ?>" required>

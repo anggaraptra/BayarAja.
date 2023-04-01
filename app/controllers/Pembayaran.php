@@ -23,6 +23,7 @@ class Pembayaran extends Controller
         $data['pegawai'] = $this->model('Pegawai_model')->getAllPegawai();
         $data['siswa'] = $this->model('Siswa_model')->getAllSiswa();
         $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
+        $data['spp'] = $this->model('Spp_model')->getAllSpp();
 
         // view
         $this->view('templates/header', $data);
@@ -388,11 +389,11 @@ class Pembayaran extends Controller
 
                 if ($rowDetailBayar) {
                     if ($uangKembali !== 0) {
-                        Flasher::setFlashMessage('success', 'Berhasil melakukan pembayaran! Uang kembali ' . $namaSiswa . ' adalah Rp. ' . rupiah($uangKembali) . '');
+                        Flasher::setFlashMessage('success', 'Berhasil melakukan pembayaran! Uang kembali ' . $namaSiswa . ' adalah ' . rupiah($uangKembali) . '');
                         header('Location: ' . BASEURL . '/pembayaran/detail/1/' . $nisSiswa . '');
                         exit;
                     } else if ($sisaBayar !== 0) {
-                        Flasher::setFlashMessage('success', 'Berhasil melakukan pembayaran! Sisa pembayaran ' . $namaSiswa . ' adalah Rp. ' . rupiah($sisaBayar) . '');
+                        Flasher::setFlashMessage('success', 'Berhasil melakukan pembayaran! Sisa pembayaran ' . $namaSiswa . ' adalah ' . rupiah($sisaBayar) . '');
                         header('Location: ' . BASEURL . '/pembayaran/detail/1/' . $nisSiswa . '');
                         exit;
                     } else {

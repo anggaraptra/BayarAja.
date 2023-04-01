@@ -106,8 +106,29 @@
                             <td><?= $pmb['bulan']; ?></td>
                             <td><?= $pmb['jatuh_tempo']; ?></td>
                             <td><?= $pmb['tahun']; ?></td>
-                            <td><?= rupiah($pmb['jumlah_bayar']); ?></td>
-                            <td><?= $pmb['keterangan']; ?></td>
+
+                            <?php foreach ($data['spp'] as $spp) : ?>
+                                <?php if ($spp['id_spp'] == $pmb['id_spp']) : ?>
+                                    <?php if ($spp['nominal'] == $pmb['jumlah_bayar']) : ?>
+                                        <td><?= rupiah($pmb['jumlah_bayar']); ?></td>
+                                    <?php elseif ($spp['nominal'] > $pmb['jumlah_bayar'] && $pmb['jumlah_bayar'] != null) : ?>
+                                        <?php
+                                        $jumlahBayar = $pmb['jumlah_bayar'];
+                                        $nominal = $spp['nominal'];
+                                        $sisaBayar = $nominal - $jumlahBayar;
+                                        ?>
+                                        <td>-<?= rupiah($sisaBayar); ?></td>
+                                    <?php else : ?>
+                                        <td>-</td>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+
+                            <?php if ($pmb['keterangan'] == null) : ?>
+                                <td>-</td>
+                            <?php else : ?>
+                                <td><?= $pmb['keterangan']; ?></td>
+                            <?php endif; ?>
 
                             <?php if (!@$_SESSION['nis']) : ?>
                                 <?php if ($pmb['jumlah_bayar'] == null || $pmb['keterangan'] === 'belum lunas' && $pmb['sisa_bayar'] !== 0) : ?>

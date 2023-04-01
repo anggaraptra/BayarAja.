@@ -105,7 +105,7 @@
             <?php if ($data['detail']['total_bayar'] < $data['spp']['nominal'] && $data['pembayaran']['sisa_bayar'] == 0) : ?>
                 <tr>
                     <th>Keterangan</th>
-                    <td>Cicilan Lunas</td>
+                    <td>Tunggakan Lunas</td>
                 </tr>
             <?php else : ?>
                 <tr>

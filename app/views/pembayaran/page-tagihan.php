@@ -50,8 +50,29 @@
                                 <td><?= $pmbyr['bulan']; ?></td>
                                 <td><?= $pmbyr['jatuh_tempo']; ?></td>
                                 <td><?= $pmbyr['tahun']; ?></td>
-                                <td><?= rupiah($pmbyr['jumlah_bayar']); ?></td>
-                                <td><?= $pmbyr['keterangan']; ?></td>
+
+                                <?php foreach ($data['spp'] as $spp) : ?>
+                                    <?php if ($spp['id_spp'] == $pmbyr['id_spp']) : ?>
+                                        <?php if ($spp['nominal'] == $pmbyr['jumlah_bayar']) : ?>
+                                            <td><?= rupiah($pmbyr['jumlah_bayar']); ?></td>
+                                        <?php elseif ($spp['nominal'] > $pmbyr['jumlah_bayar'] && $pmbyr['jumlah_bayar'] != null) : ?>
+                                            <?php
+                                            $jumlahBayar = $pmbyr['jumlah_bayar'];
+                                            $nominal = $spp['nominal'];
+                                            $sisaBayar = $nominal - $jumlahBayar;
+                                            ?>
+                                            <td>-<?= rupiah($sisaBayar); ?></td>
+                                        <?php else : ?>
+                                            <td>-</td>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+
+                                <?php if ($pmbyr['keterangan'] == null) : ?>
+                                    <td>-</td>
+                                <?php else : ?>
+                                    <td><?= $pmbyr['keterangan']; ?></td>
+                                <?php endif; ?>
 
                                 <?php if (!@$_SESSION['nis']) : ?>
                                     <td>Aksi</td>

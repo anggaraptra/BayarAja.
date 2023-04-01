@@ -51,7 +51,24 @@
                             <?php endforeach; ?>
 
                             <td><?= $pmbyr['bulan']; ?> <?= $pmbyr['tahun'] ?></td>
-                            <td><?= rupiah($pmbyr['jumlah_bayar']); ?></td>
+
+                            <?php foreach ($data['spp'] as $spp) : ?>
+                                <?php if ($spp['id_spp'] == $pmbyr['id_spp']) : ?>
+                                    <?php if ($spp['nominal'] == $pmbyr['jumlah_bayar']) : ?>
+                                        <td><?= rupiah($pmbyr['jumlah_bayar']); ?></td>
+                                    <?php elseif ($spp['nominal'] > $pmbyr['jumlah_bayar'] && $pmbyr['jumlah_bayar'] != null) : ?>
+                                        <?php
+                                        $jumlahBayar = $pmbyr['jumlah_bayar'];
+                                        $nominal = $spp['nominal'];
+                                        $sisaBayar = $nominal - $jumlahBayar;
+                                        ?>
+                                        <td>-<?= rupiah($sisaBayar); ?></td>
+                                    <?php else : ?>
+                                        <td>-</td>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+
                             <td><?= $pmbyr['keterangan']; ?></td>
                             <td class="aksi">
                                 <a href="<?= BASEURL; ?>/pembayaran/formBayar/<?= $pmbyr['id_bayar']; ?>" class="btn btn-primary">Bayar</a>

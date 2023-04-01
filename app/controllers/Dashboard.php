@@ -26,6 +26,7 @@ class Dashboard extends Controller
         $data['pembayaran'] = $this->model('Pembayaran_model')->getAllPembayaran();
         $data['siswa'] = $this->model('Siswa_model')->getAllSiswa();
         $data['detail'] = $this->model('DetailPembayaran_model')->getAllDetailPembayaranLatest();
+        $data['spp'] = $this->model('Spp_model')->getAllSpp();
 
         // view
         $this->view('templates/header', $data);

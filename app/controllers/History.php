@@ -34,15 +34,15 @@ class History extends Controller
             exit;
         }
 
+        // cek page
         if ($page == 0) {
             header('Location: ' . BASEURL . '/history/page/1');
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'History Pembayaran';
 
-        // model
         // pagination
         $totalDataPerPage = 10;
         $totalData = count($this->model('DetailPembayaran_model')->getAllDetailPembayaran());
@@ -84,7 +84,12 @@ class History extends Controller
             }
         }
 
-        $data['detail'] = $this->model('DetailPembayaran_model')->getDetailPembayaranWithLimit($startData, $totalDataPerPage);
+        if ($startNumber != 1) {
+            $endNumber = $currentPage + $totalLink - 1;
+            if ($endNumber > $totalPage) {
+                $endNumber = $totalPage;
+            }
+        }
 
         $data['pagination'] = [
             'totalPage' => $totalPage,
@@ -96,6 +101,8 @@ class History extends Controller
             'endData' => $endData,
         ];
 
+        // model
+        $data['detail'] = $this->model('DetailPembayaran_model')->getDetailPembayaranWithLimit($startData, $totalDataPerPage);
         $data['pegawai'] = $this->model('Pegawai_model')->getAllPegawai();
         $data['pembayaran'] = $this->model('Pembayaran_model')->getAllPembayaran();
         $data['siswa'] = $this->model('Siswa_model')->getAllSiswa();
@@ -120,6 +127,7 @@ class History extends Controller
             exit;
         }
 
+        // cek nis
         if ($nis == null) {
             header('Location: ' . BASEURL . '/history/siswa/1/' . $_SESSION['nis']);
             exit;
@@ -130,15 +138,15 @@ class History extends Controller
             exit;
         }
 
+        // cek page
         if ($page == 0) {
             header('Location: ' . BASEURL . '/history/siswa/1/' . $nis);
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'History Pembayaran';
 
-        // model
         // pagination
         $totalDataPerPage = 5;
         $totalData = count($this->model('DetailPembayaran_model')->getDetailPembayaranByNis($nis));
@@ -180,7 +188,12 @@ class History extends Controller
             }
         }
 
-        $data['detail'] = $this->model('DetailPembayaran_model')->getDetailPembayaranByNisLimit($nis, $startData, $totalDataPerPage);
+        if ($startNumber != 1) {
+            $endNumber = $currentPage + $totalLink - 1;
+            if ($endNumber > $totalPage) {
+                $endNumber = $totalPage;
+            }
+        }
 
         $data['pagination'] = [
             'totalPage' => $totalPage,
@@ -192,6 +205,8 @@ class History extends Controller
             'endData' => $endData,
         ];
 
+        // model
+        $data['detail'] = $this->model('DetailPembayaran_model')->getDetailPembayaranByNisLimit($nis, $startData, $totalDataPerPage);
         $data['pegawai'] = $this->model('Pegawai_model')->getAllPegawai();
 
         // view
@@ -209,12 +224,13 @@ class History extends Controller
             exit;
         }
 
+        // cek id cetak
         if ($id == null) {
             header('Location: ' . BASEURL . '/history/siswa/1/' . $_SESSION['nis']);
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Cetak Bukti Pembayaran';
 
         // model

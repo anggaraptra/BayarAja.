@@ -50,6 +50,7 @@ class Kelas_model
         return $this->db->single();
     }
 
+    // method untuk mengambil data dengan limit
     public function getKelasWithLimit($startData, $totalDataPerPage)
     {
         $query = "SELECT * FROM " . $this->table . " ORDER BY id_kelas DESC LIMIT :startData, :totalDataPerPage";

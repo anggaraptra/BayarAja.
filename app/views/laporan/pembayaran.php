@@ -117,6 +117,7 @@
     </div>
 
     <center>
+        <a class="btn-print print" href="">Kembali</a>
         <a class="btn-print print" href="" onclick="window.print();">Cetak</a>
     </center>
 </body>

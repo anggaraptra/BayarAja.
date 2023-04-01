@@ -36,15 +36,15 @@ class Siswa extends Controller
             exit;
         }
 
+        // cek page
         if ($page == 0) {
             header('Location: ' . BASEURL . '/siswa/page/1');
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Data Siswa';
 
-        // model
         // pagination
         $totalDataPerPage = 5;
         $totalData = count($this->model('Siswa_model')->getAllSiswa());
@@ -86,7 +86,12 @@ class Siswa extends Controller
             }
         }
 
-        $data['siswa'] = $this->model('Siswa_model')->getSiswaWithLimit($startData, $totalDataPerPage);
+        if ($startNumber != 1) {
+            $endNumber = $currentPage + $totalLink - 1;
+            if ($endNumber > $totalPage) {
+                $endNumber = $totalPage;
+            }
+        }
 
         $data['pagination'] = [
             'totalPage' => $totalPage,
@@ -98,6 +103,8 @@ class Siswa extends Controller
             'endData' => $endData,
         ];
 
+        // model
+        $data['siswa'] = $this->model('Siswa_model')->getSiswaWithLimit($startData, $totalDataPerPage);
         $data['spp'] = $this->model('Spp_model')->getAllSpp();
         $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
 
@@ -105,6 +112,40 @@ class Siswa extends Controller
         $this->view('templates/header', $data);
         $this->view('templates/navsidebar', $data, 'siswa');
         $this->view('siswa/index', $data);
+        $this->view('templates/footer');
+    }
+
+    public function biodata()
+    {
+        // cek session 
+        if (!@$_SESSION['login']) {
+            header('Location: ' . BASEURL . '/login');
+            exit;
+        }
+
+        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
+            header('Location: ' . BASEURL . '/history');
+            exit;
+        }
+
+        // cek keyword
+        if ($_POST['keyword'] == null) {
+            header('Location: ' . BASEURL);
+            exit;
+        }
+
+        // title
+        $data['title'] = 'Biodata Siswa';
+
+        // model
+        $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
+        $data['siswa'] = $this->model('Siswa_model')->searchSiswa();
+        $data['spp'] = $this->model('Spp_model')->getAllSpp();
+
+        // view
+        $this->view('templates/header', $data);
+        $this->view('templates/navsidebar', $data);
+        $this->view('siswa/page-biodata', $data);
         $this->view('templates/footer');
     }
 
@@ -128,25 +169,26 @@ class Siswa extends Controller
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Tambah Siswa';
 
-        // model
+        // cek jika data kelas kosong tidak bisa tambah data siswa
         $data['kelasRow'] = $this->model('Kelas_model')->getAllDataKelas();
-        $data['sppRow'] = $this->model('Spp_model')->getAllDataSpp();
-
         if ($data['kelasRow'] == 0) {
             Flasher::setFlashMessage('danger', 'Data kelas kosong, silahkan tambah data kelas terlebih dahulu!');
             header('Location: ' . BASEURL . '/siswa');
             exit;
         }
 
+        // cek jika data spp kosong tidak bisa tambah data siswa
+        $data['sppRow'] = $this->model('Spp_model')->getAllDataSpp();
         if ($data['sppRow'] == 0) {
             Flasher::setFlashMessage('danger', 'Data spp kosong, silahkan tambah data spp terlebih dahulu!');
             header('Location: ' . BASEURL . '/siswa');
             exit;
         }
 
+        // model
         $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
         $data['spp'] = $this->model('Spp_model')->getAllSpp();
         $data['siswa'] = $this->model('Siswa_model')->getLastSiswa();
@@ -246,7 +288,7 @@ class Siswa extends Controller
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Update Siswa';
 
         // model

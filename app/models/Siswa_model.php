@@ -40,6 +40,7 @@ class Siswa_model
         return $this->db->single();
     }
 
+    // method untuk mengambil data terakhir
     public function getLastSiswa()
     {
         $query = 'SELECT * FROM ' . $this->table . ' ORDER BY nis DESC LIMIT 1';
@@ -82,6 +83,7 @@ class Siswa_model
         return $this->db->single();
     }
 
+    // method untuk mengambil data dengan limit
     public function getSiswaWithLimit($startData, $totalDataPerPage)
     {
         $query = "SELECT * FROM " . $this->table . " ORDER BY nis DESC LIMIT :startData, :totalDataPerPage";

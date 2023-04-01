@@ -69,6 +69,7 @@ class Pembayaran_model
         return $this->db->resultSet();
     }
 
+    // method untuk mengambil data pembayaran berdasarkan nis dengan limit
     public function getPembayaranByNisAllLimit($nis, $startData, $totalDataPerPage)
     {
         $query = 'SELECT * FROM ' . $this->table . ' WHERE nis=:nis LIMIT :startData, :totalDataPerPage';

@@ -50,6 +50,7 @@ class Spp_model
         return $this->db->single();
     }
 
+    // method untuk mengambil data dengan limit
     public function getSppWithLimit($startData, $totalDataPerPage)
     {
         $query = "SELECT * FROM " . $this->table . " ORDER BY id_spp DESC LIMIT :startData, :totalDataPerPage";

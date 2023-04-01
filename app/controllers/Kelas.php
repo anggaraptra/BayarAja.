@@ -36,15 +36,15 @@ class Kelas extends Controller
             exit;
         }
 
+        // cek page
         if ($page == 0) {
             header('Location: ' . BASEURL . '/kelas/page/1');
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Data Kelas';
 
-        // model
         // pagination
         $totalDataPerPage = 5;
         $totalData = count($this->model('Kelas_model')->getAllKelas());
@@ -86,7 +86,12 @@ class Kelas extends Controller
             }
         }
 
-        $data['kelas'] = $this->model('Kelas_model')->getKelasWithLimit($startData, $totalDataPerPage);
+        if ($startNumber != 1) {
+            $endNumber = $currentPage + $totalLink - 1;
+            if ($endNumber > $totalPage) {
+                $endNumber = $totalPage;
+            }
+        }
 
         $data['pagination'] = [
             'totalPage' => $totalPage,
@@ -97,6 +102,9 @@ class Kelas extends Controller
             'startData' => $startData,
             'endData' => $endData,
         ];
+
+        // model
+        $data['kelas'] = $this->model('Kelas_model')->getKelasWithLimit($startData, $totalDataPerPage);
 
         // view
         $this->view('templates/header', $data);
@@ -125,7 +133,7 @@ class Kelas extends Controller
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Tambah Kelas';
 
         // view
@@ -194,7 +202,7 @@ class Kelas extends Controller
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Update Kelas';
 
         // model
@@ -266,6 +274,7 @@ class Kelas extends Controller
             exit;
         }
 
+        // cek apakah data siswa masih ada
         $data['siswaRow'] = $this->model('Siswa_model')->getAllDataSiswa();
         if ($data['siswaRow'] == 0) {
             // cek apakah data berhasil dihapus

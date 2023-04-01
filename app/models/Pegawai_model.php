@@ -62,6 +62,7 @@ class Pegawai_model
         return $this->db->single();
     }
 
+    // method untuk mengambil data dengan limit
     public function getPegawaiWithLimit($startData, $totalDataPerPage)
     {
         $query = "SELECT * FROM " . $this->table . " WHERE username!=:username ORDER BY id_pegawai DESC LIMIT :startData, :totalDataPerPage";

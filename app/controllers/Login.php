@@ -46,7 +46,7 @@ class Login extends Controller
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Login';
 
         // view
@@ -84,6 +84,8 @@ class Login extends Controller
 
                 // cek apakah nis siswa ada di database
             } elseif ($siswa = $this->model('Siswa_model')->getSiswaByNis($username)) {
+
+                // cek password
                 if (password_verify($password, $siswa['password'])) {
                     $_SESSION['login'] = true;
                     $_SESSION['nis'] = $siswa['nis'];

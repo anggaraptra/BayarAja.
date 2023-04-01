@@ -10,7 +10,7 @@ class Profile extends Controller
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Profile';
 
         // model

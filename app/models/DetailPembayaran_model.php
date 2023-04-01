@@ -69,6 +69,7 @@ class DetailPembayaran_model
         return $this->db->resultSet();
     }
 
+    // method untuk mengambil data berdasarkan nis dari tabel pembayaran dengan limit
     public function getDetailPembayaranByNisLimit($nis, $startData, $totalDataPerPage)
     {
         $query = 'SELECT ' . $this->table . '.*, tb_pembayaran.* FROM ' . $this->table . ' JOIN tb_pembayaran ON ' . $this->table . '.id_bayar = tb_pembayaran.id_bayar WHERE tb_pembayaran.nis = :nis ORDER BY id_detail DESC LIMIT :startData, :totalDataPerPage';
@@ -91,6 +92,7 @@ class DetailPembayaran_model
         return $this->db->resultSet();
     }
 
+    // method untuk mengambil data berdasarkan dengan limit
     public function getDetailPembayaranWithLimit($startData, $totalDataPerPage)
     {
         $query = "SELECT * FROM " . $this->table . " ORDER BY id_detail DESC LIMIT :startData, :totalDataPerPage";

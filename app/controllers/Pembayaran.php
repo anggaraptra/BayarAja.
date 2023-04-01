@@ -15,7 +15,7 @@ class Pembayaran extends Controller
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Pembayaran';
 
         // model
@@ -28,39 +28,6 @@ class Pembayaran extends Controller
         $this->view('templates/header', $data);
         $this->view('templates/navsidebar', $data, 'pembayaran');
         $this->view('pembayaran/index', $data);
-        $this->view('templates/footer');
-    }
-
-    public function biodata()
-    {
-        // cek session 
-        if (!@$_SESSION['login']) {
-            header('Location: ' . BASEURL . '/login');
-            exit;
-        }
-
-        if (@$_SESSION['login'] && !@$_SESSION['level'] == 'admin' || !@$_SESSION['level'] == 'petugas') {
-            header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/1/' . $_SESSION['nis'] . '');
-            exit;
-        }
-
-        if ($_POST['keyword'] == null) {
-            header('Location: ' . BASEURL . '/pembayaran');
-            exit;
-        }
-
-        // data
-        $data['title'] = 'Biodata Siswa';
-
-        // model
-        $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
-        $data['siswa'] = $this->model('Siswa_model')->searchSiswa();
-        $data['spp'] = $this->model('Spp_model')->getAllSpp();
-
-        // view
-        $this->view('templates/header', $data);
-        $this->view('templates/navsidebar', $data);
-        $this->view('pembayaran/page-biodata', $data);
         $this->view('templates/footer');
     }
 
@@ -77,17 +44,16 @@ class Pembayaran extends Controller
             exit;
         }
 
+        // cek nis
         if (@$_POST['keyword'] == null && $nis == null) {
             header('Location: ' . BASEURL . '/pembayaran');
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Detail Pembayaran';
 
-        // model
-        $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
-
+        // jika nis null dan keyword tidak null
         if ($nis == null) {
             $data['siswa'] = $this->model('Siswa_model')->searchSiswaByNis();
             // pagination
@@ -131,6 +97,13 @@ class Pembayaran extends Controller
                 }
             }
 
+            if ($startNumber != 1) {
+                $endNumber = $currentPage + $totalLink - 1;
+                if ($endNumber > $totalPage) {
+                    $endNumber = $totalPage;
+                }
+            }
+
             $data['pembayaran'] = $this->model('Pembayaran_model')->getPembayaranByNisAllLimit($_POST['keyword'], $startData, $totalDataPerPage);
 
             $data['pagination'] = [
@@ -144,6 +117,7 @@ class Pembayaran extends Controller
             ];
         }
 
+        // jika nis tidak null dan keyword null
         if ($nis !== null) {
             $data['siswa'] = $this->model('Siswa_model')->getSiswaByNis($nis);
             // pagination
@@ -187,6 +161,13 @@ class Pembayaran extends Controller
                 }
             }
 
+            if ($startNumber != 1) {
+                $endNumber = $currentPage + $totalLink - 1;
+                if ($endNumber > $totalPage) {
+                    $endNumber = $totalPage;
+                }
+            }
+
             $data['pembayaran'] = $this->model('Pembayaran_model')->getPembayaranByNisAllLimit($nis, $startData, $totalDataPerPage);
 
             $data['pagination'] = [
@@ -200,8 +181,9 @@ class Pembayaran extends Controller
             ];
         }
 
+        // model
+        $data['kelas'] = $this->model('Kelas_model')->getAllKelas();
         $data['spp'] = $this->model('Spp_model')->getAllSpp();
-
 
         // view
         $this->view('templates/header', $data);
@@ -218,6 +200,7 @@ class Pembayaran extends Controller
             exit;
         }
 
+        // cek nis
         if ($nis == null) {
             header('Location: ' . BASEURL . '/pembayaran/tagihanSiswa/1/' . $_SESSION['nis'] . '');
             exit;
@@ -228,10 +211,9 @@ class Pembayaran extends Controller
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Tagihan Siswa';
 
-        // model
         // pagination
         $totalDataPerPage = 12;
         $totalData = count($this->model('Pembayaran_model')->getPembayaranByNisAll($nis));
@@ -273,7 +255,12 @@ class Pembayaran extends Controller
             }
         }
 
-        $data['pembayaran'] = $this->model('Pembayaran_model')->getPembayaranByNisAllLimit($nis, $startData, $totalDataPerPage);
+        if ($startNumber != 1) {
+            $endNumber = $currentPage + $totalLink - 1;
+            if ($endNumber > $totalPage) {
+                $endNumber = $totalPage;
+            }
+        }
 
         $data['pagination'] = [
             'totalPage' => $totalPage,
@@ -284,6 +271,9 @@ class Pembayaran extends Controller
             'startData' => $startData,
             'endData' => $endData,
         ];
+
+        // model
+        $data['pembayaran'] = $this->model('Pembayaran_model')->getPembayaranByNisAllLimit($nis, $startData, $totalDataPerPage);
         $data['siswa'] = $this->model('Siswa_model')->getSiswaByNis($nis);
         $data['spp'] = $this->model('Spp_model')->getAllSpp();
 
@@ -307,17 +297,20 @@ class Pembayaran extends Controller
             exit;
         }
 
+        // cek id bayar
         if ($idBayar == null) {
             header('Location: ' . BASEURL . '/pembayaran');
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Bayar Tagihan';
 
         // model
         $data['pembayaran'] = $this->model('Pembayaran_model')->getPembayaranById($idBayar);
+        $data['siswa'] = $this->model('Siswa_model')->getSiswaByNis($data['pembayaran']['nis']);
 
+        // cek pembayaran sudah lunas atau belum
         if ($data['pembayaran']['jumlah_bayar'] == null) {
             $data['spp'] = $this->model('Spp_model')->getSppById($data['pembayaran']['id_spp']);
         } else {
@@ -328,8 +321,6 @@ class Pembayaran extends Controller
                 'nominal' => $sisaBayar
             ];
         }
-
-        $data['siswa'] = $this->model('Siswa_model')->getSiswaByNis($data['pembayaran']['nis']);
 
         // view 
         $this->view('templates/header', $data);

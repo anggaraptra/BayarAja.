@@ -16,7 +16,7 @@ class Laporan extends Controller
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Laporan Pembayaran';
 
         // model
@@ -44,12 +44,13 @@ class Laporan extends Controller
             exit;
         }
 
+        // cek data yang dikirim dari form
         if (empty($_POST['id_kelas']) || empty($_POST['bulan'])) {
             header('Location: ' . BASEURL . '/laporan');
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Laporan Pembayaran Kelas';
 
         // model
@@ -79,12 +80,13 @@ class Laporan extends Controller
             exit;
         }
 
+        // cek data yang dikirim dari form
         if (empty($_POST['tgl1']) || empty($_POST['tgl2'])) {
             header('Location: ' . BASEURL . '/laporan');
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Laporan Pembayaran';
 
         // model

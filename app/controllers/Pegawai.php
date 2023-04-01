@@ -48,15 +48,15 @@ class Pegawai extends Controller
             exit;
         }
 
+        // cek page
         if ($page == 0) {
             header('Location: ' . BASEURL . '/pegawai/page/1');
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Data Pegawai';
 
-        // model
         // pagination
         $totalDataPerPage = 5;
         $totalData = count($this->model('Pegawai_model')->getAllPetugas());
@@ -98,7 +98,12 @@ class Pegawai extends Controller
             }
         }
 
-        $data['pegawai'] = $this->model('Pegawai_model')->getPegawaiWithLimit($startData, $totalDataPerPage);
+        if ($startNumber != 1) {
+            $endNumber = $currentPage + $totalLink - 1;
+            if ($endNumber > $totalPage) {
+                $endNumber = $totalPage;
+            }
+        }
 
         $data['pagination'] = [
             'totalPage' => $totalPage,
@@ -109,6 +114,9 @@ class Pegawai extends Controller
             'startData' => $startData,
             'endData' => $endData,
         ];
+
+        // model
+        $data['pegawai'] = $this->model('Pegawai_model')->getPegawaiWithLimit($startData, $totalDataPerPage);
 
         // view
         $this->view('templates/header', $data);
@@ -137,7 +145,7 @@ class Pegawai extends Controller
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Tambah Pegawai';
 
         // view
@@ -206,7 +214,7 @@ class Pegawai extends Controller
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Update Pegawai';
 
         // model

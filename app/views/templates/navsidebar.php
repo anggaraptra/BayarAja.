@@ -41,7 +41,7 @@
             <?php if (@$_SESSION['login'] && @$_SESSION['level'] == 'admin' || @$_SESSION['level'] == 'petugas') : ?>
                 <li class="search-box">
                     <i class='icon search'><?= SEARCH; ?></i>
-                    <form action="<?= BASEURL; ?>/pembayaran/biodata" method="POST">
+                    <form action="<?= BASEURL; ?>/siswa/biodata" method="POST">
                         <input type="text" name="keyword" id="keyword" placeholder="Search Siswa..." autocomplete="off" required maxlength="20" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                     </form>
                 </li>

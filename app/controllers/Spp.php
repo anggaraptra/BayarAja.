@@ -14,18 +14,6 @@ class Spp extends Controller
             header('Location: ' . BASEURL . '/spp/page/1');
             exit;
         }
-
-        // data
-        $data['title'] = 'Data SPP';
-
-        // model
-        $data['spp'] = $this->model('Spp_model')->getAllSpp();
-
-        // view
-        $this->view('templates/header', $data);
-        $this->view('templates/navsidebar', $data, 'spp');
-        $this->view('spp/index', $data);
-        $this->view('templates/footer');
     }
 
     public function page($page = 0)
@@ -36,15 +24,15 @@ class Spp extends Controller
             exit;
         }
 
+        // cek page
         if ($page == 0) {
             header('Location: ' . BASEURL . '/spp/page/1');
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Data SPP';
 
-        // model
         // pagination
         $totalDataPerPage = 5;
         $totalData = count($this->model('Spp_model')->getAllSpp());
@@ -86,7 +74,12 @@ class Spp extends Controller
             }
         }
 
-        $data['spp'] = $this->model('Spp_model')->getSppWithLimit($startData, $totalDataPerPage);
+        if ($startNumber != 1) {
+            $endNumber = $currentPage + $totalLink - 1;
+            if ($endNumber > $totalPage) {
+                $endNumber = $totalPage;
+            }
+        }
 
         $data['pagination'] = [
             'totalPage' => $totalPage,
@@ -97,6 +90,9 @@ class Spp extends Controller
             'startData' => $startData,
             'endData' => $endData,
         ];
+
+        // model
+        $data['spp'] = $this->model('Spp_model')->getSppWithLimit($startData, $totalDataPerPage);
 
         // view
         $this->view('templates/header', $data);
@@ -125,7 +121,7 @@ class Spp extends Controller
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Tambah SPP';
 
         // view
@@ -194,7 +190,7 @@ class Spp extends Controller
             exit;
         }
 
-        // data
+        // title
         $data['title'] = 'Update SPP';
 
         // model
@@ -259,8 +255,8 @@ class Spp extends Controller
             exit;
         }
 
+        // cek apakah data pembayaran sudah kosong
         $data['bayarRow'] = $this->model('Pembayaran_model')->getAllDataPembayaran();
-
         if ($data['bayarRow'] == 0) {
             // cek apakah data berhasil dihapus atau tidak
             if ($this->model('Spp_model')->deleteDataSpp($angkatan) > 0) {

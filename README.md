@@ -23,4 +23,4 @@ Sistem Pembayaran SPP Sekolah adalah aplikasi berbasis web yang dibuat untuk mem
 - [LinkedIn](https://www.linkedin.com/in/i-kadek-anggara-putra/)
 - [Email](kadekanggaraptra@gmail.com)
 
-Copyright (c) 2023 I Kadek Anggara Putra
+Copyright (c) 2023 I Kadek Anggara Putra. All rights reserved.

@@ -111,7 +111,7 @@ class Login extends Controller
         // cek setiap session yang ada dan level
         if (@$_SESSION['login'] && $_SESSION['level'] == 'admin') {
             Flasher::setFlashMessage('info', 'Selamat datang admin!');
-            header('Location: ' . BASEURL . '/dashboard');
+            header('Location: ' . BASEURL);
             exit;
         } elseif (@$_SESSION['login'] && $_SESSION['level'] == 'petugas') {
             Flasher::setFlashMessage('info', 'Selamat datang petugas!');

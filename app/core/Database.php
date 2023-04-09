@@ -80,7 +80,7 @@ class Database
         return $this->stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // mengambil jumlah baris
+    // mengembalikan nilai row antara 1 dan 0 atau true and false
     public function rowCount()
     {
         return $this->stmt->rowCount();

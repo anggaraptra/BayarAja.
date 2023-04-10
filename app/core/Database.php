@@ -14,7 +14,7 @@ class Database
 
     public function __construct()
     {
-        // Set DSN
+        // Set DSN (data source name)
         $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
         // Set options, untuk mengoptimasi koneksi ke database
         $options = [

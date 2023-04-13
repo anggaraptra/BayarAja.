@@ -15,6 +15,7 @@ Sistem Pembayaran SPP Sekolah adalah aplikasi berbasis web yang dibuat untuk mem
 - Histori Pembayaran
 - Laporan Pembayaran
 - Print Laporan dan Bukti Pembayaran
+- Dark Mode
 
 ## Kontak
 

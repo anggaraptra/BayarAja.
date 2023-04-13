@@ -1,19 +1,45 @@
+/* Font */
+@font-face {
+  font-family: 'Montserrat';
+  src: url(../assets/fonts/montserrat/Montserrat-VariableFont_wght.ttf), url(../assets/fonts/montserrat/Montserrat-Italic-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: 'HindMadurai';
+  src: url(../assets/fonts/hind-madurai/HindMadurai-Regular.ttf), url(../assets/fonts/hind-madurai/HindMadurai-Bold.ttf), url(../assets/fonts/hind-madurai/HindMadurai-Light.ttf), url(../assets/fonts/hind-madurai/HindMadurai-Medium.ttf),
+    url(../assets/fonts/hind-madurai/HindMadurai-SemiBold.ttf);
+}
+
 :root {
-  --body-color: #e4e9f7;
+  /* Color */
+  --body-color: #f5f5f5;
   --sidebar-color: #fff;
   --navbar-color: #fff;
   --primary-color: #5d77e0;
   --primary-color-light: #f6f5ff;
   --toggle-color: #ddd;
-  --text-color: #656565;
-  --logout-color: #dd5353;
+  --text-color: #3f3f3f;
+  --content-color: #363636;
+  --success-color: #5cb85c;
+  --danger-color: #dd5353;
+  --warning-color: #f0ad4e;
+  --hover-delete: #c46262;
+  --active-color: #a9acb1;
+  --table-striped: rgba(0, 0, 0, 0.05);
+  --btn-color: #f5f5f5;
+  --btn-hover: rgba(93, 119, 224, 0.85);
   --shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  --profile-color: invert(21%) sepia(0%) saturate(0%) hue-rotate(179deg) brightness(97%) contrast(86%);
 
   /* Transition */
+  --tran-03: all 0.1s ease;
   --tran-03: all 0.2s ease;
-  --tran-03: all 0.3s ease;
-  --tran-04: all 0.3s ease;
-  --tran-05: all 0.3s ease;
+  --tran-04: all 0.2s ease;
+  --tran-05: all 0.2s ease;
+}
+
+::-webkit-scrollbar {
+  width: 0;
 }
 
 * {
@@ -39,14 +65,208 @@ body.dark {
   --primary-color-light: #3a3b3c;
   --toggle-color: #fff;
   --text-color: #ccc;
-  --logout-color: #5d3d3d;
+  --content-color: #cecece;
+  --success-color: #3b623b;
+  --danger-color: #5d3d3d;
+  --warning-color: #5c4848;
+  --hover-delete: #5c4848;
+  --active-color: #808080;
+  --table-striped: #242526;
+  --btn-color: #ccc;
+  --btn-hover: rgba(69, 71, 74, 0.4);
   --shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  --profile-color: invert(88%) sepia(1%) saturate(338%) hue-rotate(317deg) brightness(100%) contrast(80%);
 }
 
 ::selection {
   background-color: var(--primary-color);
   color: #fff;
 }
+
+/* Flash messages */
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  text-transform: capitalize;
+  transition: var(--tran-05);
+}
+
+.alert p.message {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+button.btn-close {
+  padding: 0;
+  cursor: pointer;
+  background: 0 0;
+  border: 0;
+}
+.btn-close {
+  font-size: 1.8rem;
+  color: #fff;
+  opacity: 0.5;
+}
+button.btn-close:hover {
+  opacity: 1;
+}
+
+.alert-info {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.alert-success {
+  background-color: var(--success-color);
+  color: #fff;
+}
+
+.alert-danger {
+  background-color: var(--danger-color);
+  color: #fff;
+}
+
+.alert-failed {
+  background-color: var(--danger-color);
+  color: #fff;
+}
+
+.alert-warning {
+  background-color: var(--warning-color);
+  color: #fff;
+}
+
+.alert-error {
+  background-color: var(--danger-color);
+  color: #fff;
+}
+/* End style flash messages */
+
+/* Login */
+#login {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--sidebar-color);
+}
+
+.container-login {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper-login {
+  width: 30rem;
+  padding: 3rem;
+  background-color: var(--body-color);
+  border-radius: 1rem;
+}
+
+.wrapper-login .judul-login {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.wrapper-login .judul-login img {
+  width: 5rem;
+}
+
+.wrapper-login .judul-login h1 {
+  font-size: 2.5rem;
+  color: var(--text-color);
+}
+
+.wrapper-login .judul-login h1 span {
+  color: var(--primary-color);
+}
+
+.wrapper-login .judul-login p {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.wrapper-login .form-login {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.wrapper-login .form-login .input-group {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+
+.wrapper-login .form-login .input-group.password .head-input {
+  display: flex;
+  margin: -1rem 0rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wrapper-login .form-login .input-group.password .head-input .show-password {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.wrapper-login .form-login .input-group .remember {
+  display: flex;
+  align-items: center;
+  margin: -1rem 0rem;
+  gap: 0.2rem;
+}
+
+.wrapper-login .form-login .input-group label.label-input {
+  color: var(--text-color);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.wrapper-login .form-login .input-group.password .show-password {
+  margin-bottom: 0.5rem;
+}
+
+.wrapper-login .form-login .input-group input {
+  height: 3.5rem;
+  padding: 0 1rem;
+  border-radius: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: 1px solid var(--active-color);
+  background-color: var(--sidebar-color);
+  color: var(--text-color);
+}
+
+.wrapper-login .form-login .input-group input.form-control:focus {
+  box-shadow: 0 0 0 0.1rem var(--primary-color);
+}
+
+.wrapper-login .form-login .input-group button {
+  height: 3.5rem;
+  padding: 0rem 1rem;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  background-color: var(--primary-color);
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--btn-color);
+}
+
+.wrapper-login .form-login .input-group button:hover {
+  background-color: var(--btn-hover);
+  color: var(--btn-color);
+}
+
+/* End style login */
 
 /* Navbar */
 .navbar {
@@ -61,11 +281,124 @@ body.dark {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* grid-template-columns: 1fr 1fr 1fr; */
   padding: 0 1rem;
   box-shadow: var(--shadow);
   transition: var(--tran-05);
 }
+
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar .logo .icon svg {
+  margin-right: 0.3rem;
+  transition: var(--tran-05);
+}
+
+.navbar .logo .icon.d-none {
+  display: none;
+}
+
+.navbar .logo h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-color);
+  transition: var(--tran-05);
+}
+
+.navbar .logo span {
+  color: var(--primary-color);
+}
+
+.navbar .toggle-sidebar {
+  margin-right: 55rem;
+}
+
+.navbar .toggle-sidebar i {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.navbar .toggle-sidebar .toggle {
+  position: absolute;
+  top: 0;
+  left: 15rem;
+  color: var(--sidebar-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--tran-05);
+}
+
+.navbar .navbar-profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  transition: var(--tran-05);
+}
+
+.navbar .navbar-profile .dropdown .icon-down {
+  cursor: pointer;
+  background-color: var(--body-color);
+}
+
+.navbar .navbar-profile .dropdown {
+  margin-left: -0.8rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar .navbar-profile .dropdown-menu {
+  text-align: center;
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 2.8rem;
+  background-color: var(--sidebar-color);
+  min-width: 10rem;
+  box-shadow: var(--shadow);
+  border-radius: 0.3rem;
+  text-transform: capitalize;
+  z-index: 1;
+}
+
+.navbar .navbar-profile .dropdown-menu li {
+  color: var(--text-color);
+  padding: 1rem 3rem;
+  font-size: 1rem;
+  display: block;
+}
+
+.navbar .navbar-profile .dropdown-menu.d-block {
+  display: block;
+}
+
+.navbar .navbar-profile .dropdown .icon-down.active svg {
+  transform: rotate(-180deg);
+  fill: var(--primary-color);
+}
+
+.navbar .navbar-profile .dropdown-menu li:hover {
+  background-color: var(--primary-color-light);
+  color: var(--text-color);
+}
+
+.navbar .navbar-profile .dropdown-menu li.level {
+  border-bottom: var(--active-color) 1px solid;
+}
+
+.navbar .navbar-profile .dropdown-menu li.level h5 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+/* End style navbar */
 
 /* Sidebar */
 .sidebar {
@@ -76,9 +409,9 @@ body.dark {
   width: 15.6rem;
   padding: 0.6rem 0.8rem;
   background: var(--sidebar-color);
-  transition: var(--tran-05);
   z-index: 100;
   box-shadow: var(--shadow);
+  transition: var(--tran-05);
 }
 .sidebar.close {
   width: 5.5rem;
@@ -92,12 +425,14 @@ body.dark {
   margin-top: 0.6rem;
 }
 
-.sidebar .icon {
+.sidebar .icon,
+.navbar .icon {
   min-width: 3.7rem;
   border-radius: 0.3rem;
 }
 
-.sidebar .icon {
+.sidebar .icon,
+.navbar .icon {
   min-width: 3.7rem;
   border-radius: 0.3rem;
   height: 100%;
@@ -108,25 +443,33 @@ body.dark {
 }
 
 .sidebar .text,
-.sidebar .icon svg {
+.sidebar .icon svg,
+.navbar .text,
+.navbar .icon svg {
   color: var(--text-color);
   fill: var(--text-color);
   transition: var(--tran-03);
 }
 
-.sidebar .text {
+.sidebar .text,
+.navbar .text {
   font-size: 1rem;
   font-weight: 500;
   white-space: nowrap;
   opacity: 1;
 }
 .sidebar.close .text,
-.sidebar.close ::placeholder {
+.sidebar.close ::placeholder,
+.sidebar.close .sun-moon svg {
   opacity: 0;
 }
 
 .sidebar .menu {
   margin-top: 3rem;
+}
+
+body.dark .sidebar .menu .toggle-sidebar svg {
+  fill: var(--text-color);
 }
 
 .sidebar li.search-box {
@@ -139,6 +482,7 @@ body.dark {
 .sidebar li.search-box input {
   height: 100%;
   width: 100%;
+  padding-right: 0.8rem;
   outline: none;
   border: none;
   background-color: var(--primary-color-light);
@@ -161,11 +505,27 @@ body.dark {
   transition: var(--tran-03);
 }
 
+.sidebar li a.active {
+  background-color: var(--primary-color);
+}
+
+.sidebar li a.active .icon svg,
+.sidebar li a.active .text {
+  color: var(--sidebar-color);
+  fill: var(--sidebar-color);
+}
+
+body.dark .sidebar li a.active .icon svg,
+body.dark .sidebar li a.active .text {
+  color: var(--text-color);
+  fill: var(--text-color);
+}
+
 .sidebar li a:hover {
   background-color: var(--primary-color);
 }
 .sidebar li a.logout:hover {
-  background-color: var(--logout-color);
+  background-color: var(--danger-color);
 }
 .sidebar li a:hover .icon svg,
 .sidebar li a:hover .text {
@@ -178,7 +538,7 @@ body.dark .sidebar li a:hover .text {
   fill: var(--text-color);
 }
 body.dark .sidebar li a.logout:hover {
-  background-color: var(--logout-color);
+  background-color: var(--danger-color);
 }
 
 .sidebar .menu-bar {
@@ -224,7 +584,7 @@ body.dark .mode .sun-moon i.moon {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.3px;
+  border-radius: 0.3rem;
   cursor: pointer;
 }
 .toggle-switch .switch {
@@ -252,30 +612,194 @@ body.dark .mode .sun-moon i.moon {
 body.dark .switch::before {
   left: 1.2rem;
 }
+/* End style sidebar */
 
-/* Home Dashboard */
+/* Dashboard */
+.home .content.dashboard .container-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.home .content.dashboard .container-info h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-right: 1rem;
+  text-transform: capitalize;
+}
+
+.home .content.dashboard .container-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.home .content.dashboard .card {
+  padding: 2rem 2rem;
+  margin: 1rem 1rem;
+  border-radius: 1rem;
+  color: var(--text-color);
+  background-color: var(--sidebar-color);
+  cursor: pointer;
+  text-align: center;
+  transition: var(--tran-03);
+}
+
+.home .content.dashboard .card img {
+  width: 5rem;
+  margin-bottom: 1rem;
+  filter: var(--profile-color);
+}
+
+.home .content.dashboard .card .card-header h1 {
+  font-weight: 500;
+}
+
+.home .content.dashboard .card:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+  transform: scale(1.03);
+}
+
+.home .content.dashboard .card:hover img {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(215deg) brightness(102%) contrast(105%);
+}
+
+.home .content.transaksi h1 {
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+/* End styles dashboard */
+
+/* Reusable style */
+/* Home */
 .home {
   position: absolute;
   top: 4rem;
   left: 13.7rem;
   height: 100vh;
-  width: calc(100% - 15.6rem);
+  width: calc(100% - 14rem);
   background-color: var(--body-color);
+  font-family: 'HindMadurai', sans-serif;
   transition: var(--tran-05);
 }
 
-.home .head-text {
-  font-size: 1.8rem;
-  font-weight: 500;
-  color: var(--text-color);
+.home .page-title {
   padding: 0.7rem 3.7rem;
 }
 
-.home .text {
+.home .page-title .head-text {
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.home .page-title .sub-text {
   font-size: 1rem;
   font-weight: 400;
   color: var(--text-color);
+}
+
+.home .page-title .sub-text a {
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.home .page-title .sub-text span {
+  color: var(--active-color);
+  cursor: pointer;
+  transition: var(--tran-05);
+}
+
+.home .content {
   padding: 0.7rem 3.7rem;
+  font-size: 1.3rem;
+  color: var(--content-color);
+}
+
+.home .container-alert {
+  width: 50%;
+  padding: 0.7rem 3.7rem;
+  color: var(--content-color);
+}
+
+.home .content .add {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.home .content .add a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.home .content .add a .icon svg {
+  fill: var(--btn-color);
+}
+
+.home .content .add .btn {
+  padding: 0.6rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--btn-color);
+  transition: var(--tran-05);
+}
+
+.home .content .add .btn:hover {
+  background-color: var(--btn-hover);
+  color: var(--btn-color);
+}
+
+.home .content table .aksi {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.home .content table .aksi a {
+  padding: 0.6rem 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  fill: var(--btn-color);
+  color: var(--btn-color);
+  transition: var(--tran-05);
+}
+
+.home .content table .aksi a:hover {
+  background-color: var(--btn-hover);
+  color: var(--btn-color);
+}
+
+.home .content table .aksi a.btn-delete {
+  background-color: var(--danger-color);
+}
+
+.home .content table .aksi a.btn-delete:hover {
+  background-color: var(--hover-delete);
+  color: var(--btn-color);
+}
+
+.home .content.kelas table tbody tr td.nama-kelas {
+  text-transform: uppercase;
+}
+
+.home .content.pegawai table tbody tr td.username {
+  text-transform: lowercase;
 }
 
 .sidebar.close ~ .home {
@@ -286,6 +810,599 @@ body.dark .switch::before {
 body.dark .home .head-text,
 body.dark .home .text {
   color: var(--text-color);
+}
+
+/* Table */
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.table th,
+.table td {
+  padding: 0.7rem;
+  vertical-align: top;
+  border-top: 1px solid var(--active-color);
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid var(--active-color);
+}
+
+.table tbody + tbody {
+  border-top: 2px solid var(--active-color);
+}
+
+.table-sm th,
+.table-sm td {
+  padding: 0.3rem;
+}
+
+.table-bordered {
+  border: 1px solid var(--active-color);
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid var(--active-color);
+}
+
+.table-bordered thead th,
+.table-bordered thead td {
+  border-bottom-width: 2px;
+}
+
+.table-borderless th,
+.table-borderless td,
+.table-borderless thead th,
+.table-borderless tbody + tbody {
+  border: 0;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: var(--table-striped);
+}
+
+.table-hover tbody tr:hover {
+  color: var(--text-color);
+  background-color: var(--table-striped);
+}
+
+table.table tr td {
+  text-transform: capitalize;
+}
+
+/* Form add and form update */
+.home .form-add form,
+.home .form-update form,
+.home .form-bayar form {
+  padding: 0rem 3.2rem;
+  margin-bottom: 8rem;
+}
+
+.home .form-add .input-group,
+.home .form-update .input-group,
+.home .form-bayar .input-group {
+  width: 50%;
+  display: grid;
+  margin-bottom: 1rem;
+}
+
+.home .form-add .input-group label,
+.home .form-update .input-group label,
+.home .form-bayar .input-group label {
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.home .form-add .input-group .form-control,
+.home .form-update .input-group .form-control,
+.home .form-bayar .input-group .form-control {
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  border-radius: 0.3rem;
+  border: 1px solid var(--active-color);
+  background-color: var(--body-color);
+  color: var(--text-color);
+  transition: var(--tran-05);
+}
+
+.home .form-add .input-group .form-control:focus,
+.home .form-update .input-group .form-control:focus,
+.home .form-bayar .input-group .form-control:focus {
+  box-shadow: 0 0 0 0.1rem var(--primary-color);
+}
+
+.home .form-add .btn,
+.home .form-update .btn,
+.home .form-bayar .btn {
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--btn-color);
+  transition: var(--tran-05);
+}
+
+.home .form-add .btn:hover,
+.home .form-update .btn:hover,
+.home .form-bayar .btn:hover {
+  background-color: var(--btn-hover);
+  color: var(--btn-color);
+}
+
+.home .content-null {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.home .content-null h1 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.home .content-null .btn.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--btn-color);
+  transition: var(--tran-05);
+}
+
+.home .content-null .btn.btn-primary svg {
+  fill: var(--btn-color);
+}
+
+.home .content-null .btn.btn-primary:hover {
+  background-color: var(--btn-hover);
+  color: var(--btn-color);
+}
+/* End reusable style */
+
+/* Pembayaran */
+.home .content.pembayaran {
+  padding: 0rem 4rem;
+}
+
+.home .content.pembayaran .search-box .form-control {
+  width: 50%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  border-radius: 0.3rem;
+  border: 1px solid var(--active-color);
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+
+.home .content.pembayaran .search-box .form-control:focus {
+  box-shadow: 0 0 0 0.1rem var(--primary-color);
+}
+
+.home .content.pembayaran .search-box .btn {
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--btn-color);
+}
+
+.home .content.pembayaran .search-box .btn:hover {
+  background-color: var(--btn-hover);
+  color: var(--btn-color);
+}
+
+.home .content.tunggakan {
+  padding: 0rem 4rem;
+  margin-top: 3rem;
+}
+
+.home .content.tunggakan h1 {
+  font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+/* End pembayaran style */
+
+/* Tagihan */
+.home .content.tagihan h1 {
+  font-weight: 500;
+  color: var(--text-color);
+  padding: 0.8rem 0;
+}
+
+.home .content.tagihan .header-tagihan {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: capitalize;
+}
+/* End tagihan style */
+
+/* History */
+.home .content.history {
+  padding-bottom: 5rem;
+}
+/* End history style */
+
+/* Laporan Data */
+.home .laporan table .form-pembayaran-kelas {
+  display: grid;
+  gap: 1rem;
+}
+
+.home .laporan table .form-pembayaran-kelas .option-kelas {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.home .laporan table .form-pembayaran-kelas .option-kelas .form-control,
+.home .laporan table .form-pembayaran-kelas .option-bulan .form-control {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  border-radius: 0.3rem;
+  border: 1px solid var(--active-color);
+  background-color: var(--body-color);
+  color: var(--text-color);
+  transition: var(--tran-05);
+}
+
+.home .laporan table .form-pembayaran-kelas .option-kelas .form-control:focus,
+.home .laporan table .form-pembayaran-kelas .option-bulan .form-control:focus {
+  border: 1px solid var(--primary-color);
+}
+
+.home .laporan table .form-pembayaran-kelas .btn {
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--btn-color);
+  transition: var(--tran-05);
+}
+
+.home .laporan table .form-pembayaran-kelas .btn:hover {
+  background-color: var(--btn-hover);
+  color: var(--btn-color);
+}
+
+.home .laporan table .form-tanggal {
+  display: grid;
+  gap: 1rem;
+}
+
+.home .laporan table .form-tanggal .input-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.home .laporan table .form-tanggal .input-group .form-control {
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  border-radius: 0.3rem;
+  border: 1px solid var(--active-color);
+  background-color: var(--body-color);
+  color: var(--text-color);
+  transition: var(--tran-05);
+}
+
+.home .laporan table .form-tanggal .input-group .form-control:focus {
+  border: 1px solid var(--primary-color);
+}
+
+.home .laporan table .form-tanggal .btn {
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--btn-color);
+  transition: var(--tran-05);
+}
+
+.home .laporan table .form-tanggal .btn:hover {
+  background-color: var(--btn-hover);
+  color: var(--btn-color);
+}
+/* End laporan data */
+
+/* Profile */
+.home .profile .container {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+}
+
+.home .profile .container .profile-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 8rem;
+  transition: var(--tran-03);
+}
+
+.home .profile .container .profile-image img {
+  object-fit: cover;
+  width: 10rem;
+  height: 10rem;
+  filter: var(--profile-color);
+}
+
+.home .profile .container .profile-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.profile .container .profile-info h1 {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.home .profile .container .profile-info table tr td {
+  text-transform: capitalize;
+}
+/* End style profile */
+
+/* Biodata */
+.home .content.biodata-siswa a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.home .content.biodata-siswa a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+/* End style biodata */
+
+/* Cetak Laporan Pembayaran & Kelas */
+#laporan-pembayaran,
+#laporan-kelas {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem 0.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#laporan-pembayaran .container,
+#laporan-kelas .container,
+#cetak-history .container {
+  display: grid;
+  gap: 1rem;
+}
+
+#laporan-pembayaran .container .header,
+#laporan-kelas .container .header,
+#cetak-history .container .header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+#laporan-pembayaran .container .header img,
+#laporan-kelas .container .header img,
+#cetak-history .container .header img {
+  width: 3rem;
+}
+
+#laporan-pembayaran .container .header h1,
+#laporan-kelas .container .header h1,
+#cetak-history .container .header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+#laporan-pembayaran .container .header h1 span,
+#laporan-kelas .container .header h1 span,
+#cetak-history .container .header h1 span {
+  color: var(--primary-color);
+}
+
+#laporan-pembayaran .container .header-table,
+#laporan-kelas .container .header-table {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+#laporan-pembayaran .container .header-table h1,
+#laporan-kelas .container .header-table h1 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+#laporan-pembayaran .container .table-cetak,
+#laporan-kelas .container .table-cetak {
+  border-collapse: collapse;
+  width: 100%;
+  border: 2px solid var(--active-color);
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+#laporan-pembayaran .container .table-cetak td,
+#laporan-pembayaran .container .table-cetak th,
+#laporan-kelas .container .table-cetak td,
+#laporan-kelas .container .table-cetak th {
+  border: 2px solid var(--active-color);
+  padding: 0.2rem 0.4rem;
+  text-transform: capitalize;
+}
+
+#laporan-pembayaran .container .table-cetak .total,
+#laporan-kelas .container .table-cetak .total {
+  font-weight: 600;
+  text-align: right;
+}
+
+#laporan-pembayaran .container table.info,
+#laporan-kelas .container table.info {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+#laporan-pembayaran .container table.info td.ttd,
+#laporan-kelas .container table.info td.ttd {
+  width: 200px;
+}
+
+#laporan-pembayaran .container table.info td.ttd p,
+#laporan-kelas .container table.info td.ttd p {
+  text-transform: capitalize;
+}
+
+#laporan-pembayaran .btn-print,
+#laporan-kelas .btn-print,
+#cetak-history .btn-print {
+  color: var(--btn-color);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  background-color: var(--primary-color);
+}
+
+#laporan-pembayaran .btn-print:hover,
+#laporan-kelas .btn-print:hover,
+#cetak-history .btn-print:hover {
+  background-color: var(--btn-hover);
+  color: var(--btn-color);
+}
+/* End style Cetak Laporan Pembayaran & Kelas */
+
+/* Cetak Bukti Pembayaran */
+#cetak-history {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem 3rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#cetak-history .container .table-cetak td,
+#cetak-history .container .table-cetak th {
+  text-align: start;
+}
+
+#cetak-history .container .header-table h1 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-color);
+  text-align: center;
+}
+/* End style Cetak Bukti Pembayaran */
+
+/* Pagination */
+.pagination.page-kelas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.pagination {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0.5rem;
+}
+
+.pagination .left {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  text-transform: capitalize;
+}
+
+.pagination .right {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.pagination .right ul {
+  list-style: none;
+}
+
+.pagination .right ul li {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--active-color);
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.pagination .right ul li a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.pagination .right ul li:hover {
+  background-color: var(--primary-color);
+}
+
+.pagination .right ul li:hover a {
+  color: var(--btn-color);
+}
+
+.pagination .right ul li.active {
+  background-color: var(--primary-color);
+}
+
+.pagination .right ul li.active a {
+  color: var(--btn-color);
+}
+/* End style Pagination */
+
+/* Media Print */
+@media print {
+  .print {
+    display: none;
+  }
 }
 
 /* Media Queries */

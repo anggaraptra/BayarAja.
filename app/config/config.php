@@ -2,7 +2,7 @@
 
 // Variable Constant
 // Base URL
-const BASEURL = 'http://localhost/pembayaranspp/public/';
+const BASEURL = 'http://localhost/pembayaranspp/public';
 
 // Database
 const DB_HOST = 'localhost';
@@ -11,4 +11,4 @@ const DB_USER = 'root';
 const DB_PASS = '';
 
 // Site Name
-const SITENAME = 'Pembayaran SPP';
+const SITENAME = 'BayarAja.';
